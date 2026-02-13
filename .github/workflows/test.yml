@@ -1,0 +1,16 @@
+name: Test Builds
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  test:
+    uses: salem404/github-actions/.github/workflows/test.yml@main
+    with:
+      project-path: "."

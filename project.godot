@@ -1,0 +1,37 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="ProyectoFinal"
+config/features=PackedStringArray("4.6", "GL Compatibility")
+
+[audio]
+
+buses/default_bus_layout="uid://67417mfeefcj"
+
+[autoload]
+
+ConfigManager="*uid://cxoh50kfg1s2t"
+
+[file_customization]
+
+folder_colors={
+"res://assets/": "red",
+"res://scenes/": "pink",
+"res://scripts/": "purple",
+"res://translations/": "gray"
+}
+
+[rendering]
+
+rendering_device/driver.windows="d3d12"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

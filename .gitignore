@@ -1,0 +1,34 @@
+# Godot 4+ specific ignores
+.godot/
+.nomedia
+
+# Godot-specific ignores
+.import/
+/android/
+exports/
+export.cfg
+export_credentials.cfg
+*.tmp
+
+# Imported translations (automatically generated from CSV files)
+*.translation
+
+# Mono-specific ignores
+.mono/
+data_*/
+mono_crash.*.json
+
+# OS-specific ignores
+
+# Windows
+Thumbs.db
+# macOS
+.DS_Store
+# Linux
+*~
+
+# Jetbrains IDE files
+.idea/
+
+# Visual Studio Code files
+.vscode/
