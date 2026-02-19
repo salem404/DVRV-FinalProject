@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://ddfu83q6oko6m"]
+
+[ext_resource type="PackedScene" uid="uid://cn0nsbc6f1er4" path="res://scenes/Player.tscn" id="1_cbu06"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_yu7w2"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_lnipu"]
+
+[node name="Node2D" type="Node2D" unique_id=769547888]
+
+[node name="Map" type="Node" parent="." unique_id=371813413]
+
+[node name="Visual" type="Node" parent="Map" unique_id=1832980256]
+
+[node name="Background" type="Sprite2D" parent="Map/Visual" unique_id=1420582737]
+modulate = Color(0.45029536, 0.45029536, 0.5801458, 1)
+z_index = -2
+position = Vector2(640.00006, 360.00003)
+scale = Vector2(1280, 720.00006)
+texture = SubResource("CanvasTexture_yu7w2")
+
+[node name="Floor" type="Sprite2D" parent="Map/Visual" unique_id=970954159]
+modulate = Color(0.61347646, 0.61347646, 0.7852611, 1)
+z_index = -1
+position = Vector2(320, 536)
+scale = Vector2(640, 303.99997)
+texture = SubResource("CanvasTexture_lnipu")
+
+[node name="Floor2" type="Sprite2D" parent="Map/Visual" unique_id=6766485]
+modulate = Color(0.61347646, 0.61347646, 0.7852611, 1)
+z_index = -1
+position = Vector2(969.3154, 442.65256)
+rotation = -0.2617994
+scale = Vector2(763.18677, 303.49203)
+texture = SubResource("CanvasTexture_lnipu")
+
+[node name="Boundry" type="Area2D" parent="Map" unique_id=852656395]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Boundry" unique_id=259037805]
+polygon = PackedVector2Array(1280, 200, 1280, 520, 638.746, 688, 0, 688, 0, 384, 600, 384)
+
+[node name="CharacterDefault" parent="." unique_id=750750168 node_paths=PackedStringArray("MovingArea") instance=ExtResource("1_cbu06")]
+z_index = 1
+position = Vector2(192, 448)
+MovingArea = NodePath("../Map/Boundry")
