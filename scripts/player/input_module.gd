@@ -9,5 +9,5 @@ func _process(delta):
 	movement.y = Input.get_axis("MoveUp","MoveDown")
 	movement.x = Input.get_axis("MoveLeft","MoveRight")
 	
-	jumpKey = Input.is_action_pressed("Jump")
+	jumpKey = Input.is_action_just_pressed("Jump")
 	

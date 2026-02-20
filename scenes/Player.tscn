@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://buig5yjiwsaiy" path="res://scripts/player/movement_module.gd" id="3_tuyoq"]
 [ext_resource type="Script" uid="uid://cp8p2ixqhldlj" path="res://scripts/player/status_module.gd" id="5_fjrip"]
 [ext_resource type="Script" uid="uid://bko02gl3dtcuq" path="res://scripts/player/stats_module.gd" id="7_fjrip"]
+[ext_resource type="Texture2D" uid="uid://de8xycmp1afo4" path="res://images/Entities/shadow.png" id="8_khinc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("1_3vyb7")
@@ -31,14 +32,6 @@ height = 128.0
 position = Vector2(640, 320)
 script = ExtResource("1_tuyoq")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1240271889]
-position = Vector2(0, -64)
-sprite_frames = SubResource("SpriteFrames_qhqgy")
-
-[node name="CollisionBox" type="CollisionShape2D" parent="." unique_id=837465960]
-position = Vector2(0, -64)
-shape = SubResource("CapsuleShape2D_dqkch")
-
 [node name="PlayerModule" type="Node" parent="." unique_id=1523449589]
 script = ExtResource("2_qlg0r")
 
@@ -59,3 +52,18 @@ autostart = true
 
 [node name="StatsModule" type="Node" parent="PlayerModule" unique_id=459627275]
 script = ExtResource("7_fjrip")
+
+[node name="Anims" type="AnimatedSprite2D" parent="." unique_id=1240271889]
+position = Vector2(0, -64)
+sprite_frames = SubResource("SpriteFrames_qhqgy")
+
+[node name="CollisionBox" type="CollisionShape2D" parent="." unique_id=837465960]
+position = Vector2(0, -64)
+shape = SubResource("CapsuleShape2D_dqkch")
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=741059315]
+modulate = Color(1, 1, 1, 0.19607843)
+z_index = -1
+position = Vector2(8.583069e-06, -4.4999967)
+scale = Vector2(0.8, 0.5700001)
+texture = ExtResource("8_khinc")

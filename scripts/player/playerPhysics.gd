@@ -5,22 +5,11 @@ extends CharacterBody2D
 
 @onready var boundryPolygon = MovingArea.get_node("CollisionPolygon2D").polygon
 
-
 var isMoving: bool = false
-var onFloor: bool = true
-var setGravity: bool = true
 var outsideArea: bool = false
-
-var floorPos: float
 
 func _physics_process(delta):
 	var oldPos = position
-	# Add the gravity.
-	if setGravity and not onFloor:
-		velocity += get_gravity() * delta
-		
-		if floorPos < position.y and velocity.y >= 0 and not outsideArea:
-			onFloor = true
 
 	# Handle jump.
 	#if Input.is_action_just_pressed("ui_accept") and is_on_floor():
@@ -29,7 +18,7 @@ func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	#var direction = Input.get_axis("ui_left", "ui_right")
-	if not isMoving and onFloor:
+	if not isMoving:
 		velocity.x = 0
 		velocity.y = 0
 	move_and_slide()
@@ -41,8 +30,6 @@ func _physics_process(delta):
 	else:
 		outsideArea = false
 		
-	if onFloor:
-		floorPos = position.y
 
 func moveTo(movement: Vector2):
 	velocity.x = movement.x
@@ -76,9 +63,4 @@ func snapInsidePolygon():
 			min_distPos = closest
 			
 	if min_distPos: 
-		if onFloor:
-			position = min_distPos
-		else:
-			if position.y > min_distPos.y:
-				position = min_distPos
-				onFloor = true
+		position = min_distPos

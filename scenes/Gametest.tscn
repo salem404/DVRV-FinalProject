@@ -6,7 +6,7 @@
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_lnipu"]
 
-[node name="Node2D" type="Node2D" unique_id=769547888]
+[node name="Map" type="Node2D" unique_id=769547888]
 
 [node name="Map" type="Node" parent="." unique_id=371813413]
 
@@ -37,7 +37,8 @@ texture = SubResource("CanvasTexture_lnipu")
 [node name="Boundry" type="Area2D" parent="Map" unique_id=852656395]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Boundry" unique_id=259037805]
-polygon = PackedVector2Array(1280, 200, 1280, 520, 638.746, 688, 0, 688, 0, 384, 600, 384)
+position = Vector2(-8, 0)
+polygon = PackedVector2Array(1272, 232, 1272, 496, 640, 664, 24, 664, 24, 408, 616, 408)
 
 [node name="CharacterDefault" parent="." unique_id=750750168 node_paths=PackedStringArray("MovingArea") instance=ExtResource("1_cbu06")]
 z_index = 1

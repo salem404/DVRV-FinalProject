@@ -1,5 +1,6 @@
 extends Node
 
+var onAir: bool = false
 var isStunned: bool = false
 var isDebounced: bool = false
 
