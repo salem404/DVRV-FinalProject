@@ -25,7 +25,7 @@ body:
     id: browser
     attributes:
       label: Browser (if applicable)
-      description: If you are playing on the web, please specify your browser and version
+      description: If you are playing on the web, please, specify your browser and version
       placeholder: Chrome v90.0.4430.93
   - type: input
     id: version

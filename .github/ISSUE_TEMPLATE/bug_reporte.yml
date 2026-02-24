@@ -1,5 +1,5 @@
 name: 🐛 Informe de error (bug)
-description: Reporta un error o problema con el juego
+description: Reporta un error o un problema que hayas tenido con el juego
 title: "[Bug]: <title> "
 labels: ["bug"]
 type: "Bug"
@@ -25,7 +25,7 @@ body:
     id: browser
     attributes:
       label: Navegador (si aplica)
-      description: Si estás jugando en la web, por favor especifica tu navegador y versión
+      description: Si estás jugando en la web, por favor, especifica tu navegador y la versión
       placeholder: Chrome v90.0.4430.93
   - type: input
     id: version
