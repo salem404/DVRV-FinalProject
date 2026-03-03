@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ddfu83q6oko6m"]
 
-[ext_resource type="PackedScene" uid="uid://cn0nsbc6f1er4" path="res://scenes/Player.tscn" id="1_cbu06"]
+[ext_resource type="PackedScene" uid="uid://cn0nsbc6f1er4" path="res://scenes/Game/Player.tscn" id="1_cbu06"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_yu7w2"]
 
