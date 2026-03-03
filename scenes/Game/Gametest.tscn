@@ -22,23 +22,23 @@ texture = SubResource("CanvasTexture_yu7w2")
 [node name="Floor" type="Sprite2D" parent="Map/Visual" unique_id=970954159]
 modulate = Color(0.61347646, 0.61347646, 0.7852611, 1)
 z_index = -1
-position = Vector2(320, 536)
-scale = Vector2(640, 303.99997)
+position = Vector2(320, 499.99997)
+scale = Vector2(640, 231.99992)
 texture = SubResource("CanvasTexture_lnipu")
 
 [node name="Floor2" type="Sprite2D" parent="Map/Visual" unique_id=6766485]
 modulate = Color(0.61347646, 0.61347646, 0.7852611, 1)
 z_index = -1
-position = Vector2(969.3154, 442.65256)
+position = Vector2(976.00006, 408.00003)
 rotation = -0.2617994
-scale = Vector2(763.18677, 303.49203)
+scale = Vector2(763.18677, 229.58717)
 texture = SubResource("CanvasTexture_lnipu")
 
 [node name="Boundry" type="Area2D" parent="Map" unique_id=852656395]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Boundry" unique_id=259037805]
 position = Vector2(-8, 0)
-polygon = PackedVector2Array(1272, 232, 1272, 496, 640, 664, 24, 664, 24, 408, 616, 408)
+polygon = PackedVector2Array(1272, 232, 1272, 424, 640, 592, 24, 592, 24, 408, 616, 408)
 
 [node name="CharacterDefault" parent="." unique_id=750750168 node_paths=PackedStringArray("MovingArea") instance=ExtResource("1_cbu06")]
 z_index = 1
