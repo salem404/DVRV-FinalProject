@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://bnc8tnds8ryqw"]
+
+[ext_resource type="Script" uid="uid://d0wgmqf2eg2kn" path="res://scripts/player_gui.gd" id="1_gobnf"]
+[ext_resource type="Texture2D" uid="uid://d1mlbgplycn15" path="res://images/UI/Progress Barr.png" id="2_iykwx"]
+
+[node name="PlayerGUI" type="MarginContainer" unique_id=413265438]
+theme_override_constants/margin_left = 59
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 58
+theme_override_constants/margin_bottom = 30
+script = ExtResource("1_gobnf")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1817343686]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1861957353]
+layout_mode = 2
+
+[node name="HealthBar" type="TextureProgressBar" parent="PanelContainer/VBoxContainer" unique_id=1487439538]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+value = 50.0
+nine_patch_stretch = true
+texture_under = ExtResource("2_iykwx")
+texture_progress = ExtResource("2_iykwx")
+tint_under = Color(0.4852317, 0.059644576, 0.059644576, 1)
+tint_progress = Color(0, 1, 0, 1)
+
+[node name="ManaBar" type="TextureProgressBar" parent="PanelContainer/VBoxContainer" unique_id=1392239597]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+value = 50.0
+nine_patch_stretch = true
+texture_under = ExtResource("2_iykwx")
+texture_progress = ExtResource("2_iykwx")
+tint_under = Color(0.25792, 0.22320001, 0.31, 1)
+tint_progress = Color(0, 0.73333335, 1, 1)
