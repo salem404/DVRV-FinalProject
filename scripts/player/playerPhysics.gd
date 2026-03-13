@@ -3,10 +3,16 @@ extends CharacterBody2D
 @export_category("Objects")
 @export var MovingArea: Area2D
 
-@onready var boundryPolygon = MovingArea.get_node("CollisionPolygon2D").polygon
+var boundryPolygon
 
 var isMoving: bool = false
 var outsideArea: bool = false
+
+func _ready():
+	if MovingArea: 
+		boundryPolygon = MovingArea.get_node("CollisionPolygon2D").polygon
+	else:
+		push_warning("MovingArea not found in ", name)
 
 func _physics_process(delta):
 	var oldPos = position

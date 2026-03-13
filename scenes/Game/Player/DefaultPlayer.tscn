@@ -30,7 +30,6 @@ height = 128.0
 
 [node name="CharacterDefault" type="CharacterBody2D" unique_id=187010336 groups=["Player"]]
 position = Vector2(640, 320)
-collision_layer = 2
 script = ExtResource("1_tuyoq")
 
 [node name="PlayerModule" type="Node" parent="." unique_id=1523449589]

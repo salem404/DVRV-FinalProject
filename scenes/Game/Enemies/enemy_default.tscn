@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://0keg0f2gbnbh"]
+
+[ext_resource type="Script" uid="uid://dbjji30kw3c0f" path="res://scripts/player/playerPhysics.gd" id="1_hxfsq"]
+[ext_resource type="Script" uid="uid://b6mwl4d2vgyxp" path="res://scripts/player/player_module.gd" id="2_cat8y"]
+[ext_resource type="Script" uid="uid://buig5yjiwsaiy" path="res://scripts/player/movement_module.gd" id="3_nbf47"]
+[ext_resource type="Script" uid="uid://r0wutpqybqq8" path="res://scenes/Game/Enemies/ai_module.gd" id="4_cat8y"]
+[ext_resource type="Script" uid="uid://cp8p2ixqhldlj" path="res://scripts/player/status_module.gd" id="4_elj56"]
+[ext_resource type="Script" uid="uid://bko02gl3dtcuq" path="res://scripts/player/stats_module.gd" id="5_qj2ak"]
+[ext_resource type="Texture2D" uid="uid://cmb8qgi4h0vuu" path="res://images/TemplateImage.svg" id="6_0ntfv"]
+[ext_resource type="Texture2D" uid="uid://de8xycmp1afo4" path="res://images/Entities/shadow.png" id="7_cjajr"]
+[ext_resource type="Script" uid="uid://8dvmgdhmovjw" path="res://scripts/player/input_module.gd" id="7_nbf47"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
+atlas = ExtResource("6_0ntfv")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qhqgy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g2els")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dqkch"]
+radius = 48.0
+height = 128.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nbf47"]
+radius = 648.0494
+
+[node name="EnemyDefault" type="CharacterBody2D" unique_id=187010336]
+position = Vector2(640, 320)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_hxfsq")
+
+[node name="PlayerModule" type="Node" parent="." unique_id=1523449589]
+script = ExtResource("2_cat8y")
+
+[node name="MovementModule" type="Node" parent="PlayerModule" unique_id=436468096]
+script = ExtResource("3_nbf47")
+
+[node name="StatusModule" type="Node" parent="PlayerModule" unique_id=4619627]
+script = ExtResource("4_elj56")
+
+[node name="StunTimer" type="Timer" parent="PlayerModule/StatusModule" unique_id=577133988]
+autostart = true
+
+[node name="DebounceTimer" type="Timer" parent="PlayerModule/StatusModule" unique_id=222624588]
+autostart = true
+
+[node name="StatsModule" type="Node" parent="PlayerModule" unique_id=459627275]
+script = ExtResource("5_qj2ak")
+Speed = Vector2(200, 100)
+
+[node name="InputModule" type="Node" parent="PlayerModule" unique_id=1834445673]
+script = ExtResource("7_nbf47")
+active = false
+
+[node name="Anims" type="AnimatedSprite2D" parent="." unique_id=1240271889]
+position = Vector2(0, -64)
+sprite_frames = SubResource("SpriteFrames_qhqgy")
+
+[node name="CollisionBox" type="CollisionShape2D" parent="." unique_id=837465960]
+position = Vector2(0, -64)
+shape = SubResource("CapsuleShape2D_dqkch")
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=741059315]
+modulate = Color(1, 1, 1, 0.19607843)
+z_index = -1
+position = Vector2(8.583069e-06, -4.4999967)
+scale = Vector2(0.8, 0.5700001)
+texture = ExtResource("7_cjajr")
+
+[node name="AIModule" type="Node2D" parent="." unique_id=1351280651]
+script = ExtResource("4_cat8y")
+
+[node name="AiRange" type="Area2D" parent="AIModule" unique_id=495530485]
+position = Vector2(640, 256)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AIModule/AiRange" unique_id=1789317739]
+position = Vector2(-640, -256)
+shape = SubResource("CircleShape2D_nbf47")
+debug_color = Color(0.62, 0.41333336, 0, 0.039215688)
+
+[connection signal="body_entered" from="AIModule/AiRange" to="AIModule" method="_on_ai_range_body_entered"]
+[connection signal="body_exited" from="AIModule/AiRange" to="AIModule" method="_on_ai_range_body_exited"]

@@ -69,6 +69,10 @@ Jump={
 ]
 }
 
+[layer_names]
+
+2d_render/layer_1="PlayerCollision"
+
 [rendering]
 
 rendering_device/driver.windows="d3d12"
