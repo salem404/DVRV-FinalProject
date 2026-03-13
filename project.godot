@@ -37,6 +37,10 @@ folder_colors={
 "res://translations/": "gray"
 }
 
+[global_group]
+
+Player=""
+
 [input]
 
 MoveUp={

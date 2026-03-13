@@ -4,62 +4,85 @@
 [ext_resource type="PackedScene" uid="uid://bnc8tnds8ryqw" path="res://scenes/Game/player_gui.tscn" id="2_kcqp7"]
 [ext_resource type="PackedScene" uid="uid://cn0nsbc6f1er4" path="res://scenes/Game/DefaultPlayer.tscn" id="2_mhr4y"]
 [ext_resource type="PackedScene" uid="uid://br5xu6mixulmb" path="res://scenes/Game/UI.tscn" id="3_unq2p"]
+[ext_resource type="Script" uid="uid://kymh0tus5b24" path="res://scenes/Game/player_follower.gd" id="5_unq2p"]
+[ext_resource type="Script" uid="uid://chelv8jhgtdu4" path="res://scenes/Game/events_detector.gd" id="6_crllf"]
+[ext_resource type="Script" uid="uid://cpffx88thlrv0" path="res://scenes/Game/playerAreaDetector.gd" id="6_edlo4"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_yu7w2"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_lnipu"]
 
-[node name="Game" type="Node2D" unique_id=769547888]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_crllf"]
+size = Vector2(128, 720)
+
+[node name="Game" type="Node2D" unique_id=769547888 node_paths=PackedStringArray("SpawnPos")]
 script = ExtResource("1_mhr4y")
 PackedPlayerGUI = ExtResource("2_kcqp7")
 PackedPlayers = Array[PackedScene]([ExtResource("2_mhr4y")])
+SpawnPos = [NodePath("SpawnPos/P1"), NodePath("SpawnPos/P2"), NodePath("SpawnPos/P3"), NodePath("SpawnPos/P4")]
 
-[node name="Map" type="Node" parent="." unique_id=371813413]
+[node name="Map" type="Node2D" parent="." unique_id=561736938]
 
-[node name="Visual" type="Node" parent="Map" unique_id=1832980256]
+[node name="Visual" type="Node2D" parent="Map" unique_id=406405879]
 
 [node name="Background" type="Sprite2D" parent="Map/Visual" unique_id=1420582737]
 modulate = Color(0.45029536, 0.45029536, 0.5801458, 1)
 z_index = -2
-position = Vector2(640.00006, 360.00003)
-scale = Vector2(1280, 720.00006)
+position = Vector2(1120, 360.00003)
+scale = Vector2(2240, 720.00006)
 texture = SubResource("CanvasTexture_yu7w2")
 
 [node name="Floor" type="Sprite2D" parent="Map/Visual" unique_id=970954159]
 modulate = Color(0.61347646, 0.61347646, 0.7852611, 1)
 z_index = -1
-position = Vector2(320, 499.99997)
-scale = Vector2(640, 231.99992)
-texture = SubResource("CanvasTexture_lnipu")
-
-[node name="Floor2" type="Sprite2D" parent="Map/Visual" unique_id=6766485]
-modulate = Color(0.61347646, 0.61347646, 0.7852611, 1)
-z_index = -1
-position = Vector2(976.00006, 408.00003)
-rotation = -0.2617994
-scale = Vector2(763.18677, 229.58717)
+position = Vector2(1120, 504)
+scale = Vector2(2239.9998, 319.99997)
 texture = SubResource("CanvasTexture_lnipu")
 
 [node name="Boundry" type="Area2D" parent="Map" unique_id=852656395]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Boundry" unique_id=259037805]
 position = Vector2(-8, 0)
-polygon = PackedVector2Array(1272, 240, 1272, 424, 640, 592, 24, 592, 24, 408, 632, 408)
+polygon = PackedVector2Array(2232, 368, 2232, 648, 24, 648, 24, 368)
 
-[node name="Players" type="Node" parent="." unique_id=708148398]
+[node name="Players" type="Node2D" parent="." unique_id=1371707939]
 
-[node name="Ui" parent="." unique_id=1782285889 instance=ExtResource("3_unq2p")]
-
-[node name="SpawnPos" type="Node" parent="." unique_id=871830655]
+[node name="SpawnPos" type="Node2D" parent="." unique_id=710396889]
 
 [node name="P1" type="Marker2D" parent="SpawnPos" unique_id=494059567]
-position = Vector2(64, 424)
+position = Vector2(256, 448)
 
 [node name="P2" type="Marker2D" parent="SpawnPos" unique_id=1541590837]
-position = Vector2(64, 472)
+position = Vector2(256, 576)
 
 [node name="P3" type="Marker2D" parent="SpawnPos" unique_id=1705212425]
-position = Vector2(64, 520)
+position = Vector2(104, 424)
 
 [node name="P4" type="Marker2D" parent="SpawnPos" unique_id=123537638]
-position = Vector2(64, 560)
+position = Vector2(104, 552)
+
+[node name="PlayerFollower" type="Node2D" parent="." unique_id=836535732]
+position = Vector2(640, 360)
+script = ExtResource("5_unq2p")
+
+[node name="Camera2D" type="Camera2D" parent="PlayerFollower" unique_id=1110206721]
+
+[node name="Ui" parent="PlayerFollower" unique_id=1782285889 instance=ExtResource("3_unq2p")]
+offset_left = -640.0
+offset_top = -360.0
+offset_right = -640.0
+offset_bottom = -360.0
+
+[node name="EventsDetector" type="Node2D" parent="." unique_id=751690982 node_paths=PackedStringArray("events")]
+script = ExtResource("6_crllf")
+events = [NodePath("Area1")]
+
+[node name="Area1" type="Area2D" parent="EventsDetector" unique_id=1414414942]
+position = Vector2(1984, 512)
+script = ExtResource("6_edlo4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EventsDetector/Area1" unique_id=610897106]
+position = Vector2(-256, -152)
+shape = SubResource("RectangleShape2D_crllf")
+
+[connection signal="body_entered" from="EventsDetector/Area1" to="EventsDetector/Area1" method="_on_body_entered"]

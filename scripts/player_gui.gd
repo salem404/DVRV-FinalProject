@@ -12,4 +12,3 @@ func _process(delta):
 		HpBar.value = playerStats.Health
 		ManaBar.max_value = playerStats.MaxMagic
 		ManaBar.value = playerStats.Magic
-		print(playerStats.MaxHealth, " ", playerStats.Health, " ", playerStats.MaxMagic, " ", playerStats.Magic)
