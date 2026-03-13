@@ -4,13 +4,19 @@
 [ext_resource type="PackedScene" uid="uid://bnc8tnds8ryqw" path="res://scenes/Game/player_gui.tscn" id="2_kcqp7"]
 [ext_resource type="PackedScene" uid="uid://cn0nsbc6f1er4" path="res://scenes/Game/DefaultPlayer.tscn" id="2_mhr4y"]
 [ext_resource type="PackedScene" uid="uid://br5xu6mixulmb" path="res://scenes/Game/UI.tscn" id="3_unq2p"]
-[ext_resource type="Script" uid="uid://kymh0tus5b24" path="res://scenes/Game/player_follower.gd" id="5_unq2p"]
-[ext_resource type="Script" uid="uid://chelv8jhgtdu4" path="res://scenes/Game/events_detector.gd" id="6_crllf"]
-[ext_resource type="Script" uid="uid://cpffx88thlrv0" path="res://scenes/Game/playerAreaDetector.gd" id="6_edlo4"]
+[ext_resource type="Script" uid="uid://kymh0tus5b24" path="res://player_follower.gd" id="5_unq2p"]
+[ext_resource type="Script" uid="uid://chelv8jhgtdu4" path="res://events_detector.gd" id="6_crllf"]
+[ext_resource type="Script" uid="uid://cpffx88thlrv0" path="res://scripts/player/playerAreaDetector.gd" id="6_edlo4"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_yu7w2"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_lnipu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wkojt"]
+size = Vector2(192, 720)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kxm5a"]
+size = Vector2(192, 720)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_crllf"]
 size = Vector2(128, 720)
@@ -73,16 +79,33 @@ offset_top = -360.0
 offset_right = -640.0
 offset_bottom = -360.0
 
+[node name="RightWall" type="StaticBody2D" parent="PlayerFollower" unique_id=642667161]
+position = Vector2(736, 0)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerFollower/RightWall" unique_id=319139832]
+shape = SubResource("RectangleShape2D_wkojt")
+
+[node name="LeftWall" type="StaticBody2D" parent="PlayerFollower" unique_id=732630125]
+position = Vector2(-736, 0)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerFollower/LeftWall" unique_id=917108382]
+shape = SubResource("RectangleShape2D_kxm5a")
+
 [node name="EventsDetector" type="Node2D" parent="." unique_id=751690982 node_paths=PackedStringArray("events")]
 script = ExtResource("6_crllf")
 events = [NodePath("Area1")]
 
 [node name="Area1" type="Area2D" parent="EventsDetector" unique_id=1414414942]
 position = Vector2(1984, 512)
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("6_edlo4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EventsDetector/Area1" unique_id=610897106]
 position = Vector2(-256, -152)
 shape = SubResource("RectangleShape2D_crllf")
+debug_color = Color(0.8297021, 0, 0.18158725, 0.41960785)
 
 [connection signal="body_entered" from="EventsDetector/Area1" to="EventsDetector/Area1" method="_on_body_entered"]
