@@ -2,6 +2,7 @@ extends Node
 
 @onready var player: CharacterBody2D = get_parent()
 @onready var MovementModule: Node = $MovementModule
+@onready var MovesetModule: Node = $MovesetModule
 @onready var InputModule: Node = $InputModule
 @onready var StatusModule: Node = $StatusModule
 @onready var StatsModule: Node = $StatsModule
@@ -36,6 +37,6 @@ func _process(delta):
 			MovementModule.jump(StatsModule.Jpower)
 		
 		if InputModule.lightAttack:
-			
+			MovesetModule.lightAttack()
 	else:
 		MovementModule.isMoving = false

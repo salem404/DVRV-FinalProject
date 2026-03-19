@@ -1,18 +1,19 @@
 [gd_scene format=3 uid="uid://pyc48swcdrki"]
 
-[ext_resource type="Script" uid="uid://cepmk55uduy27" path="res://scripts/Game/Hitbox/hitbox_module.gd" id="1_0vdsg"]
-[ext_resource type="Script" uid="uid://c2ayeug5h2qxe" path="res://scripts/Game/Hitbox/hitbox.gd" id="1_no6bd"]
-[ext_resource type="Script" uid="uid://cetqui21umd2g" path="res://scripts/Game/Hitbox/lifetime_module.gd" id="2_qugoh"]
-[ext_resource type="Texture2D" uid="uid://bwf0hdksn75fq" path="res://images/Circle.png" id="4_ogycc"]
+[ext_resource type="Script" uid="uid://c2ayeug5h2qxe" path="res://scripts/Game/Hitbox/hitbox.gd" id="1_nj274"]
+[ext_resource type="Script" uid="uid://cetqui21umd2g" path="res://scripts/Game/Hitbox/lifetime_module.gd" id="2_2ktgi"]
+[ext_resource type="Script" uid="uid://cepmk55uduy27" path="res://scripts/Game/Hitbox/hitbox_module.gd" id="3_7svxk"]
+[ext_resource type="Texture2D" uid="uid://bwf0hdksn75fq" path="res://images/Circle.png" id="4_vq0b0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0vdsg"]
 radius = 8.0
 
 [node name="Hitbox" type="Area2D" unique_id=2127241327]
+top_level = true
 position = Vector2(384, 192)
 collision_layer = 0
 collision_mask = 3
-script = ExtResource("1_no6bd")
+script = ExtResource("1_nj274")
 showTexture = true
 damage = 5
 stuntime = 1.0
@@ -23,11 +24,11 @@ shape = SubResource("CircleShape2D_0vdsg")
 debug_color = Color(1, 0, 0.016666412, 0.41960785)
 
 [node name="LifetimeModule" type="Node" parent="." unique_id=1621094472 node_paths=PackedStringArray("node")]
-script = ExtResource("2_qugoh")
+script = ExtResource("2_2ktgi")
 node = NodePath("..")
 
 [node name="HitboxModule" type="Node" parent="." unique_id=523251351 node_paths=PackedStringArray("this")]
-script = ExtResource("1_0vdsg")
+script = ExtResource("3_7svxk")
 this = NodePath("..")
 damage = 5
 stuntime = 1.0
@@ -39,4 +40,6 @@ modulate = Color(0.86, 0, 0, 0.37254903)
 z_index = 20
 position = Vector2(5.4240227e-06, 9.23872e-06)
 scale = Vector2(0.032000046, 0.032000046)
-texture = ExtResource("4_ogycc")
+texture = ExtResource("4_vq0b0")
+
+[connection signal="initialized" from="." to="LifetimeModule" method="_on_hitbox_initialized"]

@@ -1,9 +1,12 @@
 extends Area2D
 
+signal initialized()
+
 @export var showTexture: bool = false
 
 @export_category("Hitbox Values")
 @export var damage: int
+@export var height: int
 @export var stuntime: float
 @export var knockback: Vector3
 @export var friendly: bool 
@@ -14,7 +17,9 @@ extends Area2D
 func _ready():
 	$Sprite2D.visible = showTexture
 	$HitboxModule.damage = damage
+	$HitboxModule.height = height
 	$HitboxModule.stuntime = stuntime
 	$HitboxModule.knockback = knockback
 	$HitboxModule.friendly = friendly
 	$LifetimeModule.lifeTime = lifeTime
+	initialized.emit()
