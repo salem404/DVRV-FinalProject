@@ -15,7 +15,7 @@ var behavior: int = 0
 
 func _ready():
 	while true:
-		behavior = randi_range(0, 1)
+		behavior = 1 if behavior == 0 else randi_range(0, 1)
 		await get_tree().create_timer(randf_range(waitTimeRange.x,waitTimeRange.y)).timeout
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

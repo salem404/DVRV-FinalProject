@@ -1,13 +1,16 @@
 [gd_scene format=3 uid="uid://cn0nsbc6f1er4"]
 
 [ext_resource type="Texture2D" uid="uid://cmb8qgi4h0vuu" path="res://images/TemplateImage.svg" id="1_3vyb7"]
-[ext_resource type="Script" uid="uid://dbjji30kw3c0f" path="res://scripts/player/playerPhysics.gd" id="1_tuyoq"]
-[ext_resource type="Script" uid="uid://8dvmgdhmovjw" path="res://scripts/player/input_module.gd" id="2_g2els"]
-[ext_resource type="Script" uid="uid://b6mwl4d2vgyxp" path="res://scripts/player/player_module.gd" id="2_qlg0r"]
-[ext_resource type="Script" uid="uid://buig5yjiwsaiy" path="res://scripts/player/movement_module.gd" id="3_tuyoq"]
-[ext_resource type="Script" uid="uid://cp8p2ixqhldlj" path="res://scripts/player/status_module.gd" id="5_fjrip"]
-[ext_resource type="Script" uid="uid://bko02gl3dtcuq" path="res://scripts/player/stats_module.gd" id="7_fjrip"]
+[ext_resource type="Script" uid="uid://dbjji30kw3c0f" path="res://scripts/Game/Character/playerPhysics.gd" id="1_tuyoq"]
+[ext_resource type="Script" uid="uid://8dvmgdhmovjw" path="res://scripts/Game/Player/input_module.gd" id="2_g2els"]
+[ext_resource type="Script" uid="uid://b6mwl4d2vgyxp" path="res://scripts/Game/Character/player_module.gd" id="2_qlg0r"]
+[ext_resource type="Script" uid="uid://buig5yjiwsaiy" path="res://scripts/Game/Character/movement_module.gd" id="3_tuyoq"]
+[ext_resource type="Script" uid="uid://cp8p2ixqhldlj" path="res://scripts/Game/Character/status_module.gd" id="5_fjrip"]
+[ext_resource type="Script" uid="uid://ccous1xf0ya2n" path="res://scripts/Game/Character/damage_module.gd" id="7_bpow2"]
+[ext_resource type="Script" uid="uid://bko02gl3dtcuq" path="res://scripts/Game/Character/stats_module.gd" id="7_fjrip"]
+[ext_resource type="Script" uid="uid://bb1v4f07bx0gm" path="res://scripts/Game/Character/moveset_module.gd" id="8_53s13"]
 [ext_resource type="Texture2D" uid="uid://de8xycmp1afo4" path="res://images/Entities/shadow.png" id="8_khinc"]
+[ext_resource type="Texture2D" uid="uid://bwf0hdksn75fq" path="res://images/Circle.png" id="9_wrl72"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("1_3vyb7")
@@ -24,12 +27,12 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dqkch"]
-radius = 48.0
-height = 128.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_bpow2"]
+radius = 32.0
 
 [node name="CharacterDefault" type="CharacterBody2D" unique_id=187010336 groups=["Player"]]
 position = Vector2(640, 320)
+collision_mask = 0
 script = ExtResource("1_tuyoq")
 
 [node name="PlayerModule" type="Node" parent="." unique_id=1523449589]
@@ -53,13 +56,25 @@ autostart = true
 [node name="StatsModule" type="Node" parent="PlayerModule" unique_id=459627275]
 script = ExtResource("7_fjrip")
 
+[node name="DamageModule" type="Node" parent="PlayerModule" unique_id=1311322983]
+script = ExtResource("7_bpow2")
+
+[node name="MovesetModule" type="Node" parent="PlayerModule" unique_id=1059847971]
+script = ExtResource("8_53s13")
+
 [node name="Anims" type="AnimatedSprite2D" parent="." unique_id=1240271889]
 position = Vector2(0, -64)
 sprite_frames = SubResource("SpriteFrames_qhqgy")
 
 [node name="CollisionBox" type="CollisionShape2D" parent="." unique_id=837465960]
-position = Vector2(0, -64)
-shape = SubResource("CapsuleShape2D_dqkch")
+position = Vector2(0, -32)
+shape = SubResource("CircleShape2D_bpow2")
+
+[node name="Sprite2D" type="Sprite2D" parent="CollisionBox" unique_id=1033437663]
+modulate = Color(1, 1, 1, 0.4745098)
+position = Vector2(-1.9073486e-05, -9.536743e-07)
+scale = Vector2(0.12800008, 0.128)
+texture = ExtResource("9_wrl72")
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=741059315]
 modulate = Color(1, 1, 1, 0.19607843)

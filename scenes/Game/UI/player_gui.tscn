@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bnc8tnds8ryqw"]
 
-[ext_resource type="Script" uid="uid://d0wgmqf2eg2kn" path="res://scripts/player_gui.gd" id="1_gobnf"]
+[ext_resource type="Script" uid="uid://d0wgmqf2eg2kn" path="res://scripts/Game/UI/player_gui.gd" id="1_gobnf"]
 [ext_resource type="Texture2D" uid="uid://d1mlbgplycn15" path="res://images/UI/Progress Barr.png" id="2_iykwx"]
 
 [node name="PlayerGUI" type="MarginContainer" unique_id=413265438]

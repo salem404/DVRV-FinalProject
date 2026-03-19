@@ -8,7 +8,7 @@ var isDebounced: bool = false
 @onready var DebounceTimer: Timer = $DebounceTimer
 
 func canMove() -> bool:
-	return not (isStunned and isDebounced)
+	return not (isStunned or isDebounced)
 
 func applyStun(time: float):
 	if time > StunTimer.time_left:

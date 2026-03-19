@@ -1,13 +1,14 @@
 [gd_scene format=3 uid="uid://ddfu83q6oko6m"]
 
-[ext_resource type="Script" uid="uid://bttmyp1j1r7sd" path="res://scripts/player/gameManager.gd" id="1_mhr4y"]
-[ext_resource type="PackedScene" uid="uid://bnc8tnds8ryqw" path="res://scenes/Game/player_gui.tscn" id="2_kcqp7"]
+[ext_resource type="Script" uid="uid://bttmyp1j1r7sd" path="res://scripts/Game/gameManager.gd" id="1_mhr4y"]
+[ext_resource type="PackedScene" uid="uid://bnc8tnds8ryqw" path="res://scenes/Game/UI/player_gui.tscn" id="2_kcqp7"]
 [ext_resource type="PackedScene" uid="uid://cn0nsbc6f1er4" path="res://scenes/Game/Player/DefaultPlayer.tscn" id="2_mhr4y"]
-[ext_resource type="PackedScene" uid="uid://br5xu6mixulmb" path="res://scenes/Game/UI.tscn" id="3_unq2p"]
+[ext_resource type="PackedScene" uid="uid://dprhj58a0gbm2" path="res://scenes/Game/UI/UI.tscn" id="3_unq2p"]
 [ext_resource type="PackedScene" uid="uid://0keg0f2gbnbh" path="res://scenes/Game/Enemies/enemy_default.tscn" id="4_wkojt"]
 [ext_resource type="Script" uid="uid://kymh0tus5b24" path="res://player_follower.gd" id="5_unq2p"]
 [ext_resource type="Script" uid="uid://chelv8jhgtdu4" path="res://events_detector.gd" id="6_crllf"]
-[ext_resource type="Script" uid="uid://cpffx88thlrv0" path="res://scripts/player/playerAreaDetector.gd" id="6_edlo4"]
+[ext_resource type="Script" uid="uid://cpffx88thlrv0" path="res://scripts/Game/playerAreaDetector.gd" id="6_edlo4"]
+[ext_resource type="PackedScene" uid="uid://pyc48swcdrki" path="res://scenes/hitbox.tscn" id="9_kxm5a"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_yu7w2"]
 
@@ -111,5 +112,9 @@ script = ExtResource("6_edlo4")
 position = Vector2(-256, -152)
 shape = SubResource("RectangleShape2D_crllf")
 debug_color = Color(0.8297021, 0, 0.18158725, 0.41960785)
+
+[node name="Hitbox" parent="." unique_id=2127241327 instance=ExtResource("9_kxm5a")]
+position = Vector2(768, 367.99997)
+scale = Vector2(10, 10)
 
 [connection signal="body_entered" from="EventsDetector/Area1" to="EventsDetector/Area1" method="_on_body_entered"]

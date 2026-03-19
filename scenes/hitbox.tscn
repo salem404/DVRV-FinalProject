@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://pyc48swcdrki"]
+
+[ext_resource type="Script" uid="uid://cepmk55uduy27" path="res://scripts/Game/Hitbox/hitbox_module.gd" id="1_0vdsg"]
+[ext_resource type="Script" uid="uid://c2ayeug5h2qxe" path="res://scripts/Game/Hitbox/hitbox.gd" id="1_no6bd"]
+[ext_resource type="Script" uid="uid://cetqui21umd2g" path="res://scripts/Game/Hitbox/lifetime_module.gd" id="2_qugoh"]
+[ext_resource type="Texture2D" uid="uid://bwf0hdksn75fq" path="res://images/Circle.png" id="4_ogycc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0vdsg"]
+radius = 8.0
+
+[node name="Hitbox" type="Area2D" unique_id=2127241327]
+position = Vector2(384, 192)
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("1_no6bd")
+showTexture = true
+damage = 5
+stuntime = 1.0
+knockback = Vector3(-100, 20, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=643838555]
+shape = SubResource("CircleShape2D_0vdsg")
+debug_color = Color(1, 0, 0.016666412, 0.41960785)
+
+[node name="LifetimeModule" type="Node" parent="." unique_id=1621094472 node_paths=PackedStringArray("node")]
+script = ExtResource("2_qugoh")
+node = NodePath("..")
+
+[node name="HitboxModule" type="Node" parent="." unique_id=523251351 node_paths=PackedStringArray("this")]
+script = ExtResource("1_0vdsg")
+this = NodePath("..")
+damage = 5
+stuntime = 1.0
+knockback = Vector3(0, -5, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=551758244]
+visible = false
+modulate = Color(0.86, 0, 0, 0.37254903)
+z_index = 20
+position = Vector2(5.4240227e-06, 9.23872e-06)
+scale = Vector2(0.032000046, 0.032000046)
+texture = ExtResource("4_ogycc")
