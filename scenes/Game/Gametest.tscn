@@ -33,8 +33,9 @@ SpawnPos = [NodePath("SpawnPos/P1"), NodePath("SpawnPos/P2"), NodePath("SpawnPos
 z_index = 2
 y_sort_enabled = true
 
-[node name="EnemyDefault" parent="Enemies" unique_id=187010336 instance=ExtResource("4_wkojt")]
+[node name="EnemyDefault" parent="Enemies" unique_id=187010336 node_paths=PackedStringArray("MovingArea") instance=ExtResource("4_wkojt")]
 position = Vector2(960, 512)
+MovingArea = NodePath("../../Map/Boundry")
 
 [node name="Players" type="Node2D" parent="." unique_id=1371707939]
 z_index = 2

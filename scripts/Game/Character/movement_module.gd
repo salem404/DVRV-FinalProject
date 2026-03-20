@@ -7,6 +7,7 @@ var character: CharacterBody2D
 var height: float
 var heightSpeed: float
 
+var lookDir: int = 1
 var boundryPolygon
 var isMoving: bool
 var outsideArea: bool = false
@@ -21,9 +22,6 @@ func movementProcess(delta):
 	
 		var shadowSize: float = lerp(0.0, 1.0, 1/(height/100+1))
 		playerModule.charShadow.scale = playerModule.charShadowOgSize * shadowSize
-		
-	if character.name == "EnemyDefault":
-		print(playerModule.charShadow.scale)
 		
 	if not isMoving and not playerModule.StatusModule.onAir:
 		character.velocity.x /= 1.4
@@ -53,6 +51,10 @@ func setHeight(node: Node2D, offset: float):
 func setMovement(movement: Vector2, speed: Vector2):
 	if movement != Vector2.ZERO:
 		isMoving = true
+		if movement.x < 0:
+			lookDir = -1
+		elif movement.x > 0:
+			lookDir = 1
 		moveTo(Vector2(movement.x * speed.x, movement.y * speed.y))
 	elif not playerModule.StatusModule.onAir: 
 		isMoving = false

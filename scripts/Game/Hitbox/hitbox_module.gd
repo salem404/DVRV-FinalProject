@@ -28,7 +28,8 @@ func _on_body_entered(body):
 		inside.append(body)
 
 func _on_body_exit(body):
-	inside.erase(body)
+	if (not friendly and body.is_in_group("Player") or friendly and body.is_in_group("Enemy")) and not hitted.has(body):
+		inside.erase(body)
 
 func isTrulyIn(body):
 	var thisRadius = this.get_node("CollisionShape2D").shape.radius * this.scale.y
