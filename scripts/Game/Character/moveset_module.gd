@@ -6,6 +6,7 @@ extends Node
 
 @export_category("LightAttack")
 @export var LADamage: Array[int] = [10,10,10]
+@export var LAPlayerMovement: Array[Vector3] = [Vector3(200,1,0),Vector3(200,1,0),Vector3(200,1,0)]
 @export var LAKnockback: Array[Vector3] = [Vector3(50,5,0),Vector3(50,5,0),Vector3(200,10,0)]
 @export var LAHitboxOffset: Array[Vector3] = [Vector3(80,0,-64),Vector3(80,0,-64),Vector3(80,0,-64)]
 @export var LAHitboxSize: Array[int] = [10,10,10]
@@ -18,7 +19,10 @@ var attackNumber: int = 0
 
 func lightAttack():
 	if LADamage.size() <= attackNumber: return
-	playerModule.StatusModule.applyDebounce(LADebounceTime[attackNumber-1])
+	playerModule.StatusModule.applyDebounce(LADebounceTime[attackNumber])
+	
+	playerModule.MovementModule.applyForceV3(LAPlayerMovement[attackNumber])
+	
 	var hitbox = hitboxPacked.instantiate()
 	hitbox.friendly = true
 	var offset = LAHitboxOffset[attackNumber]

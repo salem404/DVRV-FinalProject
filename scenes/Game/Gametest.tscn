@@ -23,15 +23,22 @@ size = Vector2(192, 720)
 size = Vector2(128, 720)
 
 [node name="Game" type="Node2D" unique_id=769547888 node_paths=PackedStringArray("SpawnPos")]
+y_sort_enabled = true
 script = ExtResource("1_mhr4y")
 PackedPlayerGUI = ExtResource("2_kcqp7")
 PackedPlayers = Array[PackedScene]([ExtResource("2_mhr4y")])
 SpawnPos = [NodePath("SpawnPos/P1"), NodePath("SpawnPos/P2"), NodePath("SpawnPos/P3"), NodePath("SpawnPos/P4")]
 
 [node name="Enemies" type="Node2D" parent="." unique_id=2062962674]
+z_index = 2
+y_sort_enabled = true
 
 [node name="EnemyDefault" parent="Enemies" unique_id=187010336 instance=ExtResource("4_wkojt")]
 position = Vector2(960, 512)
+
+[node name="Players" type="Node2D" parent="." unique_id=1371707939]
+z_index = 2
+y_sort_enabled = true
 
 [node name="Map" type="Node2D" parent="." unique_id=561736938]
 
@@ -57,8 +64,6 @@ texture = SubResource("CanvasTexture_lnipu")
 position = Vector2(-8, 0)
 polygon = PackedVector2Array(2232, 368, 2232, 648, 24, 648, 24, 368)
 
-[node name="Players" type="Node2D" parent="." unique_id=1371707939]
-
 [node name="SpawnPos" type="Node2D" parent="." unique_id=710396889]
 
 [node name="P1" type="Marker2D" parent="SpawnPos" unique_id=494059567]
@@ -74,6 +79,7 @@ position = Vector2(104, 424)
 position = Vector2(104, 552)
 
 [node name="PlayerFollower" type="Node2D" parent="." unique_id=836535732]
+z_index = 2
 position = Vector2(640, 360)
 script = ExtResource("5_unq2p")
 

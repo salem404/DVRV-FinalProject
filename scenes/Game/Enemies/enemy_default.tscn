@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://de8xycmp1afo4" path="res://images/Entities/shadow.png" id="7_cjajr"]
 [ext_resource type="Script" uid="uid://ccous1xf0ya2n" path="res://scripts/Game/Character/damage_module.gd" id="7_elj56"]
 [ext_resource type="Script" uid="uid://8dvmgdhmovjw" path="res://scripts/Game/Player/input_module.gd" id="7_nbf47"]
+[ext_resource type="Script" uid="uid://bb1v4f07bx0gm" path="res://scripts/Game/Character/moveset_module.gd" id="8_cjajr"]
+[ext_resource type="PackedScene" uid="uid://pyc48swcdrki" path="res://scenes/Game/hitbox.tscn" id="9_uemot"]
 [ext_resource type="Texture2D" uid="uid://bwf0hdksn75fq" path="res://images/Circle.png" id="11_qj2ak"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
@@ -64,6 +66,10 @@ active = false
 
 [node name="DamageModule" type="Node" parent="PlayerModule" unique_id=1236290251]
 script = ExtResource("7_elj56")
+
+[node name="MovesetModule" type="Node" parent="PlayerModule" unique_id=442740027]
+script = ExtResource("8_cjajr")
+hitboxPacked = ExtResource("9_uemot")
 
 [node name="Anims" type="AnimatedSprite2D" parent="." unique_id=1240271889]
 position = Vector2(0, -64)

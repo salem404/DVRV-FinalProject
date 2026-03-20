@@ -22,9 +22,12 @@ func movementProcess(delta):
 		var shadowSize: float = lerp(0.0, 1.0, 1/(height/100+1))
 		playerModule.charShadow.scale = playerModule.charShadowOgSize * shadowSize
 		
+	if character.name == "EnemyDefault":
+		print(playerModule.charShadow.scale)
+		
 	if not isMoving and not playerModule.StatusModule.onAir:
-		character.velocity.x = 0
-		character.velocity.y = 0
+		character.velocity.x /= 1.4
+		character.velocity.y /= 1.4
 	character.move_and_slide()
 	
 	if MovingArea and not Geometry2D.is_point_in_polygon(character.position, boundryPolygon):
@@ -71,6 +74,10 @@ func applyForce(force: Vector2, height: float):
 	
 	isMoving = true
 
+func applyForceV3(force: Vector3):
+	applyForce(Vector2(force.x,force.z), force.y)
+
+	
 func jump(jPower: float):
 	heightSpeed = jPower
 	playerModule.StatusModule.onAir = true
