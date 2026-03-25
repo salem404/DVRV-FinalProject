@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal started()
+
 @export_category("Objects")
 @export var MovingArea: Area2D
 @onready var PlayerModule: Node = $PlayerModule
@@ -11,6 +13,9 @@ func _ready():
 		PlayerModule.MovementModule.boundryPolygon = MovingArea.get_node("CollisionPolygon2D").polygon
 	else:
 		push_warning("MovingArea not found in ", name)
-
+		
+	started.connect(PlayerModule.initialized)
+	started.emit()
+	
 func _physics_process(delta):
 	PlayerModule.MovementModule.movementProcess(delta)

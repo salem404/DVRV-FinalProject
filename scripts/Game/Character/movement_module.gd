@@ -6,18 +6,21 @@ var character: CharacterBody2D
 
 var height: float
 var heightSpeed: float
-
-var lookDir: int = 1
 var boundryPolygon
 var isMoving: bool
 var outsideArea: bool = false
 
 func movementProcess(delta):
+	if not playerModule:
+		playerModule = get_parent()
+		return
+	character = playerModule.player
+	isMoving = playerModule.StatusModule.isMoving
 	var oldPos = character.position
 	
 	if playerModule.StatusModule.onAir:
 		calculateHeight()
-		setHeight(playerModule.charAnim, playerModule.charAnimOgOffset)
+		setHeight(playerModule.charVisual, playerModule.charAnimOgOffset)
 		setHeight(playerModule.charCollision, playerModule.charCollisionOgOffset)
 	
 		var shadowSize: float = lerp(0.0, 1.0, 1/(height/100+1))
@@ -50,14 +53,14 @@ func setHeight(node: Node2D, offset: float):
 
 func setMovement(movement: Vector2, speed: Vector2):
 	if movement != Vector2.ZERO:
-		isMoving = true
+		playerModule.StatusModule.isMoving = true
 		if movement.x < 0:
-			lookDir = -1
+			playerModule.StatusModule.lookDir = -1
 		elif movement.x > 0:
-			lookDir = 1
+			playerModule.StatusModule.lookDir = 1
 		moveTo(Vector2(movement.x * speed.x, movement.y * speed.y))
 	elif not playerModule.StatusModule.onAir: 
-		isMoving = false
+		playerModule.StatusModule.isMoving = false
 
 func moveTo(movement: Vector2):
 	character.velocity.x = movement.x
@@ -74,7 +77,7 @@ func applyForce(force: Vector2, height: float):
 	character.velocity.y += force.y
 	jump(height)
 	
-	isMoving = true
+	playerModule.StatusModule.isMoving = true
 
 func applyForceV3(force: Vector3):
 	applyForce(Vector2(force.x,force.z), force.y)

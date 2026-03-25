@@ -10,10 +10,10 @@ extends Node
 
 @export var LAHitboxOffset: Array[Vector3] = [Vector3(80,0,-64),Vector3(80,0,-64),Vector3(80,0,-64)]
 @export var LAHitboxSize: Array[int] = [10,10,10]
-@export var LAHitboxLifetime: Array[float] = [0.2,0.2,0.2]
+@export var LAHitboxLifetime: Array[float] = [0.1,0.1,0.1]
 
 @export var LAPlayerMovement: Array[Vector3] = [Vector3(200,1,0),Vector3(200,1,0),Vector3(200,1,0)]
-@export var LAStuntime: Array[float] = [0.3,0.3,1]
+@export var LAStuntime: Array[float] = [0.3,0.3,0.1]
 @export var LADebounceTime: Array[float] = [0.2,0.2,0.2]
 @export var LAResetTime: Array[float] = [1.0,1.0,2.0]
 var attackNumber: int = 0
@@ -22,7 +22,7 @@ var attackNumber: int = 0
 func lightAttack():
 	if LADamage.size() <= attackNumber: return
 	
-	var lookDir = playerModule.MovementModule.lookDir
+	var lookDir = playerModule.StatusModule.lookDir
 	
 	playerModule.StatusModule.applyDebounce(LADebounceTime[attackNumber])
 	playerModule.MovementModule.applyForceV3(LAPlayerMovement[attackNumber]*Vector3(lookDir,1,1))

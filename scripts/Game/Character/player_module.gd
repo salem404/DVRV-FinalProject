@@ -7,23 +7,23 @@ extends Node
 @onready var StatusModule: Node = $StatusModule
 @onready var StatsModule: Node = $StatsModule
 @onready var DamageModule: Node = $DamageModule
+@onready var AnimModule: Node = $AnimModule
 
 var isMoving: bool = false
 var outsideArea: bool = false
 
-var charAnim: AnimatedSprite2D 
+var charVisual: Node2D 
 var charCollision: CollisionShape2D 
 var charShadow: Sprite2D 
 var charAnimOgOffset: float
 var charCollisionOgOffset: float
 var charShadowOgSize: Vector2
 
-func _ready():
-	MovementModule.character = player
-	charAnim = player.get_node("Anims")
+func initialized():
+	charVisual = player.get_node("Visual")
 	charCollision = player.get_node("CollisionBox")
 	charShadow = player.get_node("Shadow")
-	charAnimOgOffset = charAnim.position.y
+	charAnimOgOffset = charVisual.position.y
 	charCollisionOgOffset = charCollision.position.y
 	charShadowOgSize = charShadow.scale
 
@@ -39,4 +39,4 @@ func _process(delta):
 		if InputModule.lightAttack:
 			MovesetModule.lightAttack()
 	else:
-		MovementModule.isMoving = false
+		StatusModule.isMoving = false
