@@ -10,9 +10,10 @@
 [ext_resource type="Script" uid="uid://bko02gl3dtcuq" path="res://scripts/Game/Character/stats_module.gd" id="7_fjrip"]
 [ext_resource type="Script" uid="uid://bb1v4f07bx0gm" path="res://scripts/Game/Character/moveset_module.gd" id="8_53s13"]
 [ext_resource type="Texture2D" uid="uid://de8xycmp1afo4" path="res://images/Entities/shadow.png" id="8_khinc"]
-[ext_resource type="PackedScene" uid="uid://pyc48swcdrki" path="res://scenes/Game/hitbox.tscn" id="9_hpxot"]
+[ext_resource type="PackedScene" uid="uid://pyc48swcdrki" path="res://scenes/Game/Attacks/hitbox.tscn" id="9_hpxot"]
 [ext_resource type="Texture2D" uid="uid://bwf0hdksn75fq" path="res://images/Circle.png" id="9_wrl72"]
-[ext_resource type="Script" uid="uid://b3t5n7l6qx052" path="res://scenes/Game/Player/anim_module.gd" id="10_by3ly"]
+[ext_resource type="Script" uid="uid://b3t5n7l6qx052" path="res://scripts/Game/Player/anim_module.gd" id="10_by3ly"]
+[ext_resource type="Script" uid="uid://c5vqkq5gad78e" path="res://scripts/Game/Character/height_module.gd" id="11_00enb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bpow2"]
 radius = 32.0
@@ -101,6 +102,10 @@ advance_condition = &"Knockback"
 advance_mode = 2
 advance_condition = &"!Knockback"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d7n1s"]
+advance_mode = 2
+advance_condition = &"!Stun"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_d7n1s"]
 states/Idle/node = SubResource("AnimationNodeBlendSpace1D_jpqlp")
 states/Idle/position = Vector2(302, -38)
@@ -111,7 +116,7 @@ states/Stun/node = SubResource("AnimationNodeBlendSpace1D_00enb")
 states/Stun/position = Vector2(520, 39)
 states/Walk/node = SubResource("AnimationNodeBlendSpace1D_wklcl")
 states/Walk/position = Vector2(501, -71)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_by3ly"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_00enb"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_jpqlp"), "Idle", "Stun", SubResource("AnimationNodeStateMachineTransition_82rnm"), "Walk", "Stun", SubResource("AnimationNodeStateMachineTransition_wklcl"), "Stun", "Knockback", SubResource("AnimationNodeStateMachineTransition_dt5te"), "Knockback", "Idle", SubResource("AnimationNodeStateMachineTransition_6x8u5")]
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_by3ly"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_00enb"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_jpqlp"), "Idle", "Stun", SubResource("AnimationNodeStateMachineTransition_82rnm"), "Walk", "Stun", SubResource("AnimationNodeStateMachineTransition_wklcl"), "Stun", "Knockback", SubResource("AnimationNodeStateMachineTransition_dt5te"), "Knockback", "Idle", SubResource("AnimationNodeStateMachineTransition_6x8u5"), "Stun", "Idle", SubResource("AnimationNodeStateMachineTransition_d7n1s")]
 graph_offset = Vector2(24, -114)
 
 [sub_resource type="Animation" id="Animation_00enb"]
@@ -393,6 +398,9 @@ script = ExtResource("2_qlg0r")
 [node name="MovementModule" type="Node" parent="PlayerModule" unique_id=436468096]
 script = ExtResource("3_tuyoq")
 
+[node name="HeightModule" type="Node" parent="PlayerModule" unique_id=1774437996]
+script = ExtResource("11_00enb")
+
 [node name="InputModule" type="Node" parent="PlayerModule" unique_id=246312231]
 script = ExtResource("2_g2els")
 
@@ -400,10 +408,10 @@ script = ExtResource("2_g2els")
 script = ExtResource("5_fjrip")
 
 [node name="StunTimer" type="Timer" parent="PlayerModule/StatusModule" unique_id=577133988]
-autostart = true
+one_shot = true
 
 [node name="DebounceTimer" type="Timer" parent="PlayerModule/StatusModule" unique_id=222624588]
-autostart = true
+one_shot = true
 
 [node name="StatsModule" type="Node" parent="PlayerModule" unique_id=459627275]
 script = ExtResource("7_fjrip")
@@ -424,6 +432,7 @@ shape = SubResource("CircleShape2D_bpow2")
 
 [node name="Sprite2D" type="Sprite2D" parent="CollisionBox" unique_id=1033437663]
 modulate = Color(1, 1, 1, 0.4745098)
+z_index = 5
 position = Vector2(-1.9073486e-05, -9.536743e-07)
 scale = Vector2(0.12800008, 0.128)
 texture = ExtResource("9_wrl72")
@@ -449,6 +458,7 @@ root_node = NodePath("../..")
 tree_root = SubResource("AnimationNodeStateMachine_d7n1s")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/!Knockback = false
+parameters/conditions/!Stun = false
 parameters/conditions/Idle = false
 parameters/conditions/Knockback = false
 parameters/conditions/Stun = false

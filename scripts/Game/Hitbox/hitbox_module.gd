@@ -7,6 +7,7 @@ extends Node
 @export var height: int
 @export var stuntime: float
 @export var knockback: Vector3
+@export var targetsAmount: int = INF
 @export var friendly: bool 
 
 var inside: Array[CharacterBody2D] = []
@@ -22,6 +23,8 @@ func _process(delta):
 			target.PlayerModule.DamageModule.takeDamage(damage,stuntime,knockback)
 			hitted.append(target)
 			inside.erase(target)
+			if hitted.size() >= targetsAmount:
+				get_parent().queue_free()
 
 func _on_body_entered(body):
 	if (not friendly and body.is_in_group("Player") or friendly and body.is_in_group("Enemy")) and not hitted.has(body):
@@ -33,7 +36,7 @@ func _on_body_exit(body):
 
 func isTrulyIn(body):
 	var thisRadius = this.get_node("CollisionShape2D").shape.radius * this.scale.y
-	var bodyHeight = body.PlayerModule.MovementModule.height
+	var bodyHeight = body.PlayerModule.HeightModule.height
 	var bodyRadius = body.CollisionBox.shape.radius
 	var bodyColPosY = body.CollisionBox.global_position + Vector2(0,bodyHeight)
 	

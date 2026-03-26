@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://c2ayeug5h2qxe" path="res://scripts/Game/Hitbox/hitbox.gd" id="1_nj274"]
 [ext_resource type="Script" uid="uid://cetqui21umd2g" path="res://scripts/Game/Hitbox/lifetime_module.gd" id="2_2ktgi"]
 [ext_resource type="Script" uid="uid://cepmk55uduy27" path="res://scripts/Game/Hitbox/hitbox_module.gd" id="3_7svxk"]
+[ext_resource type="Script" uid="uid://bghoagk1dci3i" path="res://scripts/Game/Hitbox/hitbox_movement_module.gd" id="4_mf5k8"]
 [ext_resource type="Texture2D" uid="uid://bwf0hdksn75fq" path="res://images/Circle.png" id="4_vq0b0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0vdsg"]
@@ -14,7 +15,7 @@ position = Vector2(384, 192)
 collision_layer = 0
 collision_mask = 3
 script = ExtResource("1_nj274")
-showTexture = true
+showHitbox = true
 damage = 5
 stuntime = 1.0
 knockback = Vector3(-100, 20, 0)
@@ -34,7 +35,11 @@ damage = 5
 stuntime = 1.0
 knockback = Vector3(0, -5, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=551758244]
+[node name="HitboxMovementModule" type="Node" parent="." unique_id=791949913]
+script = ExtResource("4_mf5k8")
+intMovementDir = Vector3(10, 0, 0)
+
+[node name="HitboxSprite" type="Sprite2D" parent="." unique_id=551758244]
 visible = false
 modulate = Color(0.86, 0, 0, 0.37254903)
 z_index = 20
@@ -42,4 +47,5 @@ position = Vector2(5.4240227e-06, 9.23872e-06)
 scale = Vector2(0.032000046, 0.032000046)
 texture = ExtResource("4_vq0b0")
 
-[connection signal="initialized" from="." to="LifetimeModule" method="_on_hitbox_initialized"]
+[connection signal="initialized" from="." to="LifetimeModule" method="_on_initialized"]
+[connection signal="initialized" from="." to="HitboxMovementModule" method="_on_initialized"]

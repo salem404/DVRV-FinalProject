@@ -12,24 +12,25 @@ var knockbackDir: int = 1
 @onready var DebounceTimer: Timer = $DebounceTimer
 
 func _process(delta):
-	if isKnockbacked and not onAir and not isStunned:
+	if isKnockbacked and not onAir:
 		isKnockbacked = false
+	if isStunned and StunTimer.time_left <= 0 and not onAir and not isKnockbacked:
+		isStunned = false
+	if isDebounced and DebounceTimer.time_left <= 0:
+		isDebounced = false
 
 func canMove() -> bool:
-	return not (isStunned or isDebounced)
+	if get_parent().get_parent().get_name() == "EnemyDefault":
+		#print(isStunned, " ", isDebounced, " ", isKnockbacked)
+		pass
+	return not (isStunned or isDebounced or isKnockbacked)
 
 func applyStun(time: float):
 	if time > StunTimer.time_left:
 		StunTimer.start(time)
 		isStunned = true
-		await StunTimer.timeout
-		while onAir:
-			await get_tree().process_frame
-		isStunned = false
 
 func applyDebounce(time: float):
 	if time > DebounceTimer.time_left:
 		DebounceTimer.start(time)
 		isDebounced = true
-		await DebounceTimer.timeout
-		isDebounced = false

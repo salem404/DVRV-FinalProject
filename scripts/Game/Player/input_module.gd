@@ -4,6 +4,7 @@ extends Node
 var movement: Vector2 = Vector2(0,0)
 var jumpKey: bool
 var lightAttack: bool
+var heavyAttack: bool
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -13,4 +14,5 @@ func _process(delta):
 		
 		jumpKey = Input.is_action_just_pressed("Jump")
 		lightAttack = Input.is_action_just_pressed("LightAttack")
+		heavyAttack = Input.is_action_just_pressed("HeavyAttack")
 	

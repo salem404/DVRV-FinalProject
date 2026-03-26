@@ -18,4 +18,5 @@ func _ready():
 	started.emit()
 	
 func _physics_process(delta):
+	PlayerModule.HeightModule.heightProcess(delta)
 	PlayerModule.MovementModule.movementProcess(delta)

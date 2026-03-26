@@ -5,14 +5,15 @@
 [ext_resource type="Script" uid="uid://buig5yjiwsaiy" path="res://scripts/Game/Character/movement_module.gd" id="3_nbf47"]
 [ext_resource type="Script" uid="uid://r0wutpqybqq8" path="res://scripts/Game/Enemy/ai_module.gd" id="4_cat8y"]
 [ext_resource type="Script" uid="uid://cp8p2ixqhldlj" path="res://scripts/Game/Character/status_module.gd" id="4_elj56"]
+[ext_resource type="Script" uid="uid://c5vqkq5gad78e" path="res://scripts/Game/Character/height_module.gd" id="4_swtt5"]
 [ext_resource type="Script" uid="uid://bko02gl3dtcuq" path="res://scripts/Game/Character/stats_module.gd" id="5_qj2ak"]
 [ext_resource type="Texture2D" uid="uid://cmb8qgi4h0vuu" path="res://images/TemplateImage.svg" id="6_0ntfv"]
 [ext_resource type="Texture2D" uid="uid://de8xycmp1afo4" path="res://images/Entities/shadow.png" id="7_cjajr"]
 [ext_resource type="Script" uid="uid://ccous1xf0ya2n" path="res://scripts/Game/Character/damage_module.gd" id="7_elj56"]
 [ext_resource type="Script" uid="uid://8dvmgdhmovjw" path="res://scripts/Game/Player/input_module.gd" id="7_nbf47"]
 [ext_resource type="Script" uid="uid://bb1v4f07bx0gm" path="res://scripts/Game/Character/moveset_module.gd" id="8_cjajr"]
-[ext_resource type="PackedScene" uid="uid://pyc48swcdrki" path="res://scenes/Game/hitbox.tscn" id="9_uemot"]
-[ext_resource type="Script" uid="uid://b3t5n7l6qx052" path="res://scenes/Game/Player/anim_module.gd" id="10_uemot"]
+[ext_resource type="PackedScene" uid="uid://pyc48swcdrki" path="res://scenes/Game/Attacks/hitbox.tscn" id="9_uemot"]
+[ext_resource type="Script" uid="uid://b3t5n7l6qx052" path="res://scripts/Game/Player/anim_module.gd" id="10_uemot"]
 [ext_resource type="Texture2D" uid="uid://bwf0hdksn75fq" path="res://images/Circle.png" id="11_qj2ak"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nbf47"]
@@ -389,40 +390,43 @@ _data = {
 [node name="EnemyDefault" type="CharacterBody2D" unique_id=187010336 groups=["Enemy"]]
 position = Vector2(640, 320)
 collision_layer = 2
-collision_mask = 2
+collision_mask = 0
 script = ExtResource("1_hxfsq")
 
-[node name="PlayerModule" type="Node" parent="." unique_id=1523449589]
+[node name="PlayerModule" type="Node" parent="." unique_id=651865372]
 script = ExtResource("2_cat8y")
 
-[node name="MovementModule" type="Node" parent="PlayerModule" unique_id=436468096]
+[node name="MovementModule" type="Node" parent="PlayerModule" unique_id=1998603810]
 script = ExtResource("3_nbf47")
 
-[node name="StatusModule" type="Node" parent="PlayerModule" unique_id=4619627]
-script = ExtResource("4_elj56")
+[node name="HeightModule" type="Node" parent="PlayerModule" unique_id=1271522158]
+script = ExtResource("4_swtt5")
 
-[node name="StunTimer" type="Timer" parent="PlayerModule/StatusModule" unique_id=577133988]
-autostart = true
-
-[node name="DebounceTimer" type="Timer" parent="PlayerModule/StatusModule" unique_id=222624588]
-autostart = true
-
-[node name="StatsModule" type="Node" parent="PlayerModule" unique_id=459627275]
-script = ExtResource("5_qj2ak")
-Speed = Vector2(200, 100)
-
-[node name="InputModule" type="Node" parent="PlayerModule" unique_id=1834445673]
+[node name="InputModule" type="Node" parent="PlayerModule" unique_id=969251775]
 script = ExtResource("7_nbf47")
 active = false
 
-[node name="DamageModule" type="Node" parent="PlayerModule" unique_id=1236290251]
+[node name="StatusModule" type="Node" parent="PlayerModule" unique_id=1018569875]
+script = ExtResource("4_elj56")
+
+[node name="StunTimer" type="Timer" parent="PlayerModule/StatusModule" unique_id=47121319]
+one_shot = true
+
+[node name="DebounceTimer" type="Timer" parent="PlayerModule/StatusModule" unique_id=250025342]
+one_shot = true
+
+[node name="StatsModule" type="Node" parent="PlayerModule" unique_id=1014915544]
+script = ExtResource("5_qj2ak")
+Speed = Vector2(200, 150)
+
+[node name="DamageModule" type="Node" parent="PlayerModule" unique_id=493001884]
 script = ExtResource("7_elj56")
 
-[node name="MovesetModule" type="Node" parent="PlayerModule" unique_id=442740027]
+[node name="MovesetModule" type="Node" parent="PlayerModule" unique_id=962932566]
 script = ExtResource("8_cjajr")
 hitboxPacked = ExtResource("9_uemot")
 
-[node name="AnimModule" type="Node" parent="PlayerModule" unique_id=733251751]
+[node name="AnimModule" type="Node" parent="PlayerModule" unique_id=755653304]
 script = ExtResource("10_uemot")
 
 [node name="AIModule" type="Node2D" parent="." unique_id=1351280651]

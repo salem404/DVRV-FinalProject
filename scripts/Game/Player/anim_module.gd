@@ -21,17 +21,16 @@ func setAim():
 	var knockbackDir = status.knockbackDir
 	var stunned = status.isStunned
 	var knockback = status.isKnockbacked
-	#if playerModule.get_parent().get_name() == "EnemyDefault":
-		#print(knockback)
 	
 	# Anims
 	animTree.set("parameters/conditions/Idle",!moving)
 	animTree.set("parameters/conditions/Walking",moving)
 	animTree.set("parameters/conditions/Stun",stunned)
+	animTree.set("parameters/conditions/!Stun",!stunned)
 	animTree.set("parameters/conditions/Knockback",knockback)
 	animTree.set("parameters/conditions/!Knockback",!knockback)
 	
 	# LookDir
 	animTree.set("parameters/Idle/blend_position",lookDir)
 	animTree.set("parameters/Walk/blend_position",lookDir)
-	animTree.set("parameters/Knockback/blend_position",lookDir)
+	animTree.set("parameters/Knockback/blend_position",knockbackDir)

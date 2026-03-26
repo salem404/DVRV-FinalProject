@@ -20,8 +20,9 @@ signal initialized()
 @export var lifeTime: float = -1
 
 func _ready():
-	$HitboxMovementModule.intMovementDir = intMovementDir
-	$HitboxMovementModule.AccelerationDir = AccelerationDir
+	$ProyectileMoveModule.intMovementDir = intMovementDir
+	$ProyectileMoveModule.AccelerationDir = AccelerationDir
+	$ProyectileMoveModule.intHeight = height
 	$HitboxSprite.visible = showHitbox
 	$HitboxModule.damage = damage
 	$HitboxModule.height = height

@@ -2,6 +2,7 @@ extends Node
 
 @onready var player: CharacterBody2D = get_parent()
 @onready var MovementModule: Node = $MovementModule
+@onready var HeightModule: Node = $HeightModule
 @onready var MovesetModule: Node = $MovesetModule
 @onready var InputModule: Node = $InputModule
 @onready var StatusModule: Node = $StatusModule
@@ -30,13 +31,16 @@ func initialized():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var canMove: bool = StatusModule.canMove()
+	
 	if canMove:
 		MovementModule.setMovement(InputModule.movement, StatsModule.Speed)
 		
 		if InputModule.jumpKey and not StatusModule.onAir:
-			MovementModule.jump(StatsModule.Jpower)
+			HeightModule.jump(StatsModule.Jpower)
 		
 		if InputModule.lightAttack:
 			MovesetModule.lightAttack()
+		elif InputModule.heavyAttack:
+			MovesetModule.heavyAttack()
 	else:
 		StatusModule.isMoving = false
