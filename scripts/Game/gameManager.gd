@@ -6,6 +6,7 @@ extends Node2D
 
 @onready var playerFollower: Node2D = $PlayerFollower
 @onready var gameGUI: Control = $PlayerFollower/Ui
+@onready var gameCamera: Camera2D = $PlayerFollower/Camera2D
 @onready var playersGUI: HBoxContainer = gameGUI.get_node("PlayersGUI")
 @onready var players: Array[CharacterBody2D] = []
 
@@ -19,6 +20,7 @@ func spawn_players():
 	for player in PackedPlayers:
 		var instance = player.instantiate()
 		instance.MovingArea = $Map/Boundry
+		instance.Camera = gameCamera
 		instance.position = SpawnPos[i].position
 		players.append(instance)
 		$Players.add_child(instance)

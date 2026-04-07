@@ -25,13 +25,13 @@ var LANumber: int = 0
 
 @export_category("Heavy")
 @export var HADamage: int = 40
-@export var HAKnockback: Vector3 = Vector3(50,5,0)
+@export var HAKnockback: Vector3 = Vector3(500,10,0)
 
 @export var HAHitboxOffset: Vector3 = Vector3(80,0,-64)
 @export var HAHitboxintMovementDir: Vector3 = Vector3(0,0,0)
-@export var HAHitboxAccelerationDir: Vector3 = Vector3(0,0,0)
+@export var HAHitboxAccelerationDir: Vector3 = Vector3(1,0,0)
 @export var HAHitboxSize: int = 10
-@export var HAHitboxLifetime: float = 0.1
+@export var HAHitboxLifetime: float = 1
 
 @export var HAPlayerMovement: Vector3 = Vector3(300,1,0)
 @export var HAStuntime: float = 0.3
@@ -77,8 +77,8 @@ func spawnHitbox(lookDir, positionOffset, intMovementDir, AccelerationDir, scale
 	
 	var offset = positionOffset
 	hitbox.position = player.position + Vector2(offset[0]*lookDir,offset[2]-offset[1])
-	hitbox.intMovementDir = intMovementDir
-	hitbox.AccelerationDir = AccelerationDir
+	hitbox.intMovementDir = intMovementDir*Vector3(lookDir,1,1)
+	hitbox.AccelerationDir = AccelerationDir*Vector3(lookDir,1,1)
 	hitbox.height = offset[1]
 	hitbox.scale *= scale
 	hitbox.lifeTime = lifetime
