@@ -33,6 +33,8 @@ func movementProcess(delta):
 		snapInsidePolygon()
 	else:
 		outsideArea = false
+	if character.Camera:
+		snapInsideCamera()
 
 func calculateHeight():
 	heightSpeed -= playerModule.StatsModule.gravity
@@ -94,3 +96,13 @@ func snapInsidePolygon():
 			
 	if min_distPos: 
 		character.position = min_distPos
+
+func snapInsideCamera():
+	var camera = character.Camera
+	var camPos = camera.global_position
+	var camSize = camera.get_viewport_rect().size/2-Vector2(character.CollisionBox.shape.radius,character.CollisionBox.shape.radius)
+
+	if character.global_position.x > camPos.x+camSize.x:
+		character.global_position.x = camPos.x+camSize.x
+	elif character.global_position.x < camPos.x-camSize.x:
+		character.global_position.x = camPos.x-camSize.x
