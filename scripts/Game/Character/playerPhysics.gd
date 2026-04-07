@@ -4,6 +4,7 @@ signal started()
 
 @export_category("Objects")
 @export var MovingArea: Area2D
+@export var Camera: Camera2D
 @onready var PlayerModule: Node = $PlayerModule
 @onready var CollisionBox: CollisionShape2D = $CollisionBox
 
