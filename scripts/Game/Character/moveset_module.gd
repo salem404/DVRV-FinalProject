@@ -71,9 +71,10 @@ func heavyAttack():
 	if befAtkN == HANumber:
 		HANumber = 0
 
-func spawnHitbox(lookDir, positionOffset, intMovementDir, AccelerationDir, scale, lifetime, damage, stuntime, knockback):
+func spawnHitbox(lookDir, positionOffset, intMovementDir, AccelerationDir, scale, lifetime, damage, stuntime, knockback, dmgSelf: bool = false):
 	var hitbox = hitboxPacked.instantiate()
-	hitbox.friendly = true
+	if not dmgSelf:
+		hitbox.friendGroups = player.get_groups() if not dmgSelf else []
 	
 	var offset = positionOffset
 	hitbox.position = player.position + Vector2(offset[0]*lookDir,offset[2]-offset[1])

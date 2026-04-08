@@ -14,7 +14,7 @@ signal initialized()
 @export var stuntime: float
 @export var knockback: Vector3
 @export var targetsAmount: int = INF
-@export var friendly: bool 
+@export var friendGroups: Array[StringName]
 
 @export_category("LIfeTime Values")
 @export var lifeTime: float = -1
@@ -28,6 +28,6 @@ func _ready():
 	$HitboxModule.stuntime = stuntime
 	$HitboxModule.knockback = knockback
 	$HitboxModule.targetsAmount = targetsAmount
-	$HitboxModule.friendly = friendly
+	$HitboxModule.friendGroups = friendGroups
 	$LifetimeModule.lifeTime = lifeTime
 	initialized.emit()

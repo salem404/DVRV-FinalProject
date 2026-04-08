@@ -1,9 +1,16 @@
 extends Node
 
-@export var distKeep: Vector2 = Vector2(200,0)
+@export_category("General")
+@export var waitTimeRange: Vector2 = Vector2(1,3)
+
+@export_category("Mode 1 = Move Towards")
+@export var distKeep: Vector2 = Vector2(300,100)
 @export var distKeepSize: Vector2 = Vector2(50,20)
 
-@export var waitTimeRange: Vector2 = Vector2(1,3)
+@export_category("Mode 2 = Attack")
+@export var atkDistKeep: Vector2 = Vector2(150,0)
+
+
 
 @onready var this: Node = get_parent()
 @onready var playerModule: Node = this.get_node("PlayerModule")
@@ -12,17 +19,21 @@ var targets: Array[CharacterBody2D] = []
 var behavior: int = 0
 # 0 - Nothing
 # 1 - Move towards
+# 1 - Attack
 
 func _ready():
 	while true:
-		behavior = 1 if behavior == 0 else randi_range(0, 1)
+		#behavior = 2
+		behavior = randi_range(1, 2) if behavior == 0 else randi_range(0, 2)
 		await get_tree().create_timer(randf_range(waitTimeRange.x,waitTimeRange.y)).timeout
+		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	playerModule.InputModule.movement = Vector2.ZERO
 	var closest = findClosestTarget()
 	if closest:
+			
 		match behavior:
 			0: # Nothing
 				pass
@@ -33,6 +44,14 @@ func _process(delta):
 					moveFromPlayer(closest)
 					
 				if abs(closest.position.y - this.position.y) > distKeep.y+distKeepSize.y:
+					moveSameHeight(closest)
+			2: # Attack player
+				if abs(closest.position.x - this.position.x) > atkDistKeep.x:
+					moveToPlayer(closest)
+				else:
+					useMove()
+				
+				if abs(closest.position.y - this.position.y) > atkDistKeep.y:
 					moveSameHeight(closest)
 	pass
 
@@ -54,8 +73,11 @@ func moveSameHeight(target: CharacterBody2D):
 		playerModule.InputModule.movement.y = 1 if enemyDir > 0 else -1
 	pass
 
-
-
+func useMove():
+	if playerModule.InputModule.lightAttack == false:
+		playerModule.InputModule.lightAttack = true
+		await get_tree().create_timer(1.0).timeout
+		playerModule.InputModule.lightAttack = false
 
 func findClosestTarget():
 	var closest: Node2D = null

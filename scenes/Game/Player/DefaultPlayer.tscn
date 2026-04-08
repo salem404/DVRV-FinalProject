@@ -1022,7 +1022,7 @@ _data = {
 &"WalkRight": SubResource("Animation_wklcl")
 }
 
-[node name="CharacterDefault" type="CharacterBody2D" unique_id=187010336 groups=["Player"]]
+[node name="CharacterDefault" type="CharacterBody2D" unique_id=187010336 groups=["Entity", "Player"]]
 position = Vector2(640, 320)
 collision_mask = 0
 script = ExtResource("1_tuyoq")

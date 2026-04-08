@@ -8,7 +8,7 @@ extends Node
 @export var stuntime: float
 @export var knockback: Vector3
 @export var targetsAmount: int = INF
-@export var friendly: bool 
+@export var friendGroups: Array[StringName]
 
 var inside: Array[CharacterBody2D] = []
 var hitted: Array[CharacterBody2D] = []
@@ -27,11 +27,11 @@ func _process(delta):
 				get_parent().queue_free()
 
 func _on_body_entered(body):
-	if (not friendly and body.is_in_group("Player") or friendly and body.is_in_group("Enemy")) and not hitted.has(body):
+	if body.is_in_group("Entity") and isEnemy(body): 
 		inside.append(body)
 
 func _on_body_exit(body):
-	if (not friendly and body.is_in_group("Player") or friendly and body.is_in_group("Enemy")) and not hitted.has(body):
+	if body.is_in_group("Entity") and isEnemy(body):
 		inside.erase(body)
 
 func isTrulyIn(body):
@@ -44,3 +44,11 @@ func isTrulyIn(body):
 		if bodyColPosY.distance_to(this.global_position) <= thisRadius + bodyRadius:
 			return true
 	return false
+
+func isEnemy(body):
+	var enemy = true
+	for group in friendGroups:
+		if group == "Entity": continue
+		if body.is_in_group(group):
+			enemy = false
+	return enemy
