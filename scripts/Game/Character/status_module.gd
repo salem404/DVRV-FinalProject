@@ -1,5 +1,7 @@
 extends Node
 
+@onready var playerModule: Node = get_parent()
+
 var onAir: bool = false
 var isStunned: bool = false
 var isDebounced: bool = false
@@ -26,7 +28,7 @@ func canMove() -> bool:
 	return not (isStunned or isDebounced or isKnockbacked)
 
 func applyStun(time: float):
-	if time > StunTimer.time_left:
+	if not playerModule.StatsModule.ignoresStun and time > StunTimer.time_left:
 		StunTimer.start(time)
 		isStunned = true
 

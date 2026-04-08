@@ -34,7 +34,7 @@ var LANumber: int = 0
 @export var HAHitboxLifetime: float = 1
 
 @export var HAPlayerMovement: Vector3 = Vector3(300,1,0)
-@export var HAStuntime: float = 0.3
+@export var HAStuntime: float = 2
 @export var HADebounceTime: float = 0.2
 @export var HAResetTime: float = 1.0
 var HANumber: int = 0

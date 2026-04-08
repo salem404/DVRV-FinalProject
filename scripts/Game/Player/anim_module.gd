@@ -21,6 +21,7 @@ func setAim():
 	var knockbackDir = status.knockbackDir
 	var stunned = status.isStunned
 	var knockback = status.isKnockbacked
+	var onAir = status.onAir
 	
 	# Anims
 	animTree.set("parameters/conditions/Idle",!moving)
@@ -29,8 +30,14 @@ func setAim():
 	animTree.set("parameters/conditions/!Stun",!stunned)
 	animTree.set("parameters/conditions/Knockback",knockback)
 	animTree.set("parameters/conditions/!Knockback",!knockback)
+	animTree.set("parameters/conditions/Jump",onAir)
+	animTree.set("parameters/conditions/!Jump",!onAir)
 	
 	# LookDir
 	animTree.set("parameters/Idle/blend_position",lookDir)
 	animTree.set("parameters/Walk/blend_position",lookDir)
+	animTree.set("parameters/Jump/blend_position",lookDir)
+	animTree.set("parameters/Stun/blend_position",knockbackDir)
 	animTree.set("parameters/Knockback/blend_position",knockbackDir)
+	animTree.set("parameters/Downed/blend_position",knockbackDir)
+	animTree.set("parameters/Up/blend_position",knockbackDir)

@@ -13,12 +13,6 @@
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_lnipu"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wkojt"]
-size = Vector2(192, 720)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kxm5a"]
-size = Vector2(192, 720)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_crllf"]
 size = Vector2(128, 720)
 
@@ -92,20 +86,6 @@ offset_left = -640.0
 offset_top = -360.0
 offset_right = -640.0
 offset_bottom = -360.0
-
-[node name="RightWall" type="StaticBody2D" parent="PlayerFollower" unique_id=642667161]
-position = Vector2(736, 0)
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerFollower/RightWall" unique_id=319139832]
-shape = SubResource("RectangleShape2D_wkojt")
-
-[node name="LeftWall" type="StaticBody2D" parent="PlayerFollower" unique_id=732630125]
-position = Vector2(-736, 0)
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerFollower/LeftWall" unique_id=917108382]
-shape = SubResource("RectangleShape2D_kxm5a")
 
 [node name="EventsDetector" type="Node2D" parent="." unique_id=751690982 node_paths=PackedStringArray("events")]
 script = ExtResource("6_crllf")
