@@ -1070,6 +1070,10 @@ script = ExtResource("10_uemot")
 
 [node name="AIModule" type="Node2D" parent="." unique_id=1351280651]
 script = ExtResource("4_cat8y")
+waitTimeRange = null
+distKeep = null
+distKeepSize = null
+atkDistKeep = null
 
 [node name="AiRange" type="Area2D" parent="AIModule" unique_id=495530485]
 position = Vector2(640, 256)

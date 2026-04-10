@@ -3,28 +3,34 @@ extends Node
 @export_category("General")
 @export var waitTimeRange: Vector2 = Vector2(1,3)
 
+@onready var this: Node = get_parent()
+@onready var playerModule: Node = this.get_node("PlayerModule")
+
+var isBusy: bool = false
+var targets: Array[CharacterBody2D] = []
+var behavior: int = 0
+
 @export_category("Mode 1 = Move Towards")
 @export var distKeep: Vector2 = Vector2(300,100)
 @export var distKeepSize: Vector2 = Vector2(50,20)
 
+var targetOffset: Vector2 = Vector2.ZERO
+
 @export_category("Mode 2 = Attack")
 @export var atkDistKeep: Vector2 = Vector2(150,0)
-
-
-
-@onready var this: Node = get_parent()
-@onready var playerModule: Node = this.get_node("PlayerModule")
-
-var targets: Array[CharacterBody2D] = []
-var behavior: int = 0
 # 0 - Nothing
 # 1 - Move towards
 # 1 - Attack
 
 func _ready():
 	while true:
-		#behavior = 2
-		behavior = randi_range(1, 2) if behavior == 0 else randi_range(0, 2)
+		if isBusy:
+			await get_tree().process_frame
+			continue
+		behavior = 2
+		#behavior = randi_range(1, 2) if behavior == 0 else randi_range(0, 2)
+		if behavior == 1:
+			targetOffset = Vector2(randi_range(-50,200),randi_range(-200,200))
 		await get_tree().create_timer(randf_range(waitTimeRange.x,waitTimeRange.y)).timeout
 		
 
@@ -33,26 +39,21 @@ func _process(delta):
 	playerModule.InputModule.movement = Vector2.ZERO
 	var closest = findClosestTarget()
 	if closest:
-			
+		var posDist = abs(closest.position - this.position) 
 		match behavior:
 			0: # Nothing
 				pass
 			1: # Move To Player
-				if abs(closest.position.x - this.position.x) > distKeep.x:
-					moveToPlayer(closest)
-				elif abs(closest.position.x - this.position.x) < distKeep.x-distKeepSize.x:
+				if abs(closest.position - this.position) > distKeep + targetOffset:
+					moveToPlayer(closest, targetOffset)
+				elif abs(closest.position - this.position) < distKeep-distKeepSize + targetOffset:
 					moveFromPlayer(closest)
 					
-				if abs(closest.position.y - this.position.y) > distKeep.y+distKeepSize.y:
-					moveSameHeight(closest)
 			2: # Attack player
-				if abs(closest.position.x - this.position.x) > atkDistKeep.x:
+				if abs(closest.position - this.position) > atkDistKeep:
 					moveToPlayer(closest)
 				else:
 					useMove()
-				
-				if abs(closest.position.y - this.position.y) > atkDistKeep.y:
-					moveSameHeight(closest)
 	pass
 	
 	
@@ -60,29 +61,35 @@ func _process(delta):
 #####                              Utility                                 #####
 ################################################################################
 
-func moveToPlayer(target: CharacterBody2D):
+func moveToPlayer(target: CharacterBody2D, offset: Vector2 = Vector2.ZERO):
+	var targetPos = target.position + offset
+	moveSameHorizontal(targetPos.x)
+	moveSameHeight(targetPos.y)
+	
+func moveFromPlayer(target: CharacterBody2D, offset: Vector2 = Vector2.ZERO):
+	var targetPos = 2 * this.position - (target.position + offset)
+	moveSameHorizontal(targetPos.x)
+	moveSameHeight(targetPos.y)
+
+func moveSameHorizontal(target: int):
 	if target:
-		var enemyDir: float = (target.position.x - this.position.x)
+		var enemyDir: float = (target - this.position.x)
 		playerModule.InputModule.movement.x= 1 if enemyDir > 0 else -1
 	pass
 	
-func moveFromPlayer(target: CharacterBody2D):
+func moveSameHeight(target: int):
 	if target:
-		var enemyDir: float = (target.position.x - this.position.x)
-		playerModule.InputModule.movement.x= -1 if enemyDir > 0 else 1
-	pass
-	
-func moveSameHeight(target: CharacterBody2D):
-	if target:
-		var enemyDir: float = (target.position.y - this.position.y)
+		var enemyDir: float = (target - this.position.y)
 		playerModule.InputModule.movement.y = 1 if enemyDir > 0 else -1
 	pass
 
 func useMove():
 	if playerModule.InputModule.lightAttack == false:
 		playerModule.InputModule.lightAttack = true
+		isBusy = true
 		await get_tree().create_timer(1.0).timeout
 		playerModule.InputModule.lightAttack = false
+		isBusy = false
 
 func findClosestTarget():
 	var closest: Node2D = null

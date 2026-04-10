@@ -28,7 +28,7 @@ z_index = 2
 y_sort_enabled = true
 
 [node name="EnemyDefault" parent="Enemies" unique_id=187010336 node_paths=PackedStringArray("MovingArea", "Camera") instance=ExtResource("4_wkojt")]
-position = Vector2(960, 512)
+position = Vector2(184, 640)
 MovingArea = NodePath("../../Map/Boundry")
 Camera = NodePath("../../PlayerFollower/Camera2D")
 
