@@ -10,6 +10,10 @@ extends Node
 var velocity: Vector3 = Vector3.ZERO
 var height: float = 0
 
+func _on_initialized():
+	velocity = intMovementDir
+	height = intHeight
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	velocity += AccelerationDir
@@ -18,7 +22,3 @@ func _process(delta):
 	
 	if height < 0:
 		proyectile.queue_free()
-
-func _on_initialized():
-	velocity = intMovementDir
-	height = intHeight

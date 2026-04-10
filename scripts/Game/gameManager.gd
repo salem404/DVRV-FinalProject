@@ -31,11 +31,11 @@ func start_game():
 	playerFollower.FollowPlayer = true
 	playerFollower.players = players
 
+################################################################################
+#####                              Utility                                 #####
+################################################################################
+
 func spawnPlayerGUI(player: CharacterBody2D):
 	var instance = PackedPlayerGUI.instantiate()
 	instance.playerStats = player.get_node("PlayerModule/StatsModule")
 	playersGUI.add_child(instance)
-
-
-func _on_area_1_body_entered(body):
-	pass # Replace with function body.

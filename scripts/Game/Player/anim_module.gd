@@ -15,6 +15,10 @@ func _process(delta):
 	sprite = playerModule.charVisual.get_node("Sprite2D")
 	setAim()
 
+################################################################################
+#####                              Utility                                 #####
+################################################################################
+
 func setAim():
 	var moving = status.isMoving
 	var lookDir = status.lookDir

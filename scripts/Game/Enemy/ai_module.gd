@@ -54,6 +54,11 @@ func _process(delta):
 				if abs(closest.position.y - this.position.y) > atkDistKeep.y:
 					moveSameHeight(closest)
 	pass
+	
+	
+################################################################################
+#####                              Utility                                 #####
+################################################################################
 
 func moveToPlayer(target: CharacterBody2D):
 	if target:
@@ -92,6 +97,10 @@ func findClosestTarget():
 			closest = target
 	
 	return closest
+
+################################################################################
+#####                              Signals                                 #####
+################################################################################
 
 func _on_ai_range_body_entered(body):
 	if body.is_in_group("Player"):

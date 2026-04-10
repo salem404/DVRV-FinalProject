@@ -39,6 +39,10 @@ var LANumber: int = 0
 @export var HAResetTime: float = 1.0
 var HANumber: int = 0
 
+################################################################################
+#####                             Functions                                #####
+################################################################################
+
 func lightAttack():
 	if LADamage.size() <= LANumber: return
 	
@@ -70,6 +74,10 @@ func heavyAttack():
 	await get_tree().create_timer(HAResetTime).timeout
 	if befAtkN == HANumber:
 		HANumber = 0
+
+################################################################################
+#####                              Utility                                 #####
+################################################################################
 
 func spawnHitbox(lookDir, positionOffset, intMovementDir, AccelerationDir, scale, lifetime, damage, stuntime, knockback, dmgSelf: bool = false):
 	var hitbox = hitboxPacked.instantiate()

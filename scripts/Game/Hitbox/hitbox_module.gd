@@ -26,13 +26,9 @@ func _process(delta):
 			if hitted.size() >= targetsAmount:
 				get_parent().queue_free()
 
-func _on_body_entered(body):
-	if body.is_in_group("Entity") and isEnemy(body): 
-		inside.append(body)
-
-func _on_body_exit(body):
-	if body.is_in_group("Entity") and isEnemy(body):
-		inside.erase(body)
+################################################################################
+#####                              Utility                                 #####
+################################################################################
 
 func isTrulyIn(body):
 	var thisRadius = this.get_node("CollisionShape2D").shape.radius * this.scale.y
@@ -52,3 +48,15 @@ func isEnemy(body):
 		if body.is_in_group(group):
 			enemy = false
 	return enemy
+
+################################################################################
+#####                              Signals                                 #####
+################################################################################
+
+func _on_body_entered(body):
+	if body.is_in_group("Entity") and isEnemy(body): 
+		inside.append(body)
+
+func _on_body_exit(body):
+	if body.is_in_group("Entity") and isEnemy(body):
+		inside.erase(body)

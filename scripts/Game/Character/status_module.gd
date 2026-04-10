@@ -21,6 +21,10 @@ func _process(delta):
 	if isDebounced and DebounceTimer.time_left <= 0:
 		isDebounced = false
 
+################################################################################
+#####                             Functions                                #####
+################################################################################
+
 func canMove() -> bool:
 	if get_parent().get_parent().get_name() == "EnemyDefault":
 		#print(isStunned, " ", isDebounced, " ", isKnockbacked)

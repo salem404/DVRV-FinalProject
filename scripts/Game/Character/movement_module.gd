@@ -30,6 +30,11 @@ func movementProcess(delta):
 	
 	if character.Camera:
 		snapInsideCamera()
+		
+
+################################################################################
+#####                             Functions                                #####
+################################################################################
 
 func setMovement(movement: Vector2, speed: Vector2):
 	if movement != Vector2.ZERO:
@@ -43,8 +48,8 @@ func setMovement(movement: Vector2, speed: Vector2):
 		playerModule.StatusModule.isMoving = false
 
 func moveTo(movement: Vector2):
-	character.velocity.x = movement.x
-	character.velocity.y = movement.y
+	moveXTo(movement.x)
+	moveYTo(movement.y)
 
 func moveXTo(movementX: float):
 	character.velocity.x = movementX
@@ -61,6 +66,10 @@ func applyForce(force: Vector2, height: float):
 
 func applyForceV3(force: Vector3):
 	applyForce(Vector2(force.x,force.z), force.y)
+
+################################################################################
+#####                              Utility                                 #####
+################################################################################
 
 func snapInsidePolygon():
 	# If inside, distance is zero
