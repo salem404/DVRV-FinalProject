@@ -4,7 +4,6 @@ extends Node
 @onready var status: Node = playerModule.StatusModule
 
 @export var animTree: AnimationTree
-@export var sprite: AnimatedSprite2D
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -12,7 +11,6 @@ func _process(delta):
 		status = playerModule.StatusModule
 		return
 	animTree = playerModule.charVisual.get_node("AnimationTree")
-	sprite = playerModule.charVisual.get_node("Sprite2D")
 	setAim()
 
 ################################################################################
@@ -22,7 +20,7 @@ func _process(delta):
 func setAim():
 	var moving = status.isMoving
 	var lookDir = status.lookDir
-	var knockbackDir = status.knockbackDir
+	var knockbackDir = -status.knockbackDir
 	var stunned = status.isStunned
 	var knockback = status.isKnockbacked
 	var onAir = status.onAir
