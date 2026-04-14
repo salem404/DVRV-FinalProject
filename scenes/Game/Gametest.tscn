@@ -28,7 +28,12 @@ z_index = 2
 y_sort_enabled = true
 
 [node name="EnemyDefault" parent="Enemies" unique_id=187010336 node_paths=PackedStringArray("MovingArea", "Camera") instance=ExtResource("4_wkojt")]
-position = Vector2(184, 640)
+position = Vector2(1152, 448)
+MovingArea = NodePath("../../Map/Boundry")
+Camera = NodePath("../../PlayerFollower/Camera2D")
+
+[node name="EnemyDefault2" parent="Enemies" unique_id=1612156004 node_paths=PackedStringArray("MovingArea", "Camera") instance=ExtResource("4_wkojt")]
+position = Vector2(1152, 576)
 MovingArea = NodePath("../../Map/Boundry")
 Camera = NodePath("../../PlayerFollower/Camera2D")
 
