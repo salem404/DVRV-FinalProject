@@ -18,6 +18,19 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_bpow2"]
 radius = 32.0
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wgo52"]
+animation = &"AtkHeavyLeft"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hevy8"]
+animation = &"AtkHeavyRight"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_dt5te"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_wgo52")
+blend_point_0/pos = -0.1
+blend_point_1/node = SubResource("AnimationNodeAnimation_hevy8")
+blend_point_1/pos = 0.1
+blend_mode = 1
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qtabi"]
 animation = &"AtkLight1Left"
 
@@ -56,6 +69,18 @@ blend_point_0/pos = -0.1
 blend_point_1/node = SubResource("AnimationNodeAnimation_b1y0l")
 blend_point_1/pos = 0.1
 blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bskvt"]
+animation = &"AtkHeavySLagLeft"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rfu0j"]
+animation = &"AtkHeavySLagRight"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_dpxtb"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_bskvt")
+blend_point_0/pos = -0.1
+blend_point_1/node = SubResource("AnimationNodeAnimation_rfu0j")
+blend_point_1/pos = 0.1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_00enb"]
 animation = &"DownedLeft"
@@ -205,12 +230,16 @@ advance_mode = 2
 advance_condition = &"!Stun"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_qtabi"]
+states/AtkHeavy/node = SubResource("AnimationNodeBlendSpace1D_dt5te")
+states/AtkHeavy/position = Vector2(131, -266)
 states/AtkLight1/node = SubResource("AnimationNodeBlendSpace1D_vtgiw")
 states/AtkLight1/position = Vector2(-38, -335)
 states/AtkLight2/node = SubResource("AnimationNodeBlendSpace1D_wrsq4")
 states/AtkLight2/position = Vector2(-38, -266)
 states/AtkLight3/node = SubResource("AnimationNodeBlendSpace1D_b1y0l")
 states/AtkLight3/position = Vector2(-38, -191)
+states/AtkSLagHeavy/node = SubResource("AnimationNodeBlendSpace1D_dpxtb")
+states/AtkSLagHeavy/position = Vector2(131, -335)
 states/Downed/node = SubResource("AnimationNodeBlendSpace1D_xkejy")
 states/Downed/position = Vector2(297, 226)
 states/Idle/node = SubResource("AnimationNodeBlendSpace1D_jpqlp")
@@ -229,7 +258,311 @@ states/Up/position = Vector2(297, 100)
 states/Walk/node = SubResource("AnimationNodeBlendSpace1D_wklcl")
 states/Walk/position = Vector2(633, -29)
 transitions = ["Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_00enb"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_jpqlp"), "Stun", "Knockback", SubResource("AnimationNodeStateMachineTransition_dt5te"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_by3ly"), "Knockback", "Downed", SubResource("AnimationNodeStateMachineTransition_6x8u5"), "Walk", "Jump", SubResource("AnimationNodeStateMachineTransition_0wxtw"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_h7626"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_qjkrr"), "Downed", "Up", SubResource("AnimationNodeStateMachineTransition_msu2m"), "Up", "Idle", SubResource("AnimationNodeStateMachineTransition_swtt5"), "Up", "Jump", SubResource("AnimationNodeStateMachineTransition_mde7c"), "Downed", "Knockback", SubResource("AnimationNodeStateMachineTransition_2n6nx"), "Stun", "Idle", SubResource("AnimationNodeStateMachineTransition_d7n1s")]
-graph_offset = Vector2(-26, 24)
+graph_offset = Vector2(-206, -379)
+
+[sub_resource type="Animation" id="Animation_wgo52"]
+resource_name = "AtkHeavyLeft"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual/Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0),
+"update": 0,
+"values": [Rect2(1234, 351, 240, 204)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visual/Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.4901161e-08),
+"transitions": PackedFloat32Array(0),
+"update": 0,
+"values": [Vector2(-8.000021, -63.999992)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visual/Sprite2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visual/Sprite2D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1.4901161e-08),
+"transitions": PackedFloat32Array(0),
+"update": 0,
+"values": [Vector2(0.6342553, 0.62745094)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Visual/Sprite2D:skew")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Visual/Sprite2D:flip_h")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_b1y0l"]
+resource_name = "AtkHeavyRight"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual/Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0),
+"update": 0,
+"values": [Rect2(1234, 351, 240, 204)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visual/Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0),
+"update": 0,
+"values": [Vector2(8.169779, -63.999992)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visual/Sprite2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visual/Sprite2D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1.4901161e-08),
+"transitions": PackedFloat32Array(0),
+"update": 0,
+"values": [Vector2(0.6342553, 0.62745094)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Visual/Sprite2D:skew")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Visual/Sprite2D:flip_h")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_wrsq4"]
+resource_name = "AtkHeavySLagLeft"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual/Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0),
+"update": 0,
+"values": [Rect2(1001, 415, 195, 144)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visual/Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0),
+"update": 0,
+"values": [Vector2(23.999998, -47.999992)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visual/Sprite2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visual/Sprite2D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0),
+"update": 0,
+"values": [Vector2(0.6363636, 0.6624365)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Visual/Sprite2D:skew")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Visual/Sprite2D:flip_h")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_vpl0j"]
+resource_name = "AtkHeavySLagRight"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual/Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0),
+"update": 0,
+"values": [Rect2(1001, 415, 195, 144)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visual/Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0),
+"update": 0,
+"values": [Vector2(-24.000002, -47.999992)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visual/Sprite2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visual/Sprite2D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0),
+"update": 0,
+"values": [Vector2(0.6363636, 0.6624365)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Visual/Sprite2D:skew")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Visual/Sprite2D:flip_h")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_prp3b"]
 resource_name = "AtkLight1Left"
@@ -1819,6 +2152,10 @@ tracks/5/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sd4hf"]
 _data = {
+&"AtkHeavyLeft": SubResource("Animation_wgo52"),
+&"AtkHeavyRight": SubResource("Animation_b1y0l"),
+&"AtkHeavySLagLeft": SubResource("Animation_wrsq4"),
+&"AtkHeavySLagRight": SubResource("Animation_vpl0j"),
 &"AtkLight1Left": SubResource("Animation_prp3b"),
 &"AtkLight1Right": SubResource("Animation_qtabi"),
 &"AtkLight2Left": SubResource("Animation_qk52w"),
@@ -1886,6 +2223,7 @@ position = Vector2(0, -32)
 shape = SubResource("CircleShape2D_bpow2")
 
 [node name="Sprite2D" type="Sprite2D" parent="CollisionBox" unique_id=1033437663]
+visible = false
 modulate = Color(1, 1, 1, 0.4745098)
 z_index = 5
 position = Vector2(-1.9073486e-05, -9.536743e-07)
@@ -1923,9 +2261,11 @@ parameters/conditions/Idle = false
 parameters/conditions/Jump = false
 parameters/conditions/Knockback = false
 parameters/conditions/Walking = false
+parameters/AtkHeavy/blend_position = 0.0
 parameters/AtkLight1/blend_position = 0.0
 parameters/AtkLight2/blend_position = 0.0
 parameters/AtkLight3/blend_position = 0.0
+parameters/AtkSLagHeavy/blend_position = 0.0
 parameters/Downed/blend_position = 0.0
 parameters/Idle/blend_position = 0.0
 parameters/Jump/blend_position = 0.0

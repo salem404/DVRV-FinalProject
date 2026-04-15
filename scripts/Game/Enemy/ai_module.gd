@@ -29,7 +29,7 @@ func _ready():
 		if isBusy:
 			await get_tree().process_frame
 			continue
-		#behavior = 0
+		#behavior = 1
 		behavior = randi_range(1, 2) if behavior == 0 else randi_range(0, 2)
 		if behavior == 1:
 			targetOffset = Vector2(randi_range(-50,200),randi_range(-200,200))
@@ -49,7 +49,7 @@ func _process(delta):
 				var distOffset = distKeep + targetOffset
 				if posDist.x > distOffset.x or posDist.y > distOffset.y:
 					moveToPlayer(closest, targetOffset)
-				elif posDist.x < distOffset.x-distKeepSize.x or posDist.y < distOffset.y-distKeepSize.y:
+				elif posDist.x < distOffset.x-distKeepSize.x and posDist.y < distOffset.y-distKeepSize.y:
 					moveFromPlayer(closest)
 			2: # Attack player
 				
@@ -59,7 +59,10 @@ func _process(delta):
 					await get_tree().create_timer(waitUntilAttack).timeout
 					if posDist.x < atkDistKeep.x and posDist.y < atkDistKeep.y:
 						moveToPlayer(closest)
-						useMove()
+						if randi_range(0, 1) == 1:
+							useLightAttack()
+						else:
+							useHeavyAttack()
 	pass
 	
 	
@@ -80,22 +83,16 @@ func moveFromPlayer(target: CharacterBody2D, offset: Vector2 = Vector2.ZERO):
 func moveSameHorizontal(target: int):
 	if target:
 		var enemyDir: float = (target - this.position.x)
-		playerModule.InputModule.movement.x= 1 if enemyDir > 0 else -1
+		if abs(enemyDir) > 10:
+			playerModule.InputModule.movement.x= 1 if enemyDir > 0 else -1
 	pass
 	
 func moveSameHeight(target: int):
 	if target:
 		var enemyDir: float = (target - this.position.y)
-		playerModule.InputModule.movement.y = 1 if enemyDir > 0 else -1
+		if abs(enemyDir) > 5:
+			playerModule.InputModule.movement.y = 1 if enemyDir > 0 else -1
 	pass
-
-func useMove():
-	if playerModule.InputModule.lightAttack == false:
-		playerModule.InputModule.lightAttack = true
-		isBusy = true
-		await get_tree().create_timer(1.0).timeout
-		playerModule.InputModule.lightAttack = false
-		isBusy = false
 
 func findClosestTarget():
 	var closest: Node2D = null
@@ -111,6 +108,26 @@ func findClosestTarget():
 	
 	return closest
 		
+
+################################################################################
+#####                              Attacks                                 #####
+################################################################################
+
+func useLightAttack():
+	if playerModule.InputModule.lightAttack == false:
+		playerModule.InputModule.lightAttack = true
+		isBusy = true
+		await get_tree().create_timer(1.0).timeout
+		playerModule.InputModule.lightAttack = false
+		isBusy = false
+
+func useHeavyAttack():
+	if playerModule.InputModule.heavyAttack == false:
+		playerModule.InputModule.heavyAttack = true
+		isBusy = true
+		await get_tree().create_timer(1.0).timeout
+		playerModule.InputModule.heavyAttack = false
+		isBusy = false
 
 ################################################################################
 #####                              Signals                                 #####

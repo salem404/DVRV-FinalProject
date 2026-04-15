@@ -15,7 +15,6 @@ position = Vector2(384, 192)
 collision_layer = 0
 collision_mask = 3
 script = ExtResource("1_nj274")
-showHitbox = true
 damage = 5
 stuntime = 1.0
 knockback = Vector3(-100, 20, 0)
