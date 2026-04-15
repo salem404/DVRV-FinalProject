@@ -18,16 +18,18 @@ var targetOffset: Vector2 = Vector2.ZERO
 
 @export_category("Mode 2 = Attack")
 @export var atkDistKeep: Vector2 = Vector2(150,20)
+@export var waitUntilAttack: float = 1
 # 0 - Nothing
 # 1 - Move towards
 # 1 - Attack
 
 func _ready():
+	await get_tree().create_timer(0.2).timeout
 	while true:
 		if isBusy:
 			await get_tree().process_frame
 			continue
-		#behavior = 2
+		#behavior = 0
 		behavior = randi_range(1, 2) if behavior == 0 else randi_range(0, 2)
 		if behavior == 1:
 			targetOffset = Vector2(randi_range(-50,200),randi_range(-200,200))
@@ -49,13 +51,15 @@ func _process(delta):
 					moveToPlayer(closest, targetOffset)
 				elif posDist.x < distOffset.x-distKeepSize.x or posDist.y < distOffset.y-distKeepSize.y:
 					moveFromPlayer(closest)
-					
 			2: # Attack player
 				
 				if posDist.x > atkDistKeep.x or posDist.y > atkDistKeep.y:
 					moveToPlayer(closest)
 				else:
-					useMove()
+					await get_tree().create_timer(waitUntilAttack).timeout
+					if posDist.x < atkDistKeep.x and posDist.y < atkDistKeep.y:
+						moveToPlayer(closest)
+						useMove()
 	pass
 	
 	
@@ -106,6 +110,7 @@ func findClosestTarget():
 			closest = target
 	
 	return closest
+		
 
 ################################################################################
 #####                              Signals                                 #####

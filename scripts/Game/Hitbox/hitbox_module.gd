@@ -7,7 +7,7 @@ extends Node
 @export var height: int
 @export var stuntime: float
 @export var knockback: Vector3
-@export var targetsAmount: int = INF
+@export var targetsAmount: int = 500
 @export var friendGroups: Array[StringName]
 
 var inside: Array[CharacterBody2D] = []
@@ -24,6 +24,7 @@ func _process(delta):
 			hitted.append(target)
 			inside.erase(target)
 			if hitted.size() >= targetsAmount:
+				print("MAX")
 				get_parent().queue_free()
 
 ################################################################################

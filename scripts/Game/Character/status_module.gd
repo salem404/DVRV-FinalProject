@@ -40,3 +40,9 @@ func applyDebounce(time: float):
 	if time > DebounceTimer.time_left:
 		DebounceTimer.start(time)
 		isDebounced = true
+
+func setLookDir(newDir: float):
+	if newDir > 0:
+		lookDir = 1
+	elif newDir < 0:
+		lookDir = -1

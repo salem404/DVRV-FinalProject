@@ -10,6 +10,8 @@ extends Node
 @export_category("LightAttack")
 @export var LADamage: Array[int] = [10,10,10]
 @export var LAKnockback: Array[Vector3] = [Vector3(50,5,0),Vector3(50,5,0),Vector3(800,15,0)]
+@export var LADebounceTime: Array[float] = [0.2,0.2,0.2]
+@export var LAAnim: Array[String] = ["AtkLight1","AtkLight2","AtkLight3"]
 
 @export var LAHitboxOffset: Array[Vector3] = [Vector3(80,0,-64),Vector3(80,0,-64),Vector3(80,0,-64)]
 @export var LAHitboxintMovementDir: Array[Vector3] = [Vector3(0,0,0),Vector3(0,0,0),Vector3(0,0,0)]
@@ -19,7 +21,6 @@ extends Node
 
 @export var LAPlayerMovement: Array[Vector3] = [Vector3(200,1,0),Vector3(200,1,0),Vector3(200,1,0)]
 @export var LAStuntime: Array[float] = [0.3,0.3,1]
-@export var LADebounceTime: Array[float] = [0.2,0.2,0.2]
 @export var LAResetTime: Array[float] = [1.0,1.0,2.0]
 var LANumber: int = 0
 
@@ -50,11 +51,14 @@ func lightAttack():
 	
 	playerModule.StatusModule.applyDebounce(LADebounceTime[LANumber])
 	playerModule.MovementModule.applyForceV3(LAPlayerMovement[LANumber]*Vector3(lookDir,1,1))
-	
+	playerModule.AnimModule.forceAnim(LAAnim[LANumber])
 	spawnHitbox(lookDir, LAHitboxOffset[LANumber], LAHitboxintMovementDir[LANumber], LAHitboxAccelerationDir[LANumber], LAHitboxSize[LANumber], LAHitboxLifetime[LANumber], LADamage[LANumber], LAStuntime[LANumber], LAKnockback[LANumber])
 	
 	LANumber += 1
 	var befAtkN = LANumber
+	await get_tree().create_timer(LADebounceTime[LANumber-1]).timeout
+	playerModule.AnimModule.resetAnim()
+	
 	await get_tree().create_timer(LAResetTime[LANumber-1]).timeout
 	if befAtkN == LANumber:
 		LANumber = 0
@@ -78,6 +82,8 @@ func heavyAttack():
 ################################################################################
 #####                              Utility                                 #####
 ################################################################################
+
+
 
 func spawnHitbox(lookDir, positionOffset, intMovementDir, AccelerationDir, scale, lifetime, damage, stuntime, knockback, dmgSelf: bool = false):
 	var hitbox = hitboxPacked.instantiate()

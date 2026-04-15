@@ -40,9 +40,9 @@ func setMovement(movement: Vector2, speed: Vector2):
 	if movement != Vector2.ZERO:
 		playerModule.StatusModule.isMoving = true
 		if movement.x < 0:
-			playerModule.StatusModule.lookDir = -1
+			playerModule.StatusModule.setLookDir(-1)
 		elif movement.x > 0:
-			playerModule.StatusModule.lookDir = 1
+			playerModule.StatusModule.setLookDir(1)
 		moveTo(Vector2(movement.x * speed.x, movement.y * speed.y))
 	elif not playerModule.StatusModule.onAir: 
 		playerModule.StatusModule.isMoving = false

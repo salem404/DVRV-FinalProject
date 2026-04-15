@@ -23,6 +23,6 @@ func applyKnockback(knockback: Vector3):
 		playerModule.MovementModule.moveTo(Vector2.ZERO)
 		playerModule.MovementModule.applyForce(Vector2(knockback.x, knockback.z), knockback.y)
 		
-		playerModule.StatusModule.knockbackDir = int(knockback.x) if int(knockback.x) != 0 else playerModule.StatusModule.lookDir
+		playerModule.StatusModule.setLookDir(-int(knockback.x) if int(knockback.x) != 0 else playerModule.StatusModule.lookDir)
 		if knockback.y > knockbackStatusPoint:
 			playerModule.StatusModule.isKnockbacked = true

@@ -13,7 +13,7 @@ signal initialized()
 @export var height: int
 @export var stuntime: float
 @export var knockback: Vector3
-@export var targetsAmount: int = INF
+@export var targetsAmount: int = 500
 @export var friendGroups: Array[StringName]
 
 @export_category("LIfeTime Values")

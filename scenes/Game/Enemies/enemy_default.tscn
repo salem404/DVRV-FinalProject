@@ -219,7 +219,7 @@ states/Up/position = Vector2(297, 100)
 states/Walk/node = SubResource("AnimationNodeBlendSpace1D_wklcl")
 states/Walk/position = Vector2(633, -29)
 transitions = ["Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_00enb"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_jpqlp"), "Idle", "Stun", SubResource("AnimationNodeStateMachineTransition_82rnm"), "Walk", "Stun", SubResource("AnimationNodeStateMachineTransition_wklcl"), "Stun", "Knockback", SubResource("AnimationNodeStateMachineTransition_dt5te"), "Stun", "Idle", SubResource("AnimationNodeStateMachineTransition_d7n1s"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_by3ly"), "Knockback", "Downed", SubResource("AnimationNodeStateMachineTransition_6x8u5"), "Walk", "Jump", SubResource("AnimationNodeStateMachineTransition_0wxtw"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_h7626"), "Jump", "Stun", SubResource("AnimationNodeStateMachineTransition_xkejy"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_qjkrr"), "Downed", "Up", SubResource("AnimationNodeStateMachineTransition_msu2m"), "Up", "Idle", SubResource("AnimationNodeStateMachineTransition_swtt5"), "Up", "Stun", SubResource("AnimationNodeStateMachineTransition_p8wg7"), "Up", "Jump", SubResource("AnimationNodeStateMachineTransition_mde7c"), "Downed", "Knockback", SubResource("AnimationNodeStateMachineTransition_2n6nx")]
-graph_offset = Vector2(132, -16)
+graph_offset = Vector2(-179, -292)
 
 [sub_resource type="Animation" id="Animation_d7n1s"]
 resource_name = "Downed"
@@ -1070,10 +1070,6 @@ script = ExtResource("10_uemot")
 
 [node name="AIModule" type="Node2D" parent="." unique_id=1351280651]
 script = ExtResource("4_cat8y")
-waitTimeRange = null
-distKeep = null
-distKeepSize = null
-atkDistKeep = null
 
 [node name="AiRange" type="Area2D" parent="AIModule" unique_id=495530485]
 position = Vector2(640, 256)

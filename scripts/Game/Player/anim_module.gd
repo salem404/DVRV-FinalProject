@@ -20,7 +20,6 @@ func _process(delta):
 func setAim():
 	var moving = status.isMoving
 	var lookDir = status.lookDir
-	var knockbackDir = -status.knockbackDir
 	var stunned = status.isStunned
 	var knockback = status.isKnockbacked
 	var onAir = status.onAir
@@ -34,16 +33,17 @@ func setAim():
 	animTree.set("parameters/conditions/!Knockback",!knockback)
 	animTree.set("parameters/conditions/Jump",onAir)
 	animTree.set("parameters/conditions/!Jump",!onAir)
-	# LookDir
-	animTree.set("parameters/Idle/blend_position",lookDir)
-	animTree.set("parameters/Walk/blend_position",lookDir)
-	animTree.set("parameters/Jump/blend_position",lookDir)
-	animTree.set("parameters/Stun/blend_position",knockbackDir)
-	animTree.set("parameters/Knockback/blend_position",knockbackDir)
-	animTree.set("parameters/Downed/blend_position",knockbackDir)
-	animTree.set("parameters/Up/blend_position",knockbackDir)
+	
+	var sm = animTree.get("parameters/playback")
+	var current = sm.get_current_node()
+	animTree.set("parameters/%s/blend_position" % current, lookDir)
+	#animTree.set("parameters/Knockback/blend_position",knockbackDir)
 
 func forceAnim(animName: String):
-	var sm = animTree.get("parameters/playback")
-	sm.start(animName)
+	if animTree:
+		var sm = animTree.get("parameters/playback")
+		if animTree.tree_root.has_node(animName):
+			sm.start(animName)
 	
+func resetAnim():
+	forceAnim("Idle")
