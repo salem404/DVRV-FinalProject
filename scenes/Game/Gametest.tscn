@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bnc8tnds8ryqw" path="res://scenes/Game/UI/player_gui.tscn" id="2_kcqp7"]
 [ext_resource type="PackedScene" uid="uid://cn0nsbc6f1er4" path="res://scenes/Game/Player/DefaultPlayer.tscn" id="2_mhr4y"]
 [ext_resource type="PackedScene" uid="uid://dprhj58a0gbm2" path="res://scenes/Game/UI/UI.tscn" id="3_unq2p"]
-[ext_resource type="PackedScene" uid="uid://0keg0f2gbnbh" path="res://scenes/Game/Enemies/enemy_default.tscn" id="4_wkojt"]
+[ext_resource type="PackedScene" uid="uid://csu2xssxwqn4n" path="res://scenes/Game/Enemies/Grimp.tscn" id="4_sa5pu"]
 [ext_resource type="Script" uid="uid://kymh0tus5b24" path="res://player_follower.gd" id="5_unq2p"]
 [ext_resource type="Script" uid="uid://chelv8jhgtdu4" path="res://events_detector.gd" id="6_crllf"]
 [ext_resource type="Script" uid="uid://cpffx88thlrv0" path="res://scripts/Game/playerAreaDetector.gd" id="6_edlo4"]
@@ -27,8 +27,8 @@ SpawnPos = [NodePath("SpawnPos/P1"), NodePath("SpawnPos/P2"), NodePath("SpawnPos
 z_index = 2
 y_sort_enabled = true
 
-[node name="EnemyDefault" parent="Enemies" unique_id=187010336 node_paths=PackedStringArray("MovingArea", "Camera") instance=ExtResource("4_wkojt")]
-position = Vector2(1088, 448)
+[node name="EnemyDefault" parent="Enemies" unique_id=187010336 node_paths=PackedStringArray("MovingArea", "Camera") instance=ExtResource("4_sa5pu")]
+position = Vector2(1184, 512)
 MovingArea = NodePath("../../Map/Boundry")
 Camera = NodePath("../../PlayerFollower/Camera2D")
 

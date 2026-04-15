@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://b717jnnmpw5jo"]
+[gd_scene format=3 uid="uid://di0oislcbgvqq"]
 
 [ext_resource type="Script" uid="uid://dbjji30kw3c0f" path="res://scripts/Game/Character/playerPhysics.gd" id="1_7nrw5"]
 [ext_resource type="Script" uid="uid://b6mwl4d2vgyxp" path="res://scripts/Game/Character/player_module.gd" id="2_4f100"]
@@ -8,10 +8,10 @@
 [ext_resource type="Script" uid="uid://cp8p2ixqhldlj" path="res://scripts/Game/Character/status_module.gd" id="6_dkdkc"]
 [ext_resource type="Script" uid="uid://bko02gl3dtcuq" path="res://scripts/Game/Character/stats_module.gd" id="7_8of3a"]
 [ext_resource type="Script" uid="uid://ccous1xf0ya2n" path="res://scripts/Game/Character/damage_module.gd" id="8_dlvw2"]
-[ext_resource type="Script" uid="uid://bb1v4f07bx0gm" path="res://scripts/Game/Character/moveset_module.gd" id="9_kbtim"]
+[ext_resource type="Script" uid="uid://bb1v4f07bx0gm" path="res://scripts/Game/Character/P1/P1_moveset.gd" id="9_kbtim"]
 [ext_resource type="PackedScene" uid="uid://pyc48swcdrki" path="res://scenes/Game/Attacks/hitbox.tscn" id="10_k04ko"]
 [ext_resource type="Script" uid="uid://b3t5n7l6qx052" path="res://scripts/Game/Player/anim_module.gd" id="11_cdggc"]
-[ext_resource type="Script" uid="uid://r0wutpqybqq8" path="res://scripts/Game/Enemy/ai_module.gd" id="12_4ntao"]
+[ext_resource type="Script" uid="uid://r0wutpqybqq8" path="res://scripts/Game/Enemy/TEST/base_AI.gd" id="12_4ntao"]
 [ext_resource type="Texture2D" uid="uid://bwf0hdksn75fq" path="res://images/Circle.png" id="13_lvp1u"]
 [ext_resource type="Texture2D" uid="uid://de8xycmp1afo4" path="res://images/Entities/shadow.png" id="14_l4lm5"]
 [ext_resource type="Texture2D" uid="uid://cmb8qgi4h0vuu" path="res://images/TemplateImage.svg" id="15_deiy2"]

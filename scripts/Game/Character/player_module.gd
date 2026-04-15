@@ -1,9 +1,9 @@
 extends Node
 
+@export var MovesetModule: Node
 @onready var player: CharacterBody2D = get_parent()
 @onready var MovementModule: Node = $MovementModule
 @onready var HeightModule: Node = $HeightModule
-@onready var MovesetModule: Node = $MovesetModule
 @onready var InputModule: Node = $InputModule
 @onready var StatusModule: Node = $StatusModule
 @onready var StatsModule: Node = $StatsModule
@@ -38,9 +38,9 @@ func _process(delta):
 		if InputModule.jumpKey and not StatusModule.onAir:
 			HeightModule.jump(StatsModule.Jpower)
 		
-		if InputModule.lightAttack:
+		if InputModule.lightAttack and MovesetModule.lightAttack:
 			MovesetModule.lightAttack()
-		elif InputModule.heavyAttack:
+		if InputModule.heavyAttack and MovesetModule.heavyAttack:
 			MovesetModule.heavyAttack()
 	else:
 		StatusModule.isMoving = false

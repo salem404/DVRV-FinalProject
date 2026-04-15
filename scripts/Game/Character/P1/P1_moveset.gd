@@ -1,8 +1,8 @@
 extends Node
 
 @export var hitboxPacked: PackedScene
-@onready var playerModule: Node = get_parent()
-@onready var player: Node = playerModule.get_parent()
+@onready var player: Node = get_parent()
+@onready var playerModule: Node = get_parent().PlayerModule
 
 @export var intMovementDir: Vector3
 @export var AccelerationDir: Vector3
@@ -42,6 +42,9 @@ var LANumber: int = 0
 @export var HAAnim: Array[String] = ["AtkSLagHeavy", "AtkHeavy"]
 @export var HAResetTime: float = 1.0
 var HANumber: int = 0
+
+func initialized():
+	playerModule = get_parent().PlayerModule
 
 ################################################################################
 #####                             Functions                                #####

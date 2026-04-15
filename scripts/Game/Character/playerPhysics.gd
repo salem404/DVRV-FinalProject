@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-signal started()
+signal initialized()
 
 @export_category("Objects")
 @export var MovingArea: Area2D
@@ -15,8 +15,10 @@ func _ready():
 	else:
 		push_warning("MovingArea not found in ", name)
 		
-	started.connect(PlayerModule.initialized)
-	started.emit()
+		
+	initialized.connect(PlayerModule.MovesetModule.initialized)
+	initialized.connect(PlayerModule.initialized)
+	initialized.emit()
 	
 func _physics_process(delta):
 	PlayerModule.HeightModule.heightProcess(delta)

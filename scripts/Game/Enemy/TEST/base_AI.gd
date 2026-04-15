@@ -20,7 +20,7 @@ var targetOffset: Vector2 = Vector2.ZERO
 @export var atkDistKeep: Vector2 = Vector2(150,20)
 @export var waitUntilAttack: float = 1
 # 0 - Nothing
-# 1 - Move towards
+# 1 - Move closer
 # 1 - Attack
 
 func _ready():
@@ -29,8 +29,8 @@ func _ready():
 		if isBusy:
 			await get_tree().process_frame
 			continue
-		behavior = 0
-		#behavior = randi_range(1, 2) if behavior == 0 else randi_range(0, 2)
+		#behavior = 0
+		behavior = randi_range(1, 2) if behavior == 0 else randi_range(0, 2)
 		if behavior == 1:
 			targetOffset = Vector2(randi_range(-50,200),randi_range(-200,200))
 		await get_tree().create_timer(randf_range(waitTimeRange.x,waitTimeRange.y)).timeout
@@ -43,15 +43,15 @@ func _process(delta):
 	if closest:
 		var posDist = abs(closest.position - this.position) 
 		match behavior:
-			0: # Nothing
+			0:
 				moveToPlayer(closest, targetOffset)
-			1: # Move To Player
+			1:
 				var distOffset = distKeep + targetOffset
 				if posDist.x > distOffset.x or posDist.y > distOffset.y:
 					moveToPlayer(closest, targetOffset)
 				elif posDist.x < distOffset.x-distKeepSize.x and posDist.y < distOffset.y-distKeepSize.y:
 					moveFromPlayer(closest)
-			2: # Attack player
+			2:
 				
 				if posDist.x > atkDistKeep.x or posDist.y > atkDistKeep.y:
 					moveToPlayer(closest)
