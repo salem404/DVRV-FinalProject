@@ -17,7 +17,7 @@ var behavior: int = 0
 var targetOffset: Vector2 = Vector2.ZERO
 
 @export_category("Mode 2 = Attack")
-@export var atkDistKeep: Vector2 = Vector2(150,0)
+@export var atkDistKeep: Vector2 = Vector2(150,20)
 # 0 - Nothing
 # 1 - Move towards
 # 1 - Attack
@@ -44,13 +44,15 @@ func _process(delta):
 			0: # Nothing
 				pass
 			1: # Move To Player
-				if abs(closest.position - this.position) > distKeep + targetOffset:
+				var distOffset = distKeep + targetOffset
+				if posDist.x > distOffset.x or posDist.y > distOffset.y:
 					moveToPlayer(closest, targetOffset)
-				elif abs(closest.position - this.position) < distKeep-distKeepSize + targetOffset:
+				elif posDist.x < distOffset.x-distKeepSize.x or posDist.y < distOffset.y-distKeepSize.y:
 					moveFromPlayer(closest)
 					
 			2: # Attack player
-				if abs(closest.position - this.position) > atkDistKeep:
+				
+				if posDist.x > atkDistKeep.x or posDist.y > atkDistKeep.y:
 					moveToPlayer(closest)
 				else:
 					useMove()
