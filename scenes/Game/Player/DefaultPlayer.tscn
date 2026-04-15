@@ -512,6 +512,7 @@ tracks/5/keys = {
 [sub_resource type="Animation" id="Animation_msu2m"]
 resource_name = "JumpLeft"
 length = 2.0
+step = 0.0333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -651,7 +652,9 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_dt5te"]
 resource_name = "KnockbackLeft"
+length = 0.5
 loop_mode = 1
+step = 0.0333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -695,10 +698,10 @@ tracks/3/path = NodePath("Visual/Sprite2D:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0]
+"values": [0.0, 6.283185307179586]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -727,6 +730,7 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id="Animation_6x8u5"]
 resource_name = "KnockbackRight"
+length = 0.5
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -771,10 +775,10 @@ tracks/3/path = NodePath("Visual/Sprite2D:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0]
+"values": [0.0, -6.283185307179586]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -878,8 +882,7 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id="Animation_xkejy"]
 resource_name = "StunnedLeft"
-length = 2.0
-loop_mode = 1
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -919,44 +922,43 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Visual/Sprite2D:scale")
+tracks/3/path = NodePath("Visual/Sprite2D:skew")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0.6363636, 0.6363636)]
+"values": [0.0]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Visual/Sprite2D:skew")
+tracks/4/path = NodePath("Visual/Sprite2D:region_rect")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0]
+"values": [Rect2(39, 935, 259, 206)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Visual/Sprite2D:region_rect")
+tracks/5/path = NodePath("Visual/Sprite2D:scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.19999999),
+"transitions": PackedFloat32Array(0.5, 0.5),
 "update": 0,
-"values": [Rect2(39, 935, 259, 206)]
+"values": [Vector2(0.4, 0.636), Vector2(0.6363636, 0.6363636)]
 }
 
 [sub_resource type="Animation" id="Animation_h7626"]
 resource_name = "StunnedRight"
-length = 2.0
-loop_mode = 1
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1000,10 +1002,10 @@ tracks/3/path = NodePath("Visual/Sprite2D:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.19999999),
+"transitions": PackedFloat32Array(0.5, 0.5),
 "update": 0,
-"values": [Vector2(0.6363636, 0.6363636)]
+"values": [Vector2(0.4, 0.636), Vector2(0.6363636, 0.6363636)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -1033,7 +1035,6 @@ tracks/5/keys = {
 [sub_resource type="Animation" id="Animation_p8wg7"]
 resource_name = "UpLeft"
 length = 0.2
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1041,10 +1042,10 @@ tracks/0/path = NodePath("Visual/Sprite2D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.5, 0.5),
 "update": 0,
-"values": [Vector2(15.999996, -63.999992)]
+"values": [Vector2(15.999996, -45.318172), Vector2(15.999996, -63.999992)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -1065,10 +1066,10 @@ tracks/2/path = NodePath("Visual/Sprite2D:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.5, 0.5),
 "update": 0,
-"values": [Vector2(0.6363636, 0.6363636)]
+"values": [Vector2(0.6363636, 0.46497077), Vector2(0.6363636, 0.6363636)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -1117,10 +1118,10 @@ tracks/0/path = NodePath("Visual/Sprite2D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.5, 0.5),
 "update": 0,
-"values": [Vector2(-16, -63.999992)]
+"values": [Vector2(-16, -47.999992), Vector2(-16, -63.999992)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -1141,10 +1142,10 @@ tracks/2/path = NodePath("Visual/Sprite2D:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.5, 0.5),
 "update": 0,
-"values": [Vector2(0.6363636, 0.6363636)]
+"values": [Vector2(0.6363636, 0.4282736), Vector2(0.6363636, 0.6363636)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -1400,7 +1401,6 @@ position = Vector2(0, -32)
 shape = SubResource("CircleShape2D_bpow2")
 
 [node name="Sprite2D" type="Sprite2D" parent="CollisionBox" unique_id=1033437663]
-visible = false
 modulate = Color(1, 1, 1, 0.4745098)
 z_index = 5
 position = Vector2(-1.9073486e-05, -9.536743e-07)

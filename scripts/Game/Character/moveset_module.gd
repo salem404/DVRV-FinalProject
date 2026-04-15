@@ -18,7 +18,7 @@ extends Node
 @export var LAHitboxLifetime: Array[float] = [0.1,0.1,0.1]
 
 @export var LAPlayerMovement: Array[Vector3] = [Vector3(200,1,0),Vector3(200,1,0),Vector3(200,1,0)]
-@export var LAStuntime: Array[float] = [0.3,0.3,0.3]
+@export var LAStuntime: Array[float] = [0.3,0.3,1]
 @export var LADebounceTime: Array[float] = [0.2,0.2,0.2]
 @export var LAResetTime: Array[float] = [1.0,1.0,2.0]
 var LANumber: int = 0
