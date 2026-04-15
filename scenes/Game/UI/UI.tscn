@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://dprhj58a0gbm2"]
+
+[ext_resource type="Texture2D" uid="uid://d1mlbgplycn15" path="res://images/UI/Progress Barr.png" id="1_dj8aq"]
+
+[node name="Ui" type="Control" unique_id=1782285889]
+z_index = 10
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayersGUI" type="HBoxContainer" parent="." unique_id=306253373]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 128.0
+
+[node name="BossGUI" type="HBoxContainer" parent="." unique_id=2091568191]
+visible = false
+layout_mode = 0
+offset_top = 600.0
+offset_right = 1280.0
+offset_bottom = 720.0
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="BossGUI" unique_id=1317915077]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 20
+
+[node name="BossHealth" type="PanelContainer" parent="BossGUI/MarginContainer" unique_id=537933746]
+layout_mode = 2
+
+[node name="HealthBar" type="TextureProgressBar" parent="BossGUI/MarginContainer/BossHealth" unique_id=1255956450]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+value = 50.0
+nine_patch_stretch = true
+texture_under = ExtResource("1_dj8aq")
+texture_progress = ExtResource("1_dj8aq")
+tint_under = Color(0.4852317, 0.059644576, 0.059644576, 1)
+tint_progress = Color(0, 1, 0, 1)
