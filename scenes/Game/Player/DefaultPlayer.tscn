@@ -2225,7 +2225,7 @@ shape = SubResource("CircleShape2D_bpow2")
 [node name="Sprite2D" type="Sprite2D" parent="CollisionBox" unique_id=1033437663]
 visible = false
 modulate = Color(1, 1, 1, 0.4745098)
-z_index = 5
+z_index = 50
 position = Vector2(-1.9073486e-05, -9.536743e-07)
 scale = Vector2(0.12800008, 0.128)
 texture = ExtResource("9_wrl72")
