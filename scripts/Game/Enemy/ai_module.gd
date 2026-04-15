@@ -29,8 +29,8 @@ func _ready():
 		if isBusy:
 			await get_tree().process_frame
 			continue
-		#behavior = 1
-		behavior = randi_range(1, 2) if behavior == 0 else randi_range(0, 2)
+		behavior = 0
+		#behavior = randi_range(1, 2) if behavior == 0 else randi_range(0, 2)
 		if behavior == 1:
 			targetOffset = Vector2(randi_range(-50,200),randi_range(-200,200))
 		await get_tree().create_timer(randf_range(waitTimeRange.x,waitTimeRange.y)).timeout
@@ -44,7 +44,7 @@ func _process(delta):
 		var posDist = abs(closest.position - this.position) 
 		match behavior:
 			0: # Nothing
-				pass
+				moveToPlayer(closest, targetOffset)
 			1: # Move To Player
 				var distOffset = distKeep + targetOffset
 				if posDist.x > distOffset.x or posDist.y > distOffset.y:
@@ -83,14 +83,14 @@ func moveFromPlayer(target: CharacterBody2D, offset: Vector2 = Vector2.ZERO):
 func moveSameHorizontal(target: int):
 	if target:
 		var enemyDir: float = (target - this.position.x)
-		if abs(enemyDir) > 10:
+		if abs(enemyDir) > 100:
 			playerModule.InputModule.movement.x= 1 if enemyDir > 0 else -1
 	pass
 	
 func moveSameHeight(target: int):
 	if target:
 		var enemyDir: float = (target - this.position.y)
-		if abs(enemyDir) > 5:
+		if abs(enemyDir) > 20:
 			playerModule.InputModule.movement.y = 1 if enemyDir > 0 else -1
 	pass
 
