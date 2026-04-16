@@ -35,28 +35,30 @@ y_sort_enabled = true
 
 [node name="Visual" type="Node2D" parent="Map" unique_id=406405879]
 
-[node name="Parallax" type="Parallax2D" parent="Map/Visual" unique_id=1189285995]
-repeat_size = Vector2(2560, 0)
+[node name="Background" type="Sprite2D" parent="Map/Visual" unique_id=1420582737]
+modulate = Color(0.45029536, 0.45029536, 0.5801458, 1)
+z_index = -2
+position = Vector2(848, 360.00003)
+scale = Vector2(1696, 720.00006)
+texture = SubResource("CanvasTexture_yu7w2")
 
-[node name="Floor" type="Sprite2D" parent="Map/Visual/Parallax" unique_id=970954159]
+[node name="Parallax" type="Node2D" parent="Map/Visual" unique_id=284604358]
+
+[node name="Floor" type="Parallax2D" parent="Map/Visual/Parallax" unique_id=953169086]
+repeat_size = Vector2(1696, 0)
+
+[node name="Floor" type="Sprite2D" parent="Map/Visual/Parallax/Floor" unique_id=970954159]
 modulate = Color(0.61347646, 0.61347646, 0.7852611, 1)
 z_index = -1
 position = Vector2(848.00006, 359.99997)
 scale = Vector2(0.6625, 0.6666666)
 texture = ExtResource("5_koclg")
 
-[node name="Background" type="Sprite2D" parent="Map/Visual" unique_id=1420582737]
-modulate = Color(0.45029536, 0.45029536, 0.5801458, 1)
-z_index = -2
-position = Vector2(1120, 360.00003)
-scale = Vector2(2240, 720.00006)
-texture = SubResource("CanvasTexture_yu7w2")
-
 [node name="Boundry" type="Area2D" parent="Map" unique_id=852656395]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Boundry" unique_id=259037805]
 position = Vector2(-8, 0)
-polygon = PackedVector2Array(2232, 368, 2232, 648, 24, 648, 24, 368)
+polygon = PackedVector2Array(3400, 368, 3400, 704, 24, 704, 24, 368)
 
 [node name="SpawnPos" type="Node2D" parent="." unique_id=710396889]
 
@@ -76,10 +78,11 @@ position = Vector2(104, 552)
 z_index = 2
 position = Vector2(640, 360)
 script = ExtResource("5_unq2p")
-FollowingPlayer = [NodePath("../Camera2D"), NodePath(""), null]
+FollowingPlayer = [NodePath("../Camera2D")]
 FollowingPlayerUI = [NodePath("../Ui")]
 
 [node name="EventsDetector" type="Node2D" parent="." unique_id=751690982 node_paths=PackedStringArray("events")]
+position = Vector2(0, 1080)
 script = ExtResource("6_crllf")
 events = [NodePath("Area1")]
 
