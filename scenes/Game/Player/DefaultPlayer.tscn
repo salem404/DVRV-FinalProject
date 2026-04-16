@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dbjji30kw3c0f" path="res://scripts/Game/Character/playerPhysics.gd" id="1_tuyoq"]
 [ext_resource type="Script" uid="uid://8dvmgdhmovjw" path="res://scripts/Game/Player/input_module.gd" id="2_g2els"]
-[ext_resource type="Script" uid="uid://x6oifdqj03x5" path="res://scenes/Game/Enemies/enemy_death.gd" id="2_jpqlp"]
+[ext_resource type="Script" uid="uid://x6oifdqj03x5" path="res://scripts/Game/Enemy/enemy_death.gd" id="2_jpqlp"]
 [ext_resource type="Script" uid="uid://b6mwl4d2vgyxp" path="res://scripts/Game/Character/player_module.gd" id="2_qlg0r"]
 [ext_resource type="Script" uid="uid://buig5yjiwsaiy" path="res://scripts/Game/Character/movement_module.gd" id="3_tuyoq"]
 [ext_resource type="Script" uid="uid://cp8p2ixqhldlj" path="res://scripts/Game/Character/status_module.gd" id="5_fjrip"]

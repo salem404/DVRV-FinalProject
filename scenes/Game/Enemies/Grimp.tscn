@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://csu2xssxwqn4n"]
 
 [ext_resource type="Script" uid="uid://dbjji30kw3c0f" path="res://scripts/Game/Character/playerPhysics.gd" id="1_lfmip"]
-[ext_resource type="Script" uid="uid://x6oifdqj03x5" path="res://scenes/Game/Enemies/enemy_death.gd" id="2_00ayx"]
-[ext_resource type="Script" uid="uid://b7vqkwge0uusc" path="res://scenes/Game/Enemies/grimp_Moveset.gd" id="2_fy6og"]
+[ext_resource type="Script" uid="uid://x6oifdqj03x5" path="res://scripts/Game/Enemy/enemy_death.gd" id="2_00ayx"]
+[ext_resource type="Script" uid="uid://b7vqkwge0uusc" path="res://scripts/Game/Enemy/Grimp/grimp_Moveset.gd" id="2_fy6og"]
 [ext_resource type="PackedScene" uid="uid://pyc48swcdrki" path="res://scenes/Game/Attacks/hitbox.tscn" id="3_a0lmu"]
-[ext_resource type="Script" uid="uid://873jsag3lu2i" path="res://scenes/Game/Enemies/grimp_AI.gd" id="3_pn36o"]
+[ext_resource type="Script" uid="uid://873jsag3lu2i" path="res://scripts/Game/Enemy/Grimp/grimp_AI.gd" id="3_pn36o"]
 [ext_resource type="Script" uid="uid://b6mwl4d2vgyxp" path="res://scripts/Game/Character/player_module.gd" id="5_m14bp"]
 [ext_resource type="Script" uid="uid://buig5yjiwsaiy" path="res://scripts/Game/Character/movement_module.gd" id="6_o0ycg"]
 [ext_resource type="Script" uid="uid://c5vqkq5gad78e" path="res://scripts/Game/Character/height_module.gd" id="7_jxnyl"]

@@ -114,7 +114,7 @@ func useLightAttack():
 	if playerModule.InputModule.lightAttack == false:
 		playerModule.InputModule.lightAttack = true
 		isBusy = true
-		await get_tree().create_timer(1.0).timeout
+		await get_tree().create_timer(0.1).timeout
 		playerModule.InputModule.lightAttack = false
 		isBusy = false
 
@@ -122,7 +122,7 @@ func useHeavyAttack():
 	if playerModule.InputModule.heavyAttack == false:
 		playerModule.InputModule.heavyAttack = true
 		isBusy = true
-		await get_tree().create_timer(1.0).timeout
+		await get_tree().create_timer(0.1).timeout
 		playerModule.InputModule.heavyAttack = false
 		isBusy = false
 
