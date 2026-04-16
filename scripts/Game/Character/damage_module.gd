@@ -13,6 +13,8 @@ func takeDamage(damage: int, stundur: float, knockback: Vector3):
 	playerModule.AnimModule.forceAnim("Stun")
 	applyKnockback(knockback)
 	
+	if playerModule.StatsModule.Health <= 0:
+		playerModule.StatusModule.setDead()
 
 ################################################################################
 #####                              Utility                                 #####

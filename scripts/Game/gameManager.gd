@@ -5,8 +5,8 @@ extends Node2D
 @export var SpawnPos: Array[Marker2D] = []
 
 @onready var playerFollower: Node2D = $PlayerFollower
-@onready var gameGUI: Control = $PlayerFollower/Ui
-@onready var gameCamera: Camera2D = $PlayerFollower/Camera2D
+@onready var gameGUI: Control = $Ui
+@onready var gameCamera: Camera2D = $Camera2D
 @onready var playersGUI: HBoxContainer = gameGUI.get_node("PlayersGUI")
 @onready var players: Array[CharacterBody2D] = []
 

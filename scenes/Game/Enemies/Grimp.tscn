@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://csu2xssxwqn4n"]
 
 [ext_resource type="Script" uid="uid://dbjji30kw3c0f" path="res://scripts/Game/Character/playerPhysics.gd" id="1_lfmip"]
+[ext_resource type="Script" uid="uid://x6oifdqj03x5" path="res://scenes/Game/Enemies/enemy_death.gd" id="2_00ayx"]
 [ext_resource type="Script" uid="uid://b7vqkwge0uusc" path="res://scenes/Game/Enemies/grimp_Moveset.gd" id="2_fy6og"]
 [ext_resource type="PackedScene" uid="uid://pyc48swcdrki" path="res://scenes/Game/Attacks/hitbox.tscn" id="3_a0lmu"]
 [ext_resource type="Script" uid="uid://873jsag3lu2i" path="res://scenes/Game/Enemies/grimp_AI.gd" id="3_pn36o"]
@@ -17,7 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://j31rhltj355y" path="res://images/Entities/Enemies/Grimp Spritesheet.png" id="15_pn36o"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nbf47"]
-radius = 648.0494
+radius = 2000.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_elj56"]
 radius = 40.0
@@ -187,7 +188,7 @@ states/Up/position = Vector2(297, 100)
 states/Walk/node = SubResource("AnimationNodeBlendSpace1D_wklcl")
 states/Walk/position = Vector2(633, -29)
 transitions = ["Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_00enb"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_jpqlp"), "Stun", "Knockback", SubResource("AnimationNodeStateMachineTransition_dt5te"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_by3ly"), "Knockback", "Downed", SubResource("AnimationNodeStateMachineTransition_6x8u5"), "Downed", "Up", SubResource("AnimationNodeStateMachineTransition_msu2m"), "Up", "Idle", SubResource("AnimationNodeStateMachineTransition_swtt5"), "Downed", "Knockback", SubResource("AnimationNodeStateMachineTransition_2n6nx"), "Stun", "Idle", SubResource("AnimationNodeStateMachineTransition_d7n1s")]
-graph_offset = Vector2(-247, -231)
+graph_offset = Vector2(-206, 26)
 
 [sub_resource type="Animation" id="Animation_ynu68"]
 resource_name = "AtkLeft"
@@ -1491,13 +1492,17 @@ _data = {
 &"WalkRight": SubResource("Animation_xl4w6")
 }
 
-[node name="EnemyDefault" type="CharacterBody2D" unique_id=187010336 groups=["Enemy", "Entity"]]
+[node name="EnemyDefault" type="CharacterBody2D" unique_id=187010336 node_paths=PackedStringArray("DeathNode") groups=["Enemy", "Entity"]]
 position = Vector2(640, 320)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_lfmip")
+DeathNode = NodePath("EnemyDeath")
 
-[node name="P1Moveset" type="Node2D" parent="." unique_id=581841300]
+[node name="EnemyDeath" type="Node2D" parent="." unique_id=1369617905]
+script = ExtResource("2_00ayx")
+
+[node name="GrimpMoveset" type="Node2D" parent="." unique_id=581841300]
 script = ExtResource("2_fy6og")
 hitboxPacked = ExtResource("3_a0lmu")
 
@@ -1514,7 +1519,7 @@ debug_color = Color(0.62, 0.41333336, 0, 0.039215688)
 
 [node name="PlayerModule" type="Node" parent="." unique_id=651865372 node_paths=PackedStringArray("MovesetModule")]
 script = ExtResource("5_m14bp")
-MovesetModule = NodePath("../P1Moveset")
+MovesetModule = NodePath("../GrimpMoveset")
 
 [node name="MovementModule" type="Node" parent="PlayerModule" unique_id=1998603810]
 script = ExtResource("6_o0ycg")
