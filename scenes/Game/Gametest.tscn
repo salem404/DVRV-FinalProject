@@ -8,10 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://csu2xssxwqn4n" path="res://scenes/Game/Enemies/Grimp.tscn" id="4_sa5pu"]
 [ext_resource type="Texture2D" uid="uid://b4iybnsxsuru6" path="res://images/Map/MainStage Asset.png" id="5_koclg"]
 [ext_resource type="Script" uid="uid://kymh0tus5b24" path="res://player_follower.gd" id="5_unq2p"]
+[ext_resource type="Texture2D" uid="uid://55whw6ky7rhx" path="res://images/Map/Background Basic Asset.png" id="6_2sju2"]
 [ext_resource type="Script" uid="uid://chelv8jhgtdu4" path="res://events_detector.gd" id="6_crllf"]
 [ext_resource type="Script" uid="uid://cpffx88thlrv0" path="res://scripts/Game/playerAreaDetector.gd" id="6_edlo4"]
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_yu7w2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_crllf"]
 size = Vector2(128, 720)
@@ -40,24 +39,27 @@ y_sort_enabled = true
 
 [node name="Visual" type="Node2D" parent="Map" unique_id=406405879]
 
-[node name="Background" type="Sprite2D" parent="Map/Visual" unique_id=1420582737]
-modulate = Color(0.45029536, 0.45029536, 0.5801458, 1)
-z_index = -2
-position = Vector2(848, 360.00003)
-scale = Vector2(1696, 720.00006)
-texture = SubResource("CanvasTexture_yu7w2")
-
 [node name="Parallax" type="Node2D" parent="Map/Visual" unique_id=284604358]
 
 [node name="Floor" type="Parallax2D" parent="Map/Visual/Parallax" unique_id=953169086]
+z_index = -1
 repeat_size = Vector2(1696, 0)
 
 [node name="Floor" type="Sprite2D" parent="Map/Visual/Parallax/Floor" unique_id=970954159]
 modulate = Color(0.61347646, 0.61347646, 0.7852611, 1)
-z_index = -1
 position = Vector2(848.00006, 359.99997)
 scale = Vector2(0.6625, 0.6666666)
 texture = ExtResource("5_koclg")
+
+[node name="Background" type="Parallax2D" parent="Map/Visual/Parallax" unique_id=1334119390]
+z_index = -2
+scroll_scale = Vector2(0.7, 0.7)
+repeat_size = Vector2(1696, 0)
+
+[node name="BackgroundBasicAsset" type="Sprite2D" parent="Map/Visual/Parallax/Background" unique_id=1383242347]
+position = Vector2(848, 360.00003)
+scale = Vector2(0.6625, 0.66666675)
+texture = ExtResource("6_2sju2")
 
 [node name="Boundry" type="Area2D" parent="Map" unique_id=852656395]
 
