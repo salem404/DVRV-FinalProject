@@ -7,6 +7,7 @@ var character: CharacterBody2D
 var boundryPolygon
 var isMoving: bool
 var outsideArea: bool = false
+var inCamera: bool = false
 
 func movementProcess(delta):
 	if not playerModule:
@@ -95,8 +96,11 @@ func snapInsideCamera():
 	var camera = character.Camera
 	var camPos = camera.global_position
 	var camSize = camera.get_viewport_rect().size/2-Vector2(character.CollisionBox.shape.radius,character.CollisionBox.shape.radius)
-
-	if character.global_position.x > camPos.x+camSize.x:
-		character.global_position.x = camPos.x+camSize.x
-	elif character.global_position.x < camPos.x-camSize.x:
-		character.global_position.x = camPos.x-camSize.x
+	
+	if not inCamera:
+		inCamera = character.global_position.x < camPos.x+camSize.x and character.global_position.x > camPos.x-camSize.x
+	else:
+		if character.global_position.x > camPos.x+camSize.x:
+			character.global_position.x = camPos.x+camSize.x
+		elif character.global_position.x < camPos.x-camSize.x:
+			character.global_position.x = camPos.x-camSize.x

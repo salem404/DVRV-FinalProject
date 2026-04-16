@@ -9,6 +9,7 @@ var isMoving: bool = false
 var lookDir: int = 1 
 var isKnockbacked: bool = false
 var knockbackDir: int = 1 
+var isDead: bool = false
 
 @onready var StunTimer: Timer = $StunTimer
 @onready var DebounceTimer: Timer = $DebounceTimer
@@ -46,3 +47,7 @@ func setLookDir(newDir: float):
 		lookDir = 1
 	elif newDir < 0:
 		lookDir = -1
+
+func setDead():
+	isDead = true
+	playerModule.player.dead.emit(playerModule.player)

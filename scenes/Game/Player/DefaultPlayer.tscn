@@ -2,12 +2,13 @@
 
 [ext_resource type="Script" uid="uid://dbjji30kw3c0f" path="res://scripts/Game/Character/playerPhysics.gd" id="1_tuyoq"]
 [ext_resource type="Script" uid="uid://8dvmgdhmovjw" path="res://scripts/Game/Player/input_module.gd" id="2_g2els"]
+[ext_resource type="Script" uid="uid://x6oifdqj03x5" path="res://scripts/Game/Enemy/enemy_death.gd" id="2_jpqlp"]
 [ext_resource type="Script" uid="uid://b6mwl4d2vgyxp" path="res://scripts/Game/Character/player_module.gd" id="2_qlg0r"]
 [ext_resource type="Script" uid="uid://buig5yjiwsaiy" path="res://scripts/Game/Character/movement_module.gd" id="3_tuyoq"]
 [ext_resource type="Script" uid="uid://cp8p2ixqhldlj" path="res://scripts/Game/Character/status_module.gd" id="5_fjrip"]
 [ext_resource type="Script" uid="uid://ccous1xf0ya2n" path="res://scripts/Game/Character/damage_module.gd" id="7_bpow2"]
 [ext_resource type="Script" uid="uid://bko02gl3dtcuq" path="res://scripts/Game/Character/stats_module.gd" id="7_fjrip"]
-[ext_resource type="Script" uid="uid://bb1v4f07bx0gm" path="res://scripts/Game/Character/moveset_module.gd" id="8_53s13"]
+[ext_resource type="Script" uid="uid://bb1v4f07bx0gm" path="res://scripts/Game/Character/P1/P1_moveset.gd" id="8_53s13"]
 [ext_resource type="Texture2D" uid="uid://de8xycmp1afo4" path="res://images/Entities/shadow.png" id="8_khinc"]
 [ext_resource type="PackedScene" uid="uid://pyc48swcdrki" path="res://scenes/Game/Attacks/hitbox.tscn" id="9_hpxot"]
 [ext_resource type="Texture2D" uid="uid://bwf0hdksn75fq" path="res://images/Circle.png" id="9_wrl72"]
@@ -139,16 +140,16 @@ blend_mode = 1
 animation = &"RESET"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xkejy"]
-animation = &"StunnedLeft"
+animation = &"StunLeft"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_msu2m"]
-animation = &"StunnedRight"
+animation = &"StunRight"
 
 [sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_00enb"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_xkejy")
-blend_point_0/pos = -1.0
+blend_point_0/pos = -0.1
 blend_point_1/node = SubResource("AnimationNodeAnimation_msu2m")
-blend_point_1/pos = 1.0
+blend_point_1/pos = 0.1
 blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qjkrr"]
@@ -258,7 +259,7 @@ states/Up/position = Vector2(297, 100)
 states/Walk/node = SubResource("AnimationNodeBlendSpace1D_wklcl")
 states/Walk/position = Vector2(633, -29)
 transitions = ["Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_00enb"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_jpqlp"), "Stun", "Knockback", SubResource("AnimationNodeStateMachineTransition_dt5te"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_by3ly"), "Knockback", "Downed", SubResource("AnimationNodeStateMachineTransition_6x8u5"), "Walk", "Jump", SubResource("AnimationNodeStateMachineTransition_0wxtw"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_h7626"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_qjkrr"), "Downed", "Up", SubResource("AnimationNodeStateMachineTransition_msu2m"), "Up", "Idle", SubResource("AnimationNodeStateMachineTransition_swtt5"), "Up", "Jump", SubResource("AnimationNodeStateMachineTransition_mde7c"), "Downed", "Knockback", SubResource("AnimationNodeStateMachineTransition_2n6nx"), "Stun", "Idle", SubResource("AnimationNodeStateMachineTransition_d7n1s")]
-graph_offset = Vector2(-206, -379)
+graph_offset = Vector2(-35, 33)
 
 [sub_resource type="Animation" id="Animation_wgo52"]
 resource_name = "AtkHeavyLeft"
@@ -1693,8 +1694,8 @@ tracks/5/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_xkejy"]
-resource_name = "StunnedLeft"
-length = 0.5
+resource_name = "StunLeft"
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1769,8 +1770,8 @@ tracks/5/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_h7626"]
-resource_name = "StunnedRight"
-length = 0.5
+resource_name = "StunRight"
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -2171,21 +2172,30 @@ _data = {
 &"KnockbackLeft": SubResource("Animation_dt5te"),
 &"KnockbackRight": SubResource("Animation_6x8u5"),
 &"RESET": SubResource("Animation_by3ly"),
-&"StunnedLeft": SubResource("Animation_xkejy"),
-&"StunnedRight": SubResource("Animation_h7626"),
+&"StunLeft": SubResource("Animation_xkejy"),
+&"StunRight": SubResource("Animation_h7626"),
 &"UpLeft": SubResource("Animation_p8wg7"),
 &"UpRight": SubResource("Animation_swtt5"),
 &"WalkLeft": SubResource("Animation_wklcl"),
 &"WalkRight": SubResource("Animation_82rnm")
 }
 
-[node name="CharacterDefault" type="CharacterBody2D" unique_id=187010336 groups=["Entity", "Player"]]
+[node name="CharacterDefault" type="CharacterBody2D" unique_id=187010336 node_paths=PackedStringArray("DeathNode") groups=["Entity", "Player"]]
 position = Vector2(640, 320)
 collision_mask = 0
 script = ExtResource("1_tuyoq")
+DeathNode = NodePath("EnemyDeath")
 
-[node name="PlayerModule" type="Node" parent="." unique_id=1523449589]
+[node name="EnemyDeath" type="Node2D" parent="." unique_id=692307137]
+script = ExtResource("2_jpqlp")
+
+[node name="P1Moveset" type="Node2D" parent="." unique_id=2083798295]
+script = ExtResource("8_53s13")
+hitboxPacked = ExtResource("9_hpxot")
+
+[node name="PlayerModule" type="Node" parent="." unique_id=1523449589 node_paths=PackedStringArray("MovesetModule")]
 script = ExtResource("2_qlg0r")
+MovesetModule = NodePath("../P1Moveset")
 
 [node name="MovementModule" type="Node" parent="PlayerModule" unique_id=436468096]
 script = ExtResource("3_tuyoq")
@@ -2210,10 +2220,6 @@ script = ExtResource("7_fjrip")
 
 [node name="DamageModule" type="Node" parent="PlayerModule" unique_id=1311322983]
 script = ExtResource("7_bpow2")
-
-[node name="MovesetModule" type="Node" parent="PlayerModule" unique_id=1059847971]
-script = ExtResource("8_53s13")
-hitboxPacked = ExtResource("9_hpxot")
 
 [node name="AnimModule" type="Node" parent="PlayerModule" unique_id=1888741322]
 script = ExtResource("10_by3ly")
