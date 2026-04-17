@@ -20,8 +20,8 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_nbf47"]
 radius = 2000.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_elj56"]
-radius = 40.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_00ayx"]
+radius = 48.0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_flml4"]
 animation = &"AtkLeft"
@@ -1550,11 +1550,12 @@ script = ExtResource("11_n5vjp")
 [node name="AnimModule" type="Node" parent="PlayerModule" unique_id=755653304]
 script = ExtResource("12_37p6r")
 
-[node name="CollisionBox" type="CollisionShape2D" parent="." unique_id=1218981619]
-position = Vector2(0, -40)
-shape = SubResource("CircleShape2D_elj56")
+[node name="CollisionBox" type="CollisionShape2D" parent="." unique_id=146435598]
+z_index = 1
+position = Vector2(0, -64)
+shape = SubResource("CircleShape2D_00ayx")
 
-[node name="Sprite2D" type="Sprite2D" parent="CollisionBox" unique_id=1150470729]
+[node name="Sprite2D" type="Sprite2D" parent="CollisionBox" unique_id=1863763923]
 visible = false
 modulate = Color(1, 1, 1, 0.4745098)
 z_index = 50

@@ -22,7 +22,7 @@ func spawnEnemy(name: String, right: bool = true):
 		instance.MovingArea = Game.mapBoundry
 		instance.Camera = Game.gameCamera
 		addToList(instance)
-		add_child(instance)
+		call_deferred("add_child", instance)
 		return instance
 
 ################################################################################

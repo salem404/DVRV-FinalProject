@@ -43,6 +43,24 @@ var LANumber: int = 0
 @export var HAResetTime: float = 1.0
 var HANumber: int = 0
 
+@export_category("Air")
+@export var AirDamage: int = 30
+@export var AirKnockback: Vector3 = Vector3(200,20,0)
+@export var AirStuntime: float = 1
+
+@export var AirHitboxOffset: Vector3 = Vector3(80,0,-64)
+@export var AirHitboxintMovementDir: Vector3 = Vector3(0,0,0)
+@export var AirHitboxAccelerationDir: Vector3 = Vector3(0,0,0)
+@export var AirHitboxSize: int = 10
+@export var AirHitboxLifetime: float = 1
+
+@export var AirPlayerMovement: Vector3 = Vector3(0,20,0)
+@export var AirStartLagTime: float = 0
+@export var AirDebounceTime: float = 0.2
+@export var AirAnim: Array[String] = ["AtkLight1"]
+@export var AirResetTime: float = 1.0
+var AirNumber: int = 0
+
 func initialized():
 	playerModule = get_parent().PlayerModule
 
@@ -58,6 +76,7 @@ func lightAttack():
 	playerModule.StatusModule.applyDebounce(LADebounceTime[LANumber] + LAStartLagTime[LANumber])
 	playerModule.AnimModule.forceAnim(LAAnim[LANumber])
 	await get_tree().create_timer(LAStartLagTime[LANumber]).timeout
+	if playerModule.StatusModule.isStunned: return
 	
 	playerModule.MovementModule.applyForceV3(LAPlayerMovement[LANumber]*Vector3(lookDir,1,1))
 	spawnHitbox(lookDir, LAHitboxOffset[LANumber], LAHitboxintMovementDir[LANumber], LAHitboxAccelerationDir[LANumber], LAHitboxSize[LANumber], LAHitboxLifetime[LANumber], LADamage[LANumber], LAStuntime[LANumber], LAKnockback[LANumber])
@@ -75,10 +94,11 @@ func heavyAttack():
 	if 1 <= HANumber: return
 	
 	var lookDir = playerModule.StatusModule.lookDir
-	
+	# StartLag
 	playerModule.StatusModule.applyDebounce(HADebounceTime + HAStartLagTime)
 	playerModule.AnimModule.forceAnim(HAAnim[0])
 	await get_tree().create_timer(HAStartLagTime).timeout
+	# Mid Attack
 	if playerModule.StatusModule.isStunned: return
 	playerModule.AnimModule.forceAnim(HAAnim[1])
 	
@@ -88,6 +108,7 @@ func heavyAttack():
 	
 	HANumber += 1
 	var befAtkN = HANumber
+	# Endlag
 	await get_tree().create_timer(HADebounceTime).timeout
 	playerModule.AnimModule.resetAnim()
 	
@@ -95,6 +116,33 @@ func heavyAttack():
 	if befAtkN == HANumber:
 		HANumber = 0
 
+func airAttack():
+	if 1 <= AirNumber: return
+
+	var lookDir = playerModule.StatusModule.lookDir
+	# StartLag
+	playerModule.StatusModule.applyDebounce(AirDebounceTime + AirStartLagTime)
+	playerModule.AnimModule.forceAnim(AirAnim[0])
+	await get_tree().create_timer(AirStartLagTime).timeout
+
+	# Mid Attack
+	if playerModule.StatusModule.isStunned: return
+
+	playerModule.MovementModule.applyForceV3(AirPlayerMovement * Vector3(lookDir,1,1))
+
+	spawnHitbox(lookDir, AirHitboxOffset, AirHitboxintMovementDir, AirHitboxAccelerationDir, AirHitboxSize, AirHitboxLifetime, AirDamage, AirStuntime, AirKnockback)
+
+	AirNumber += 1
+	var befAtkN = AirNumber
+
+	# Endlag
+	await get_tree().create_timer(AirDebounceTime).timeout
+	playerModule.AnimModule.resetAnim()
+
+	await get_tree().create_timer(AirResetTime).timeout
+	if befAtkN == AirNumber:
+		AirNumber = 0
+	
 ################################################################################
 #####                              Utility                                 #####
 ################################################################################
@@ -110,7 +158,7 @@ func spawnHitbox(lookDir, positionOffset, intMovementDir, AccelerationDir, scale
 	hitbox.position = player.position + Vector2(offset[0]*lookDir,offset[2]-offset[1])
 	hitbox.intMovementDir = intMovementDir*Vector3(lookDir,1,1)
 	hitbox.AccelerationDir = AccelerationDir*Vector3(lookDir,1,1)
-	hitbox.height = offset[1]
+	hitbox.height = playerModule.HeightModule.height + offset[1]
 	hitbox.scale *= scale
 	hitbox.lifeTime = lifetime
 	hitbox.damage = damage

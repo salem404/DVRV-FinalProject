@@ -16,8 +16,8 @@
 [ext_resource type="Script" uid="uid://c5vqkq5gad78e" path="res://scripts/Game/Character/height_module.gd" id="11_00enb"]
 [ext_resource type="Texture2D" uid="uid://d10n42b6hgrec" path="res://images/Player/P1 Spritesheet.png" id="14_00enb"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_bpow2"]
-radius = 32.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_jpqlp"]
+radius = 40.0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wgo52"]
 animation = &"AtkHeavyLeft"
@@ -2224,16 +2224,17 @@ script = ExtResource("7_bpow2")
 [node name="AnimModule" type="Node" parent="PlayerModule" unique_id=1888741322]
 script = ExtResource("10_by3ly")
 
-[node name="CollisionBox" type="CollisionShape2D" parent="." unique_id=837465960]
-position = Vector2(0, -32)
-shape = SubResource("CircleShape2D_bpow2")
+[node name="CollisionBox" type="CollisionShape2D" parent="." unique_id=94871496]
+z_index = 1
+position = Vector2(0, -64)
+shape = SubResource("CircleShape2D_jpqlp")
 
-[node name="Sprite2D" type="Sprite2D" parent="CollisionBox" unique_id=1033437663]
+[node name="Sprite2D" type="Sprite2D" parent="CollisionBox" unique_id=1229467001]
 visible = false
 modulate = Color(1, 1, 1, 0.4745098)
 z_index = 50
-position = Vector2(-1.9073486e-05, -9.536743e-07)
-scale = Vector2(0.12800008, 0.128)
+position = Vector2(-1.9550323e-05, -1.4305115e-06)
+scale = Vector2(0.15999985, 0.15999976)
 texture = ExtResource("9_wrl72")
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1860208575]
