@@ -10,17 +10,24 @@ var heightSpeed: float
 #####                             Functions                                #####
 ################################################################################
 
-func setHeight(node: Node2D, offset: float):
-	node.position.y = -height + offset
+func setHeight(newHeight: float):
+	height = newHeight
+	setOnAir()
+
+func addHeight(newHeight: float):
+	setHeight(newHeight-height)
 
 func jump(jPower: float):
 	height += 1
 	heightSpeed = jPower
-	playerModule.StatusModule.onAir = true
+	setOnAir()
 
 ################################################################################
 #####                              Utility                                 #####
 ################################################################################
+
+func setOnAir():
+	playerModule.StatusModule.onAir = true
 
 func heightProcess(delta):
 	if not playerModule:
@@ -29,8 +36,8 @@ func heightProcess(delta):
 		
 	if playerModule.StatusModule.onAir:
 		calculateHeight()
-		setHeight(playerModule.charVisual, playerModule.charAnimOgOffset)
-		setHeight(playerModule.charCollision, playerModule.charCollisionOgOffset)
+		setPosY(playerModule.charVisual, playerModule.charAnimOgOffset)
+		setPosY(playerModule.charCollision, playerModule.charCollisionOgOffset)
 		
 	var shadowSize: float = lerp(0.0, 1.0, 1/(height/100+1))
 	playerModule.charShadow.scale = playerModule.charShadowOgSize * shadowSize
@@ -44,3 +51,7 @@ func calculateHeight():
 		playerModule.StatusModule.onAir = false
 		
 	height += heightSpeed;
+
+func setPosY(node: Node2D, offset: float):
+	var newPosY = -height + offset
+	node.position.y = newPosY if newPosY < 0 else 0

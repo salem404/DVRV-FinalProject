@@ -1565,8 +1565,8 @@ texture = ExtResource("13_38mpw")
 [node name="Shadow" type="Sprite2D" parent="." unique_id=741059315]
 modulate = Color(1, 1, 1, 0.19607843)
 z_index = -1
-position = Vector2(0, -4.5)
-scale = Vector2(0.8, 0.5700001)
+position = Vector2(0, -4)
+scale = Vector2(0.5684207, 0.40499982)
 texture = ExtResource("14_6ns33")
 
 [node name="Visual" type="Node2D" parent="." unique_id=2038600900]

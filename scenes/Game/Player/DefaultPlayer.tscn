@@ -2242,8 +2242,8 @@ position = Vector2(80, -64)
 [node name="Shadow" type="Sprite2D" parent="." unique_id=534287080]
 modulate = Color(1, 1, 1, 0.19607843)
 z_index = -1
-position = Vector2(0, -4.5)
-scale = Vector2(0.8, 0.5700001)
+position = Vector2(6.67572e-06, -2.9999995)
+scale = Vector2(0.5614033, 0.3999999)
 texture = ExtResource("8_khinc")
 
 [node name="Visual" type="Node2D" parent="." unique_id=581879238]
