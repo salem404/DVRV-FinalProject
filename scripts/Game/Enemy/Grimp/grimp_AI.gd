@@ -17,7 +17,7 @@ var behavior: int = 0
 var targetOffset: Vector2 = Vector2.ZERO
 
 @export_category("Mode 2 = Attack")
-@export var atkDistKeep: Vector2 = Vector2(150,20)
+@export var atkDistKeep: Vector2 = Vector2(150,30)
 @export var waitUntilAttack: float = 1
 # 0 - Nothing
 # 1 - Move closer
@@ -29,7 +29,7 @@ func _ready():
 		if isBusy:
 			await get_tree().process_frame
 			continue
-		#behavior = 0
+		#behavior = 1
 		behavior = randi_range(1, 2) if behavior == 0 else randi_range(0, 2)
 		if behavior == 1:
 			targetOffset = Vector2(randi_range(-50,200),randi_range(-200,200))
@@ -50,7 +50,11 @@ func _process(delta):
 				if posDist.x > distOffset.x or posDist.y > distOffset.y:
 					moveToPlayer(closest, targetOffset)
 				elif posDist.x < distOffset.x-distKeepSize.x and posDist.y < distOffset.y-distKeepSize.y:
-					moveFromPlayer(closest)
+					if posDist.x < atkDistKeep.x and posDist.y < atkDistKeep.y:
+						moveToPlayer(closest)
+						useLightAttack()
+					else:
+						moveFromPlayer(closest)
 			2:
 				
 				if posDist.x > atkDistKeep.x or posDist.y > atkDistKeep.y:

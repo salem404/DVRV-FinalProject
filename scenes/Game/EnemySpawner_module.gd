@@ -4,10 +4,7 @@ extends Node2D
 
 @onready var Game: Node2D = get_parent()
 
-func _ready():
-	while true:
-		await get_tree().create_timer(5.0).timeout
-		spawnEnemy("Grimp", true)
+var spawnedEnemies: Array[Node2D] = []
 
 ################################################################################
 #####                             Functions                                #####
@@ -24,10 +21,17 @@ func spawnEnemy(name: String, right: bool = true):
 		instance.position = Game.gameCamera.position + (Vector2(1000,0) if right else Vector2(-1000,0))
 		instance.MovingArea = Game.mapBoundry
 		instance.Camera = Game.gameCamera
+		addToList(instance)
 		add_child(instance)
-		print("spawned")
-	
+		return instance
 
 ################################################################################
 #####                              Utility                                 #####
 ################################################################################
+
+func addToList(enemy: Node2D):
+	spawnedEnemies.append(enemy)
+	enemy.dead.connect(removeFromList)
+
+func removeFromList(enemy: Node2D):
+	spawnedEnemies.erase(enemy)
