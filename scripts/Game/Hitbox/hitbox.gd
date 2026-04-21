@@ -1,6 +1,7 @@
 extends Area2D
 
 signal initialized()
+signal hit(this: Node2D)
 
 @export var showHitbox: bool = false
 
@@ -23,11 +24,16 @@ func _ready():
 	$HitboxMovementModule.intMovementDir = intMovementDir
 	$HitboxMovementModule.AccelerationDir = AccelerationDir
 	$HitboxSprite.visible = showHitbox
+	$ImaginaryHitboxShower.visible = showHitbox
 	$HitboxModule.damage = damage
 	$HitboxModule.height = height
 	$HitboxModule.stuntime = stuntime
 	$HitboxModule.knockback = knockback
 	$HitboxModule.targetsAmount = targetsAmount
 	$HitboxModule.friendGroups = friendGroups
+	$HitboxModule.callOnHit = "sendHitSignal"
 	$LifetimeModule.lifeTime = lifeTime
 	initialized.emit()
+
+func sendHitSignal():
+	hit.emit(self)

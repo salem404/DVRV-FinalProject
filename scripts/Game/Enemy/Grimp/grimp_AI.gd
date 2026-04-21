@@ -122,14 +122,6 @@ func useLightAttack():
 		playerModule.InputModule.lightAttack = false
 		isBusy = false
 
-func useHeavyAttack():
-	if playerModule.InputModule.heavyAttack == false:
-		playerModule.InputModule.heavyAttack = true
-		isBusy = true
-		await get_tree().create_timer(0.1).timeout
-		playerModule.InputModule.heavyAttack = false
-		isBusy = false
-
 ################################################################################
 #####                              Signals                                 #####
 ################################################################################

@@ -50,7 +50,8 @@ func lightAttack():
 	HANumber += 1
 	var befAtkN = HANumber
 	await get_tree().create_timer(MeDebounceTime).timeout
-	playerModule.AnimModule.resetAnim()
+	if !playerModule.StatusModule.isStunned:
+		playerModule.AnimModule.resetAnim()
 	
 	await get_tree().create_timer(MeResetTime).timeout
 	if befAtkN == HANumber:

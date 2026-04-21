@@ -9,6 +9,7 @@ extends Node
 @export var knockback: Vector3
 @export var targetsAmount: int = 500
 @export var friendGroups: Array[StringName]
+@export var callOnHit: String
 
 var inside: Array[CharacterBody2D] = []
 var hitted: Array[CharacterBody2D] = []
@@ -19,12 +20,13 @@ func _ready():
 
 func _process(delta):
 	for target in inside:
-		if isTrulyIn(target):
+		if isTrulyIn(target) and not hitted.has(target):
 			target.PlayerModule.DamageModule.takeDamage(damage,stuntime,knockback)
+			if Callable(this, callOnHit):
+				Callable(this, callOnHit).call()
 			hitted.append(target)
 			inside.erase(target)
 			if hitted.size() >= targetsAmount:
-				print("MAX")
 				get_parent().queue_free()
 
 ################################################################################
