@@ -170,8 +170,8 @@ advance_condition = &"!Stun"
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_vr0ft"]
 states/Atk/node = SubResource("AnimationNodeBlendSpace1D_pn36o")
 states/Atk/position = Vector2(242, -184)
-states/AtkSlag/node = SubResource("AnimationNodeBlendSpace1D_flml4")
-states/AtkSlag/position = Vector2(91, -184)
+states/AtkSLag/node = SubResource("AnimationNodeBlendSpace1D_flml4")
+states/AtkSLag/position = Vector2(91, -184)
 states/Downed/node = SubResource("AnimationNodeBlendSpace1D_xkejy")
 states/Downed/position = Vector2(297, 226)
 states/Idle/node = SubResource("AnimationNodeBlendSpace1D_jpqlp")
@@ -188,7 +188,7 @@ states/Up/position = Vector2(297, 100)
 states/Walk/node = SubResource("AnimationNodeBlendSpace1D_wklcl")
 states/Walk/position = Vector2(633, -29)
 transitions = ["Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_00enb"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_jpqlp"), "Stun", "Knockback", SubResource("AnimationNodeStateMachineTransition_dt5te"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_by3ly"), "Knockback", "Downed", SubResource("AnimationNodeStateMachineTransition_6x8u5"), "Downed", "Up", SubResource("AnimationNodeStateMachineTransition_msu2m"), "Up", "Idle", SubResource("AnimationNodeStateMachineTransition_swtt5"), "Downed", "Knockback", SubResource("AnimationNodeStateMachineTransition_2n6nx"), "Stun", "Idle", SubResource("AnimationNodeStateMachineTransition_d7n1s")]
-graph_offset = Vector2(-140, -94)
+graph_offset = Vector2(-140, -276)
 
 [sub_resource type="Animation" id="Animation_ynu68"]
 resource_name = "AtkLeft"
@@ -1588,7 +1588,7 @@ parameters/conditions/Idle = false
 parameters/conditions/Knockback = false
 parameters/conditions/Walking = false
 parameters/Atk/blend_position = 0.0
-parameters/AtkSlag/blend_position = 0.0
+parameters/AtkSLag/blend_position = 0.0
 parameters/Downed/blend_position = 0.0
 parameters/Idle/blend_position = 0.0
 parameters/Knockback/blend_position = 0.0

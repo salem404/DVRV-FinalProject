@@ -15,15 +15,11 @@ var behavior: int = 0
 @export var runDistKeep: Vector2 = Vector2(400,100)
 
 
-@export_category("Mode 1 = Move Towards")
-@export var distKeep: Vector2 = Vector2(300,100)
-@export var distKeepSize: Vector2 = Vector2(50,20)
-
-var targetOffset: Vector2 = Vector2.ZERO
+@export_category("Mode 1 = Attack")
+@export var atkDistKeep: Vector2 = Vector2(150,30)
 
 @export_category("Mode 2 = Attack")
-@export var atkDistKeep: Vector2 = Vector2(150,30)
-@export var waitUntilAttack: float = 1
+
 # 0 - Nothing
 # 1 - Move closer
 # 1 - Attack
@@ -36,8 +32,7 @@ func _ready():
 			continue
 		behavior = 1
 		#behavior = randi_range(1, 2) if behavior == 0 else randi_range(0, 2)
-		if behavior == 1:
-			targetOffset = Vector2(randi_range(-50,200),randi_range(-200,200))
+		
 		await get_tree().create_timer(randf_range(waitTimeRange.x,waitTimeRange.y)).timeout
 		
 
@@ -47,18 +42,13 @@ func _process(delta):
 	var closest = findClosestTarget()
 	if closest:
 		var posDist = abs(closest.position - this.position) 
-		var distOffset = distKeep + targetOffset
 		match behavior:
-			0:
-				pass
 			1:
-				if posDist.x > distKeep.x or posDist.y > distKeep.y:
+				if posDist.x > atkDistKeep.x or posDist.y > atkDistKeep.y:
 					moveToPlayer(closest)
 				else:
-					behavior = 0
-			2:
-				pass
-	print(behavior)
+					useLightAttack()
+					
 	
 	
 ################################################################################
@@ -104,6 +94,11 @@ func findClosestTarget():
 	return closest
 		
 
+func waitTime(time: float):
+	isBusy = true
+	await get_tree().create_timer(time).timeout
+	isBusy = false
+	
 ################################################################################
 #####                              Attacks                                 #####
 ################################################################################

@@ -19,7 +19,7 @@ extends Node2D
 @export var MeHitboxLifetime: float = 0.1
 
 @export var MePlayerMovement: Vector3 = Vector3(300,1,0)
-@export var MeStartLagTime: float = 0.2
+@export var MeStartLagTime: float = 0.5
 @export var MeDebounceTime: float = 0.2
 @export var MeAnim: Array[String] = ["AtkSLag", "Atk"]
 @export var MeResetTime: float = 1.0

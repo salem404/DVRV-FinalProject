@@ -31,8 +31,10 @@ func _ready():
 			continue
 		#behavior = 1
 		behavior = randi_range(1, 2) if behavior == 0 else randi_range(0, 2)
+		
 		if behavior == 1:
 			targetOffset = Vector2(randi_range(-50,200),randi_range(-200,200))
+		
 		await get_tree().create_timer(randf_range(waitTimeRange.x,waitTimeRange.y)).timeout
 		
 
