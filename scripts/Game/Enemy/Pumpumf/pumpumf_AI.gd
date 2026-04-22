@@ -1,7 +1,7 @@
 extends Node2D
 
 @export_category("General")
-@export var waitTimeRange: Vector2 = Vector2(1,3)
+@export var waitTimeRange: Vector2 = Vector2(1,2)
 
 @onready var this: Node = get_parent()
 @onready var playerModule: Node = this.get_node("PlayerModule")
@@ -17,8 +17,11 @@ var behavior: int = 0
 
 @export_category("Mode 1 = Attack")
 @export var atkDistKeep: Vector2 = Vector2(150,30)
+@export var atkEndlagWait: Vector2 = Vector2(1.0,3.0)
 
-@export_category("Mode 2 = Attack")
+@export_category("Mode 2 = Grapple")
+@export var grapDistKeep: Vector2 = Vector2(400,30)
+@export var grapEndlagWait: Vector2 = Vector2(1.0,3.0)
 
 # 0 - Nothing
 # 1 - Move closer
@@ -30,14 +33,15 @@ func _ready():
 		if isBusy:
 			await get_tree().process_frame
 			continue
-		behavior = 1
-		#behavior = randi_range(1, 2) if behavior == 0 else randi_range(0, 2)
+		#behavior = 2
+		behavior = randi_range(1, 2)
 		
 		await get_tree().create_timer(randf_range(waitTimeRange.x,waitTimeRange.y)).timeout
 		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if isBusy: return
 	playerModule.InputModule.movement = Vector2.ZERO
 	var closest = findClosestTarget()
 	if closest:
@@ -47,14 +51,28 @@ func _process(delta):
 				if posDist.x > atkDistKeep.x or posDist.y > atkDistKeep.y:
 					moveToPlayer(closest)
 				else:
-					useLightAttack()
-					
+					lookPlayer(closest)
+					await useLightAttack()
+					waitTime(randf_range(atkEndlagWait.x,atkEndlagWait.y))
+			2:
+				if posDist.x > grapDistKeep.x or posDist.y > grapDistKeep.y:
+					moveToPlayer(closest)
+				else:
+					lookPlayer(closest)
+					await useGrappleAttack()
+					waitTime(randf_range(grapEndlagWait.x,grapEndlagWait.y))
 	
 	
 ################################################################################
 #####                              Utility                                 #####
 ################################################################################
 
+func lookPlayer(target: CharacterBody2D):
+	if target.position.x > this.position.x:
+		playerModule.StatusModule.setLookDir(1)
+	elif target.position.x < this.position.x:
+		playerModule.StatusModule.setLookDir(-1)
+	
 func moveToPlayer(target: CharacterBody2D, offset: Vector2 = Vector2.ZERO):
 	var targetPos = target.position + offset
 	moveSameHorizontal(targetPos.x)
@@ -111,6 +129,14 @@ func useLightAttack():
 		playerModule.InputModule.lightAttack = false
 		isBusy = false
 
+func useGrappleAttack():
+	if playerModule.InputModule.heavyAttack == false:
+		playerModule.InputModule.heavyAttack = true
+		isBusy = true
+		await get_tree().create_timer(0.1).timeout
+		playerModule.InputModule.heavyAttack = false
+		isBusy = false
+		
 ################################################################################
 #####                              Signals                                 #####
 ################################################################################

@@ -2237,9 +2237,6 @@ position = Vector2(-1.9550323e-05, -1.4305115e-06)
 scale = Vector2(0.15999985, 0.15999976)
 texture = ExtResource("9_wrl72")
 
-[node name="Marker2D" type="Marker2D" parent="." unique_id=1860208575]
-position = Vector2(80, -64)
-
 [node name="Shadow" type="Sprite2D" parent="." unique_id=534287080]
 modulate = Color(1, 1, 1, 0.19607843)
 z_index = -1

@@ -58,12 +58,16 @@ func lightAttack():
 		HANumber = 0
 
 ################################################################################
-#####                              Utility                                 #####
+#####                           Attack Parts                               #####
 ################################################################################
 
 
 
-func spawnHitbox(lookDir, positionOffset, intMovementDir, AccelerationDir, scale, lifetime, damage, stuntime, knockback, dmgSelf: bool = false):
+################################################################################
+#####                              Utility                                 #####
+################################################################################
+
+func spawnHitbox(lookDir, positionOffset, intMovementDir, AccelerationDir, scale, lifetime, damage, stuntime, knockback, dmgSelf: bool = false, followParent: bool = false):
 	var hitbox = hitboxPacked.instantiate()
 	if not dmgSelf:
 		hitbox.friendGroups = player.get_groups() if not dmgSelf else []
@@ -79,3 +83,4 @@ func spawnHitbox(lookDir, positionOffset, intMovementDir, AccelerationDir, scale
 	hitbox.stuntime = stuntime
 	hitbox.knockback = knockback*Vector3(lookDir,1,1)
 	add_child(hitbox)
+	return hitbox

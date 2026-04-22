@@ -62,11 +62,18 @@ func applyForce(force: Vector2, height: float):
 	character.velocity.x += force.x
 	character.velocity.y += force.y
 	playerModule.HeightModule.jump(height)
-	
-	playerModule.StatusModule.isMoving = true
+	if height != 0:
+		playerModule.StatusModule.isMoving = true
 
 func applyForceV3(force: Vector3):
 	applyForce(Vector2(force.x,force.z), force.y)
+
+func setForce(force: Vector2, height: float):
+	applyForce(force-character.velocity, height)
+
+func setForceV3(force: Vector3):
+	setForce(Vector2(force.x,force.z), force.y)
+	
 
 ################################################################################
 #####                              Utility                                 #####

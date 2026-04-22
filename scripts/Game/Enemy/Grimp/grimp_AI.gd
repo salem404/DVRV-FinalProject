@@ -53,7 +53,7 @@ func _process(delta):
 					moveToPlayer(closest, targetOffset)
 				elif posDist.x < distOffset.x-distKeepSize.x and posDist.y < distOffset.y-distKeepSize.y:
 					if posDist.x < atkDistKeep.x and posDist.y < atkDistKeep.y:
-						moveToPlayer(closest)
+						lookPlayer(closest)
 						useLightAttack()
 					else:
 						moveFromPlayer(closest)
@@ -64,7 +64,7 @@ func _process(delta):
 				else:
 					await get_tree().create_timer(waitUntilAttack).timeout
 					if posDist.x < atkDistKeep.x and posDist.y < atkDistKeep.y:
-						moveToPlayer(closest)
+						lookPlayer(closest)
 						useLightAttack()
 	pass
 	
@@ -73,6 +73,12 @@ func _process(delta):
 #####                              Utility                                 #####
 ################################################################################
 
+func lookPlayer(target: CharacterBody2D):
+	if target.position.x > this.position.x:
+		playerModule.StatusModule.setLookDir(1)
+	elif target.position.x < this.position.x:
+		playerModule.StatusModule.setLookDir(-1)
+		
 func moveToPlayer(target: CharacterBody2D, offset: Vector2 = Vector2.ZERO):
 	var targetPos = target.position + offset
 	moveSameHorizontal(targetPos.x)
