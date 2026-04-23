@@ -24,10 +24,6 @@ var behavior: int = 0
 @export var grapDistKeep: Vector2 = Vector2(400,30)
 @export var grapEndlagWait: Vector2 = Vector2(1.0,3.0)
 
-# 0 - Nothing
-# 1 - Move closer
-# 1 - Attack
-
 func _ready():
 	await get_tree().create_timer(0.2).timeout
 	while true:

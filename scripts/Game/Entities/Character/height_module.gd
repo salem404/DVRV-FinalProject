@@ -10,6 +10,12 @@ var heightSpeed: float
 #####                             Functions                                #####
 ################################################################################
 
+func jump(jPower: float):
+	if height <= 0:
+		height += 1
+	heightSpeed = jPower
+	setOnAir()
+	
 func setHeight(newHeight: float):
 	height = newHeight
 	setOnAir()
@@ -17,11 +23,9 @@ func setHeight(newHeight: float):
 func addHeight(newHeight: float):
 	setHeight(newHeight-height)
 
-func jump(jPower: float):
-	height += 1
-	heightSpeed = jPower
-	setOnAir()
-
+func addHeightSpeed(newHeightSpeed: float):
+	jump(newHeightSpeed+heightSpeed)
+	
 ################################################################################
 #####                              Utility                                 #####
 ################################################################################

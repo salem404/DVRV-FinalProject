@@ -23,8 +23,8 @@ func _ready():
 
 func wave1():
 	setCameraFollow(false)
-	EnemiesNode.spawnEnemy("Pumpumf")
-	EnemiesNode.spawnEnemy("Grimp")
+	EnemiesNode.spawnEnemy("Flyby")
+	#EnemiesNode.spawnEnemy("Grimp")
 	waitUntilEnemyClear()
 	pass
 
