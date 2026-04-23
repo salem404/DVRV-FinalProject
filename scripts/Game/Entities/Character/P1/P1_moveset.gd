@@ -3,6 +3,7 @@ extends Node
 @export var hitboxPacked: PackedScene
 @onready var player: Node = get_parent()
 @onready var playerModule: Node = get_parent().PlayerModule
+@onready var movesetUtils: Node = $MovesetUtils
 
 @export var intMovementDir: Vector3
 @export var AccelerationDir: Vector3
@@ -65,7 +66,7 @@ var HANumber: int = 0
 var AirNumber: int = 0
 var AirHitNumber: int = 0
 
-func initialized():
+func _initialized():
 	playerModule = get_parent().PlayerModule
 
 ################################################################################
@@ -83,7 +84,7 @@ func lightAttack():
 	if playerModule.StatusModule.isStunned: return
 	
 	playerModule.MovementModule.applyForceV3(LAPlayerMovement[LANumber]*Vector3(lookDir,1,1))
-	spawnHitbox(lookDir, LAHitboxOffset[LANumber], LAHitboxintMovementDir[LANumber], LAHitboxAccelerationDir[LANumber], LAHitboxSize[LANumber], LAHitboxLifetime[LANumber], LADamage[LANumber], LAStuntime[LANumber], LAKnockback[LANumber])
+	movesetUtils.spawnHitbox(lookDir, LAHitboxOffset[LANumber], LAHitboxintMovementDir[LANumber], LAHitboxAccelerationDir[LANumber], LAHitboxSize[LANumber], LAHitboxLifetime[LANumber], LADamage[LANumber], LAStuntime[LANumber], LAKnockback[LANumber])
 	
 	LANumber += 1
 	var befAtkN = LANumber
@@ -109,7 +110,7 @@ func heavyAttack():
 	
 	playerModule.MovementModule.applyForceV3(HAPlayerMovement*Vector3(lookDir,1,1))
 	
-	spawnHitbox(lookDir, HAHitboxOffset, HAHitboxintMovementDir, HAHitboxAccelerationDir, HAHitboxSize, HAHitboxLifetime, HADamage, HAStuntime, HAKnockback)
+	movesetUtils.spawnHitbox(lookDir, HAHitboxOffset, HAHitboxintMovementDir, HAHitboxAccelerationDir, HAHitboxSize, HAHitboxLifetime, HADamage, HAStuntime, HAKnockback)
 	
 	HANumber += 1
 	var befAtkN = HANumber
@@ -136,7 +137,7 @@ func airAttack():
 
 	playerModule.MovementModule.applyForceV3(AirPlayerMovement * Vector3(lookDir,1,1))
 
-	var hitbox = spawnHitbox(lookDir, AirHitboxOffset, AirHitboxintMovementDir, AirHitboxAccelerationDir, AirHitboxSize, AirHitboxLifetime, AirDamage, AirStuntime, AirKnockback)
+	var hitbox = movesetUtils.spawnHitbox(lookDir, AirHitboxOffset, AirHitboxintMovementDir, AirHitboxAccelerationDir, AirHitboxSize, AirHitboxLifetime, AirDamage, AirStuntime, AirKnockback)
 	hitbox.hit.connect(airAttackHit)
 	AirNumber += 1
 	var befAtkN = AirNumber
@@ -157,28 +158,3 @@ func airAttackHit(hitbox: Area2D):
 	playerModule.MovementModule.applyForceV3(AirHitPlayerMovement * Vector3(lookDir,1,1))
 	AirHitNumber += 1
 	print("hi")
-	
-	
-################################################################################
-#####                              Utility                                 #####
-################################################################################
-
-
-
-func spawnHitbox(lookDir, positionOffset, intMovementDir, AccelerationDir, scale, lifetime, damage, stuntime, knockback, dmgSelf: bool = false):
-	var hitbox = hitboxPacked.instantiate()
-	if not dmgSelf:
-		hitbox.friendGroups = player.get_groups() if not dmgSelf else []
-	
-	var offset = positionOffset
-	hitbox.position = player.position + Vector2(offset[0]*lookDir,offset[2]-offset[1])
-	hitbox.intMovementDir = intMovementDir*Vector3(lookDir,1,1)
-	hitbox.AccelerationDir = AccelerationDir*Vector3(lookDir,1,1)
-	hitbox.height = playerModule.HeightModule.height + offset[1]
-	hitbox.scale *= scale
-	hitbox.lifeTime = lifetime
-	hitbox.damage = damage
-	hitbox.stuntime = stuntime
-	hitbox.knockback = knockback*Vector3(lookDir,1,1)
-	add_child(hitbox)
-	return hitbox

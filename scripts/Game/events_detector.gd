@@ -24,13 +24,7 @@ func _ready():
 func wave1():
 	setCameraFollow(false)
 	EnemiesNode.spawnEnemy("Pumpumf")
-	await get_tree().create_timer(0.5).timeout
-	EnemiesNode.spawnEnemy("Pumpumf")
-	await get_tree().create_timer(0.5).timeout
-	EnemiesNode.spawnEnemy("Pumpumf")
-	await get_tree().create_timer(0.5).timeout
-	EnemiesNode.spawnEnemy("Pumpumf")
-	await get_tree().create_timer(0.5).timeout
+	EnemiesNode.spawnEnemy("Grimp")
 	waitUntilEnemyClear()
 	pass
 

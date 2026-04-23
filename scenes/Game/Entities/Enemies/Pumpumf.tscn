@@ -1,18 +1,13 @@
 [gd_scene format=3 uid="uid://di32326qpsycx"]
 
-[ext_resource type="Script" uid="uid://dbjji30kw3c0f" path="res://scripts/Game/Character/playerPhysics.gd" id="1_ecl5d"]
-[ext_resource type="Script" uid="uid://x6oifdqj03x5" path="res://scripts/Game/Enemy/enemy_death.gd" id="2_mtgve"]
-[ext_resource type="Script" uid="uid://cjok1x53h0sx7" path="res://scenes/Game/Enemies/pumpumf_Moveset.gd" id="3_gmxhq"]
+[ext_resource type="Script" uid="uid://dbjji30kw3c0f" path="res://scripts/Game/Entities/Character/playerPhysics.gd" id="1_ecl5d"]
+[ext_resource type="Script" uid="uid://x6oifdqj03x5" path="res://scripts/Game/Entities/Enemy/enemy_death.gd" id="2_mtgve"]
+[ext_resource type="Script" uid="uid://cjok1x53h0sx7" path="res://scripts/Game/Entities/Enemy/Pumpumf/pumpumf_Moveset.gd" id="3_gmxhq"]
 [ext_resource type="PackedScene" uid="uid://pyc48swcdrki" path="res://scenes/Game/Attacks/hitbox.tscn" id="4_3b4iv"]
-[ext_resource type="Script" uid="uid://bxovv4m35we40" path="res://scripts/Game/Enemy/Pumpumf/pumpumf_AI.gd" id="5_ecl5d"]
-[ext_resource type="Script" uid="uid://b6mwl4d2vgyxp" path="res://scripts/Game/Character/player_module.gd" id="6_yjywj"]
-[ext_resource type="Script" uid="uid://buig5yjiwsaiy" path="res://scripts/Game/Character/movement_module.gd" id="7_165e6"]
-[ext_resource type="Script" uid="uid://c5vqkq5gad78e" path="res://scripts/Game/Character/height_module.gd" id="8_s0f7e"]
-[ext_resource type="Script" uid="uid://8dvmgdhmovjw" path="res://scripts/Game/Player/input_module.gd" id="9_mh76h"]
-[ext_resource type="Script" uid="uid://cp8p2ixqhldlj" path="res://scripts/Game/Character/status_module.gd" id="10_157nu"]
-[ext_resource type="Script" uid="uid://bko02gl3dtcuq" path="res://scripts/Game/Character/stats_module.gd" id="11_gqcby"]
-[ext_resource type="Script" uid="uid://ccous1xf0ya2n" path="res://scripts/Game/Character/damage_module.gd" id="12_gd244"]
-[ext_resource type="Script" uid="uid://b3t5n7l6qx052" path="res://scripts/Game/Player/anim_module.gd" id="13_nmt3y"]
+[ext_resource type="Script" uid="uid://bxovv4m35we40" path="res://scripts/Game/Entities/Enemy/Pumpumf/pumpumf_AI.gd" id="5_ecl5d"]
+[ext_resource type="Script" uid="uid://c73wj7hcloodd" path="res://scripts/Game/Entities/moveset_utils.gd" id="5_gv3ce"]
+[ext_resource type="Script" uid="uid://clkkjr4bwsqf1" path="res://scripts/Game/Entities/Enemy/AI_Utilities.gd" id="6_mtgve"]
+[ext_resource type="PackedScene" uid="uid://calalwud0205g" path="res://scenes/Game/Entities/player_module.tscn" id="8_wbeby"]
 [ext_resource type="Texture2D" uid="uid://bwf0hdksn75fq" path="res://images/Circle.png" id="14_oabrq"]
 [ext_resource type="Texture2D" uid="uid://de8xycmp1afo4" path="res://images/Entities/shadow.png" id="15_6sufx"]
 [ext_resource type="Texture2D" uid="uid://cy54bepm6txdu" path="res://images/Entities/Enemies/Pumpumf Spritesheet.png" id="16_ecl5d"]
@@ -2387,14 +2382,18 @@ collision_mask = 0
 script = ExtResource("1_ecl5d")
 DeathNode = NodePath("EnemyDeath")
 
-[node name="EnemyDeath" type="Node2D" parent="." unique_id=1369617905]
+[node name="EnemyDeath" type="Node" parent="." unique_id=938863537]
 script = ExtResource("2_mtgve")
 
-[node name="PumppufMoveset" type="Node2D" parent="." unique_id=581841300]
+[node name="PumppufMoveset" type="Node" parent="." unique_id=869671624]
 script = ExtResource("3_gmxhq")
 hitboxPacked = ExtResource("4_3b4iv")
 
-[node name="AIModule" type="Node2D" parent="." unique_id=1351280651]
+[node name="MovesetUtils" type="Node" parent="PumppufMoveset" unique_id=377202206]
+script = ExtResource("5_gv3ce")
+hitboxPacked = ExtResource("4_3b4iv")
+
+[node name="AIModule" type="Node2D" parent="." unique_id=1082707025]
 script = ExtResource("5_ecl5d")
 
 [node name="AiRange" type="Area2D" parent="AIModule" unique_id=495530485]
@@ -2405,38 +2404,11 @@ position = Vector2(-632, -256)
 shape = SubResource("CircleShape2D_nbf47")
 debug_color = Color(0.62, 0.41333336, 0, 0.039215688)
 
-[node name="PlayerModule" type="Node" parent="." unique_id=651865372 node_paths=PackedStringArray("MovesetModule")]
-script = ExtResource("6_yjywj")
+[node name="AIUtils" type="Node" parent="AIModule" unique_id=1241556973]
+script = ExtResource("6_mtgve")
+
+[node name="PlayerModule" parent="." unique_id=1088861868 node_paths=PackedStringArray("MovesetModule") instance=ExtResource("8_wbeby")]
 MovesetModule = NodePath("../PumppufMoveset")
-
-[node name="MovementModule" type="Node" parent="PlayerModule" unique_id=1998603810]
-script = ExtResource("7_165e6")
-
-[node name="HeightModule" type="Node" parent="PlayerModule" unique_id=1271522158]
-script = ExtResource("8_s0f7e")
-
-[node name="InputModule" type="Node" parent="PlayerModule" unique_id=969251775]
-script = ExtResource("9_mh76h")
-active = false
-
-[node name="StatusModule" type="Node" parent="PlayerModule" unique_id=1018569875]
-script = ExtResource("10_157nu")
-
-[node name="StunTimer" type="Timer" parent="PlayerModule/StatusModule" unique_id=47121319]
-one_shot = true
-
-[node name="DebounceTimer" type="Timer" parent="PlayerModule/StatusModule" unique_id=250025342]
-one_shot = true
-
-[node name="StatsModule" type="Node" parent="PlayerModule" unique_id=1014915544]
-script = ExtResource("11_gqcby")
-Speed = Vector2(350, 250)
-
-[node name="DamageModule" type="Node" parent="PlayerModule" unique_id=493001884]
-script = ExtResource("12_gd244")
-
-[node name="AnimModule" type="Node" parent="PlayerModule" unique_id=755653304]
-script = ExtResource("13_nmt3y")
 
 [node name="CollisionBox" type="CollisionShape2D" parent="." unique_id=146435598]
 visible = false
@@ -2493,5 +2465,5 @@ parameters/Walk/blend_position = 0.0
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Visual" unique_id=2120071731]
 libraries/ = SubResource("AnimationLibrary_3b4iv")
 
-[connection signal="body_entered" from="AIModule/AiRange" to="AIModule" method="_on_ai_range_body_entered"]
-[connection signal="body_exited" from="AIModule/AiRange" to="AIModule" method="_on_ai_range_body_exited"]
+[connection signal="body_entered" from="AIModule/AiRange" to="AIModule/AIUtils" method="_on_ai_range_body_entered"]
+[connection signal="body_exited" from="AIModule/AiRange" to="AIModule/AIUtils" method="_on_ai_range_body_exited"]

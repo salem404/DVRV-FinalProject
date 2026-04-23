@@ -1,18 +1,13 @@
 [gd_scene format=3 uid="uid://csu2xssxwqn4n"]
 
-[ext_resource type="Script" uid="uid://dbjji30kw3c0f" path="res://scripts/Game/Character/playerPhysics.gd" id="1_lfmip"]
-[ext_resource type="Script" uid="uid://x6oifdqj03x5" path="res://scripts/Game/Enemy/enemy_death.gd" id="2_00ayx"]
-[ext_resource type="Script" uid="uid://b7vqkwge0uusc" path="res://scripts/Game/Enemy/Grimp/grimp_Moveset.gd" id="2_fy6og"]
+[ext_resource type="Script" uid="uid://dbjji30kw3c0f" path="res://scripts/Game/Entities/Character/playerPhysics.gd" id="1_lfmip"]
+[ext_resource type="Script" uid="uid://x6oifdqj03x5" path="res://scripts/Game/Entities/Enemy/enemy_death.gd" id="2_00ayx"]
+[ext_resource type="Script" uid="uid://b7vqkwge0uusc" path="res://scripts/Game/Entities/Enemy/Grimp/grimp_Moveset.gd" id="2_fy6og"]
 [ext_resource type="PackedScene" uid="uid://pyc48swcdrki" path="res://scenes/Game/Attacks/hitbox.tscn" id="3_a0lmu"]
-[ext_resource type="Script" uid="uid://873jsag3lu2i" path="res://scripts/Game/Enemy/Grimp/grimp_AI.gd" id="3_pn36o"]
-[ext_resource type="Script" uid="uid://b6mwl4d2vgyxp" path="res://scripts/Game/Character/player_module.gd" id="5_m14bp"]
-[ext_resource type="Script" uid="uid://buig5yjiwsaiy" path="res://scripts/Game/Character/movement_module.gd" id="6_o0ycg"]
-[ext_resource type="Script" uid="uid://c5vqkq5gad78e" path="res://scripts/Game/Character/height_module.gd" id="7_jxnyl"]
-[ext_resource type="Script" uid="uid://8dvmgdhmovjw" path="res://scripts/Game/Player/input_module.gd" id="8_foawe"]
-[ext_resource type="Script" uid="uid://cp8p2ixqhldlj" path="res://scripts/Game/Character/status_module.gd" id="9_6gbfr"]
-[ext_resource type="Script" uid="uid://bko02gl3dtcuq" path="res://scripts/Game/Character/stats_module.gd" id="10_qthsm"]
-[ext_resource type="Script" uid="uid://ccous1xf0ya2n" path="res://scripts/Game/Character/damage_module.gd" id="11_n5vjp"]
-[ext_resource type="Script" uid="uid://b3t5n7l6qx052" path="res://scripts/Game/Player/anim_module.gd" id="12_37p6r"]
+[ext_resource type="Script" uid="uid://873jsag3lu2i" path="res://scripts/Game/Entities/Enemy/Grimp/grimp_AI.gd" id="3_pn36o"]
+[ext_resource type="Script" uid="uid://c73wj7hcloodd" path="res://scripts/Game/Entities/moveset_utils.gd" id="5_ppu6s"]
+[ext_resource type="Script" uid="uid://clkkjr4bwsqf1" path="res://scripts/Game/Entities/Enemy/AI_Utilities.gd" id="6_y0wt5"]
+[ext_resource type="PackedScene" uid="uid://calalwud0205g" path="res://scenes/Game/Entities/player_module.tscn" id="8_mr4d4"]
 [ext_resource type="Texture2D" uid="uid://bwf0hdksn75fq" path="res://images/Circle.png" id="13_38mpw"]
 [ext_resource type="Texture2D" uid="uid://de8xycmp1afo4" path="res://images/Entities/shadow.png" id="14_6ns33"]
 [ext_resource type="Texture2D" uid="uid://j31rhltj355y" path="res://images/Entities/Enemies/Grimp Spritesheet.png" id="15_pn36o"]
@@ -1499,14 +1494,18 @@ collision_mask = 0
 script = ExtResource("1_lfmip")
 DeathNode = NodePath("EnemyDeath")
 
-[node name="EnemyDeath" type="Node2D" parent="." unique_id=1369617905]
+[node name="EnemyDeath" type="Node" parent="." unique_id=971704386]
 script = ExtResource("2_00ayx")
 
-[node name="GrimpMoveset" type="Node2D" parent="." unique_id=581841300]
+[node name="GrimpMoveset" type="Node" parent="." unique_id=716930840]
 script = ExtResource("2_fy6og")
 hitboxPacked = ExtResource("3_a0lmu")
 
-[node name="AIModule" type="Node2D" parent="." unique_id=1351280651]
+[node name="MovesetUtils" type="Node" parent="GrimpMoveset" unique_id=2037218752]
+script = ExtResource("5_ppu6s")
+hitboxPacked = ExtResource("3_a0lmu")
+
+[node name="AIModule" type="Node2D" parent="." unique_id=376197860]
 script = ExtResource("3_pn36o")
 
 [node name="AiRange" type="Area2D" parent="AIModule" unique_id=495530485]
@@ -1517,40 +1516,14 @@ position = Vector2(-640, -256)
 shape = SubResource("CircleShape2D_nbf47")
 debug_color = Color(0.62, 0.41333336, 0, 0.039215688)
 
-[node name="PlayerModule" type="Node" parent="." unique_id=651865372 node_paths=PackedStringArray("MovesetModule")]
-script = ExtResource("5_m14bp")
+[node name="AIUtils" type="Node" parent="AIModule" unique_id=373234183]
+script = ExtResource("6_y0wt5")
+
+[node name="PlayerModule" parent="." unique_id=1088861868 node_paths=PackedStringArray("MovesetModule") instance=ExtResource("8_mr4d4")]
 MovesetModule = NodePath("../GrimpMoveset")
 
-[node name="MovementModule" type="Node" parent="PlayerModule" unique_id=1998603810]
-script = ExtResource("6_o0ycg")
-
-[node name="HeightModule" type="Node" parent="PlayerModule" unique_id=1271522158]
-script = ExtResource("7_jxnyl")
-
-[node name="InputModule" type="Node" parent="PlayerModule" unique_id=969251775]
-script = ExtResource("8_foawe")
-active = false
-
-[node name="StatusModule" type="Node" parent="PlayerModule" unique_id=1018569875]
-script = ExtResource("9_6gbfr")
-
-[node name="StunTimer" type="Timer" parent="PlayerModule/StatusModule" unique_id=47121319]
-one_shot = true
-
-[node name="DebounceTimer" type="Timer" parent="PlayerModule/StatusModule" unique_id=250025342]
-one_shot = true
-
-[node name="StatsModule" type="Node" parent="PlayerModule" unique_id=1014915544]
-script = ExtResource("10_qthsm")
-Speed = Vector2(200, 150)
-
-[node name="DamageModule" type="Node" parent="PlayerModule" unique_id=493001884]
-script = ExtResource("11_n5vjp")
-
-[node name="AnimModule" type="Node" parent="PlayerModule" unique_id=755653304]
-script = ExtResource("12_37p6r")
-
 [node name="CollisionBox" type="CollisionShape2D" parent="." unique_id=146435598]
+visible = false
 z_index = 1
 position = Vector2(0, -64)
 shape = SubResource("CircleShape2D_00ayx")
@@ -1599,5 +1572,5 @@ parameters/Walk/blend_position = 0.0
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Visual" unique_id=1211913936]
 libraries/ = SubResource("AnimationLibrary_y0wt5")
 
-[connection signal="body_entered" from="AIModule/AiRange" to="AIModule" method="_on_ai_range_body_entered"]
-[connection signal="body_exited" from="AIModule/AiRange" to="AIModule" method="_on_ai_range_body_exited"]
+[connection signal="body_entered" from="AIModule/AiRange" to="AIModule/AIUtils" method="_on_ai_range_body_entered"]
+[connection signal="body_exited" from="AIModule/AiRange" to="AIModule/AIUtils" method="_on_ai_range_body_exited"]

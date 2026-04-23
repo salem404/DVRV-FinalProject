@@ -8,7 +8,7 @@ signal dead(this: CharacterBody2D)
 @export var Camera: Camera2D
 
 @export_category("InNode")
-@export var DeathNode: Node2D
+@export var DeathNode: Node
 @onready var PlayerModule: Node = $PlayerModule
 @onready var CollisionBox: CollisionShape2D = $CollisionBox
 
@@ -20,8 +20,7 @@ func _ready():
 		push_warning("MovingArea not found in ", name)
 		
 	
-	initialized.connect(PlayerModule.MovesetModule.initialized)
-	initialized.connect(PlayerModule.initialized)
+	initialized.connect(PlayerModule._initialized)
 	initialized.emit()
 	if DeathNode:
 		dead.connect(DeathNode.onDeath)

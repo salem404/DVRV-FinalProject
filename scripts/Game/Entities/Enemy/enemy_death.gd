@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 
 @export var deathTime: float = 2
 @export var despawnTime: float = 1

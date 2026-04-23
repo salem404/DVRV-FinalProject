@@ -1,8 +1,9 @@
-extends Node2D
+extends Node
 
 @export var hitboxPacked: PackedScene
 @onready var player: Node = get_parent()
 @onready var playerModule: Node = get_parent().PlayerModule
+@onready var movesetUtils: Node = $MovesetUtils
 
 @export var intMovementDir: Vector3
 @export var AccelerationDir: Vector3
@@ -12,10 +13,10 @@ extends Node2D
 @export var MeKnockback: Vector3 = Vector3(500,10,0)
 @export var MeStuntime: float = 0.5
 
-@export var MeHitboxOffset: Vector3 = Vector3(80,0,-64)
+@export var MeHitboxOffset: Vector3 = Vector3(80,0,-32)
 @export var MeHitboxintMovementDir: Vector3 = Vector3(0,0,0)
 @export var MeHitboxAccelerationDir: Vector3 = Vector3(0,0,0)
-@export var MeHitboxSize: int = 10
+@export var MeHitboxSize: int = 7
 @export var MeHitboxLifetime: float = 0.1
 
 @export var MePlayerMovement: Vector3 = Vector3(300,1,0)
@@ -63,7 +64,7 @@ var GrHasHit: bool = false
 @export var GrHitResetTime: float = 1.0
 var GrHitNumber: int = 0
 
-func initialized():
+func _initialized():
 	playerModule = get_parent().PlayerModule
 
 ################################################################################
@@ -83,7 +84,7 @@ func lightAttack():
 	
 	playerModule.MovementModule.applyForceV3(MePlayerMovement*Vector3(lookDir,1,1))
 	
-	spawnHitbox(lookDir, MeHitboxOffset, MeHitboxintMovementDir, MeHitboxAccelerationDir, MeHitboxSize, MeHitboxLifetime, MeDamage, MeStuntime, MeKnockback)
+	movesetUtils.spawnHitbox(lookDir, MeHitboxOffset, MeHitboxintMovementDir, MeHitboxAccelerationDir, MeHitboxSize, MeHitboxLifetime, MeDamage, MeStuntime, MeKnockback)
 	
 	MeNumber += 1
 	var befAtkN = MeNumber
@@ -109,8 +110,9 @@ func heavyAttack():
 	
 	playerModule.MovementModule.applyForceV3(GrPlayerMovement*Vector3(lookDir,1,1))
 	
-	var hitbox = spawnHitbox(lookDir, GrHitboxOffset, GrHitboxintMovementDir, GrHitboxAccelerationDir, GrHitboxSize, GrHitboxLifetime, GrDamage, GrStuntime, GrKnockback, false, true)
+	var hitbox = movesetUtils.spawnHitbox(lookDir, GrHitboxOffset, GrHitboxintMovementDir, GrHitboxAccelerationDir, GrHitboxSize, GrHitboxLifetime, GrDamage, GrStuntime, GrKnockback)
 	hitbox.hit.connect(heavyOnHitAttack)
+	
 	GrNumber += 1
 	var befAtkN = GrNumber
 	await get_tree().create_timer(GrDebounceTime).timeout
@@ -144,7 +146,7 @@ func heavyOnHitAttack(ignoreThis: Area2D):
 	
 	playerModule.MovementModule.applyForceV3(GrHitPlayerMovement*Vector3(lookDir,1,1))
 	
-	spawnHitbox(lookDir, GrHitHitboxOffset, GrHitHitboxintMovementDir, GrHitHitboxAccelerationDir, GrHitHitboxSize, GrHitHitboxLifetime, GrHitDamage, GrHitStuntime, GrHitKnockback)
+	movesetUtils.spawnHitbox(lookDir, GrHitHitboxOffset, GrHitHitboxintMovementDir, GrHitHitboxAccelerationDir, GrHitHitboxSize, GrHitHitboxLifetime, GrHitDamage, GrHitStuntime, GrHitKnockback)
 	
 	GrHitNumber += 1
 	var befAtkN = GrHitNumber
@@ -155,26 +157,3 @@ func heavyOnHitAttack(ignoreThis: Area2D):
 	await get_tree().create_timer(GrHitResetTime).timeout
 	if befAtkN == GrHitNumber:
 		GrHitNumber = 0
-
-################################################################################
-#####                              Utility                                 #####
-################################################################################
-
-func spawnHitbox(lookDir, positionOffset, intMovementDir, AccelerationDir, scale, lifetime, damage, stuntime, knockback, dmgSelf: bool = false, followParent: bool = false):
-	var hitbox = hitboxPacked.instantiate()
-	if not dmgSelf:
-		hitbox.friendGroups = player.get_groups() if not dmgSelf else []
-	
-	var offset = positionOffset
-	hitbox.global_position = Vector2(offset[0]*lookDir,offset[2]-offset[1])
-	hitbox.intMovementDir = intMovementDir*Vector3(lookDir,1,1)
-	hitbox.AccelerationDir = AccelerationDir*Vector3(lookDir,1,1)
-	hitbox.height = offset[1]
-	hitbox.scale *= scale
-	hitbox.lifeTime = lifetime
-	hitbox.damage = damage
-	hitbox.stuntime = stuntime
-	hitbox.knockback = knockback*Vector3(lookDir,1,1)
-	hitbox.top_level = false
-	add_child(hitbox)
-	return hitbox
