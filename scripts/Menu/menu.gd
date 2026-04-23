@@ -1,5 +1,5 @@
 extends Control
-@onready var options: Control = $Options
+#@onready var options: Control = $Options
 
 
 # Called when the node enters the scene tree for the first time.
