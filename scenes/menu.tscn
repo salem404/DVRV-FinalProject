@@ -2,27 +2,69 @@
 
 [ext_resource type="Script" uid="uid://b77jre5h6i45s" path="res://scripts/Menu/menu.gd" id="1_yqeox"]
 [ext_resource type="PackedScene" uid="uid://d3i3qli7l3int" path="res://scenes/settings.tscn" id="2_vjb58"]
+[ext_resource type="PackedScene" uid="uid://brmct871hpirb" path="res://scenes/credit.tscn" id="3_con2f"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mhnvy"]
 content_margin_left = 12.0
 content_margin_top = 12.0
 content_margin_right = 12.0
 content_margin_bottom = 12.0
+bg_color = Color(0.12225223, 0.12225223, 0.12225223, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
+border_color = Color(0.8117647, 0.8117647, 0.8117647, 1)
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 expand_margin_left = 1.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ytvr"]
+bg_color = Color(0.22745098, 0.22745098, 0.22745098, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g3eks"]
+bg_color = Color(0.3529412, 0.3529412, 0.3529412, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v86rl"]
+bg_color = Color(0.22745098, 0.22745098, 0.22745098, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_13sgg"]
+bg_color = Color(0.22745098, 0.22745098, 0.22745098, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i6lef"]
+bg_color = Color(0.3529412, 0.3529412, 0.3529412, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_70i5f"]
+bg_color = Color(0.22745098, 0.22745098, 0.22745098, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yqeox"]
+bg_color = Color(0.22745098, 0.22745098, 0.22745098, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vjb58"]
+bg_color = Color(0.3529412, 0.3529412, 0.3529412, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_con2f"]
+bg_color = Color(0.22745098, 0.22745098, 0.22745098, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -58,13 +100,23 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_mhnvy")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=559595266]
 layout_mode = 2
+theme_override_constants/separation = 12
 
 [node name="PlayButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1595139921]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.875, 0.875, 0.875, 1)
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_4ytvr")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_g3eks")
+theme_override_styles/hover = SubResource("StyleBoxFlat_v86rl")
 text = "ui_start"
 
 [node name="CreditButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=97648271]
 layout_mode = 2
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_13sgg")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_i6lef")
+theme_override_styles/hover = SubResource("StyleBoxFlat_70i5f")
 text = "ui_credit"
 
 [node name="ExitButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1711757321]
@@ -88,7 +140,12 @@ text = "ui_settings
 visible = false
 layout_mode = 1
 
+[node name="Credit" parent="." unique_id=101508050 instance=ExtResource("3_con2f")]
+visible = false
+layout_mode = 1
+
 [connection signal="pressed" from="PanelContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/CreditButton" to="." method="_on_credit_button_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="OptionButton" to="." method="_on_option_button_pressed"]
+[connection signal="pressed" from="OptionButton" to="Settings" method="_on_option_button_pressed"]

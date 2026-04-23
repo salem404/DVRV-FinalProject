@@ -6,6 +6,9 @@ signal settings_closed
 func _ready() -> void:
 	_load_last_tab()
 
+
+	
+
 func _load_last_tab() -> void:
 	var tab_container = get_node_or_null("MarginContainer/TabContainer")
 	if tab_container:
@@ -32,3 +35,9 @@ func get_all_buttons(node: Node) -> Array:
 			buttons.append(child)
 		buttons += get_all_buttons(child)
 	return buttons
+
+
+#boton para volver al menu
+func _on_button_pressed() -> void:
+	visible = false
+	settings_closed.emit()

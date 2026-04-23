@@ -1,9 +1,31 @@
 [gd_scene format=3 uid="uid://brmct871hpirb"]
 
-[node name="Credit" type="Control" unique_id=1257999762]
+[ext_resource type="Script" uid="uid://bayf2pvw8q5xe" path="res://scripts/credit.gd" id="1_kmqx5"]
+
+[node name="Credit" type="Control" unique_id=101508050]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_kmqx5")
+
+[node name="Label" type="Label" parent="." unique_id=362297908]
+layout_mode = 0
+offset_left = 501.0
+offset_top = 103.0
+offset_right = 701.0
+offset_bottom = 161.0
+theme_override_font_sizes/font_size = 42
+text = "CREDIT"
+
+[node name="Button" type="Button" parent="." unique_id=1218704480]
+layout_mode = 0
+offset_left = 1049.0
+offset_top = 622.0
+offset_right = 1197.0
+offset_bottom = 673.0
+text = "Exit"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
