@@ -1746,8 +1746,6 @@ debug_color = Color(0.62, 0.41333336, 0, 0.039215688)
 script = ExtResource("7_eadth")
 
 [node name="PlayerModule" parent="." unique_id=1088861868 node_paths=PackedStringArray("animTree", "MovesetModule") instance=ExtResource("8_v7v52")]
-maxHealth = 1000.0
-health = 1000.0
 animTree = NodePath("../Visual/AnimationTree")
 MovesetModule = NodePath("../FlybyMoveset")
 

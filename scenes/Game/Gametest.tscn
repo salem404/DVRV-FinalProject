@@ -67,7 +67,7 @@ texture = ExtResource("6_2sju2")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Boundry" unique_id=259037805]
 position = Vector2(-8, 0)
-polygon = PackedVector2Array(3384, 384, 3384, 704, 24, 704, 24, 384)
+polygon = PackedVector2Array(4296, 384, 4296, 704, 24, 704, 24, 384)
 
 [node name="SpawnPos" type="Node2D" parent="." unique_id=710396889]
 
@@ -94,7 +94,7 @@ position = Vector2(640, 360)
 
 [node name="EventsDetector" type="Node2D" parent="." unique_id=751690982 node_paths=PackedStringArray("waveEvents")]
 script = ExtResource("6_crllf")
-waveEvents = [NodePath("Area1"), NodePath("Area2")]
+waveEvents = [NodePath("Area1"), NodePath("Area2"), NodePath("Area3")]
 
 [node name="Area1" type="Area2D" parent="EventsDetector" unique_id=1414414942]
 position = Vector2(1408, 360)
@@ -112,7 +112,17 @@ script = ExtResource("6_edlo4")
 shape = SubResource("RectangleShape2D_crllf")
 debug_color = Color(0.8297021, 0, 0.18158725, 0.41960785)
 
+[node name="Area3" type="Area2D" parent="EventsDetector" unique_id=852438193]
+position = Vector2(2624, 360)
+script = ExtResource("6_edlo4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EventsDetector/Area3" unique_id=139451547]
+position = Vector2(896, 0)
+shape = SubResource("RectangleShape2D_crllf")
+debug_color = Color(0.8297021, 0, 0.18158725, 0.41960785)
+
 [node name="Ui" parent="." unique_id=1782285889 instance=ExtResource("3_unq2p")]
 
 [connection signal="body_entered" from="EventsDetector/Area1" to="EventsDetector/Area1" method="_on_body_entered"]
 [connection signal="body_entered" from="EventsDetector/Area2" to="EventsDetector/Area2" method="_on_body_entered"]
+[connection signal="body_entered" from="EventsDetector/Area3" to="EventsDetector/Area3" method="_on_body_entered"]
