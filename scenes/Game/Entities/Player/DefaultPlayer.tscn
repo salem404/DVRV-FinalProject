@@ -2201,11 +2201,18 @@ position = Vector2(0, -64)
 shape = SubResource("CircleShape2D_jpqlp")
 
 [node name="Sprite2D" type="Sprite2D" parent="CollisionBox" unique_id=1229467001]
-visible = false
 modulate = Color(1, 1, 1, 0.4745098)
 z_index = 50
 position = Vector2(-1.9550323e-05, -1.4305115e-06)
 scale = Vector2(0.15999985, 0.15999976)
+texture = ExtResource("9_wrl72")
+
+[node name="ImaginarySprite2D" type="Sprite2D" parent="CollisionBox" unique_id=467149613]
+modulate = Color(1, 1, 1, 0.4745098)
+self_modulate = Color(0.94633335, 1, 0.53999996, 1)
+z_index = 50
+position = Vector2(7.6293945e-06, 2.527237e-05)
+scale = Vector2(0.15999994, 0.15999988)
 texture = ExtResource("9_wrl72")
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=534287080]

@@ -6,6 +6,19 @@ var character: CharacterBody2D
 var height: float
 var heightSpeed: float
 
+func _heightProcess(delta):
+	if not playerModule:
+		playerModule = get_parent()
+		return
+		
+	if playerModule.StatusModule.onAir:
+		calculateHeight()
+		setPosY(playerModule.charVisual, playerModule.charAnimOgOffset)
+		setPosY(playerModule.charCollisionBox.get_node("ImaginarySprite2D"), 0)
+		
+	var shadowSize: float = lerp(0.0, 1.0, 1/(height/100+1))
+	playerModule.charShadow.scale = playerModule.charShadowOgSize * shadowSize
+	
 ################################################################################
 #####                             Functions                                #####
 ################################################################################
@@ -33,19 +46,6 @@ func addHeightSpeed(newHeightSpeed: float):
 func setOnAir():
 	playerModule.StatusModule.onAir = true
 
-func heightProcess(delta):
-	if not playerModule:
-		playerModule = get_parent()
-		return
-		
-	if playerModule.StatusModule.onAir:
-		calculateHeight()
-		setPosY(playerModule.charVisual, playerModule.charAnimOgOffset)
-		setPosY(playerModule.charCollision, playerModule.charCollisionOgOffset)
-		
-	var shadowSize: float = lerp(0.0, 1.0, 1/(height/100+1))
-	playerModule.charShadow.scale = playerModule.charShadowOgSize * shadowSize
-
 func calculateHeight():
 	heightSpeed -= playerModule.StatsModule.gravity
 	
@@ -57,5 +57,6 @@ func calculateHeight():
 	height += heightSpeed;
 
 func setPosY(node: Node2D, offset: float):
-	var newPosY = -height + offset
-	node.position.y = newPosY if newPosY < 0 else 0
+	if node:
+		var newPosY = -height + offset
+		node.position.y = newPosY if newPosY < 0 else 0

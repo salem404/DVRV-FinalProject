@@ -21,6 +21,8 @@ func spawnEnemy(name: String, right: bool = true):
 		instance.position = Game.gameCamera.position + (Vector2(1000,0) if right else Vector2(-1000,0))
 		instance.MovingArea = Game.mapBoundry
 		instance.Camera = Game.gameCamera
+		instance.ShowCollisions = Game.ShowCollisions
+		instance.ShowHitboxes = Game.ShowHitboxes
 		addToList(instance)
 		call_deferred("add_child", instance)
 		return instance

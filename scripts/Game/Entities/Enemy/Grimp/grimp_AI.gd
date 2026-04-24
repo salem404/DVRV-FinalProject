@@ -37,7 +37,7 @@ func _ready():
 		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _AIProcess(delta):
 	playerModule.InputModule.movement = Vector2.ZERO
 	var closest = AIUtils.findClosestTarget()
 	if closest:

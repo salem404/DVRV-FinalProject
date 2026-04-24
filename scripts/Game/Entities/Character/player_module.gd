@@ -42,18 +42,16 @@ var isMoving: bool = false
 var outsideArea: bool = false
 
 var charVisual: Node2D 
-var charCollision: CollisionShape2D 
 var charShadow: Sprite2D 
+var charCollisionBox: CollisionShape2D 
 var charAnimOgOffset: float
-var charCollisionOgOffset: float
 var charShadowOgSize: Vector2
 
 func _initialized():
 	charVisual = player.get_node("Visual")
-	charCollision = player.get_node("CollisionBox")
 	charShadow = player.get_node("Shadow")
+	charCollisionBox = player.get_node("CollisionBox")
 	charAnimOgOffset = charVisual.position.y
-	charCollisionOgOffset = charCollision.position.y
 	charShadowOgSize = charShadow.scale
 
 	InputModule.playerInput = playerInput
@@ -84,7 +82,7 @@ func _process(delta):
 		if InputModule.jumpKey and not StatusModule.onAir:
 			HeightModule.jump(StatsModule.jPower)
 		if StatusModule.onAir:
-			if InputModule.lightAttack and MovesetModule.lightAttack:
+			if InputModule.lightAttack and MovesetModule.airAttack:
 				MovesetModule.airAttack()
 		else:
 			if InputModule.lightAttack and MovesetModule.lightAttack:

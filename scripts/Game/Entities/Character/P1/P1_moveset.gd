@@ -59,7 +59,7 @@ var HANumber: int = 0
 @export var AirStartLagTime: float = 0
 @export var AirDebounceTime: float = 0.2
 @export var AirAnim: Array[String] = ["AtkLight1"]
-@export var AirResetTime: float = 1.0
+@export var AirResetTime: float = 0.5
 
 @export var AirHitPlayerMovement: Vector3 = Vector3(0,10,0)
 @export var AirHitMaxTriggerAmount: int = 1
@@ -157,4 +157,3 @@ func airAttackHit(hitbox: Area2D):
 	var lookDir = playerModule.StatusModule.lookDir
 	playerModule.MovementModule.applyForceV3(AirHitPlayerMovement * Vector3(lookDir,1,1))
 	AirHitNumber += 1
-	print("hi")

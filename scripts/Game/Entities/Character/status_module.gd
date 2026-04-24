@@ -28,7 +28,6 @@ func _process(delta):
 
 func canMove() -> bool:
 	if get_parent().get_parent().get_name() == "EnemyDefault":
-		#print(isStunned, " ", isDebounced, " ", isKnockbacked)
 		pass
 	return not (isStunned or isDebounced or isKnockbacked)
 

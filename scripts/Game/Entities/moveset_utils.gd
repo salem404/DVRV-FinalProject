@@ -16,12 +16,14 @@ func spawnHitbox(lookDir, positionOffset, intMovementDir, AccelerationDir, scale
 	hitbox.global_position = Vector2(offset[0]*lookDir,offset[2]-offset[1]) + (player.position if !followParent else Vector2.ZERO)
 	hitbox.intMovementDir = intMovementDir*Vector3(lookDir,1,1)
 	hitbox.AccelerationDir = AccelerationDir*Vector3(lookDir,1,1)
-	hitbox.height = offset[1] + player.PlayerModule.HeightModule.height
+	hitbox.height = offset[1] + player.PlayerModule.HeightModule.height if !followParent else 0
 	hitbox.scale *= scale
 	hitbox.lifeTime = lifetime
 	hitbox.damage = damage
 	hitbox.stuntime = stuntime
 	hitbox.knockback = knockback*Vector3(lookDir,1,1)
+	hitbox.followHeight = followParent
 	hitbox.top_level = !followParent
+	hitbox.showHitbox = player.ShowHitboxes
 	player.add_child(hitbox)
 	return hitbox

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dbjji30kw3c0f" path="res://scripts/Game/Entities/Character/playerPhysics.gd" id="1_go55b"]
 [ext_resource type="Script" uid="uid://x6oifdqj03x5" path="res://scripts/Game/Entities/Enemy/enemy_death.gd" id="2_8ryn8"]
-[ext_resource type="Script" uid="uid://b7vqkwge0uusc" path="res://scripts/Game/Entities/Enemy/Grimp/grimp_Moveset.gd" id="3_5xbcs"]
+[ext_resource type="Script" uid="uid://cnc6gacvg1ivt" path="res://scenes/Game/Entities/Enemies/flyby_Moveset.gd" id="3_go55b"]
 [ext_resource type="PackedScene" uid="uid://pyc48swcdrki" path="res://scenes/Game/Attacks/hitbox.tscn" id="4_tyysi"]
 [ext_resource type="Script" uid="uid://c73wj7hcloodd" path="res://scripts/Game/Entities/moveset_utils.gd" id="5_ylej0"]
 [ext_resource type="Script" uid="uid://dgmokw7dba17l" path="res://scripts/Game/Entities/Enemy/Flyby/flyby_AI.gd" id="6_go55b"]
@@ -196,8 +196,8 @@ states/AtkSLag/node = SubResource("AnimationNodeBlendSpace1D_8ryn8")
 states/AtkSLag/position = Vector2(83, -184)
 states/Downed/node = SubResource("AnimationNodeBlendSpace1D_xkejy")
 states/Downed/position = Vector2(297, 226)
-states/Idle2/node = SubResource("AnimationNodeBlendSpace1D_m2t77")
-states/Idle2/position = Vector2(297, -29)
+states/Idle/node = SubResource("AnimationNodeBlendSpace1D_m2t77")
+states/Idle/position = Vector2(297, -29)
 states/IdleBall/node = SubResource("AnimationNodeBlendSpace1D_go55b")
 states/IdleBall/position = Vector2(297, -106)
 states/Knockback/node = SubResource("AnimationNodeBlendSpace1D_by3ly")
@@ -211,7 +211,7 @@ states/Up/node = SubResource("AnimationNodeBlendSpace1D_mde7c")
 states/Up/position = Vector2(297, 100)
 states/Walk/node = SubResource("AnimationNodeBlendSpace1D_wklcl")
 states/Walk/position = Vector2(633, -29)
-transitions = ["Stun", "Knockback", SubResource("AnimationNodeStateMachineTransition_dt5te"), "Knockback", "Downed", SubResource("AnimationNodeStateMachineTransition_6x8u5"), "Downed", "Up", SubResource("AnimationNodeStateMachineTransition_msu2m"), "Downed", "Knockback", SubResource("AnimationNodeStateMachineTransition_2n6nx"), "Idle2", "Walk", SubResource("AnimationNodeStateMachineTransition_00enb"), "Walk", "Idle2", SubResource("AnimationNodeStateMachineTransition_jpqlp"), "Stun", "Idle2", SubResource("AnimationNodeStateMachineTransition_d7n1s"), "Up", "Idle2", SubResource("AnimationNodeStateMachineTransition_swtt5"), "Start", "Idle2", SubResource("AnimationNodeStateMachineTransition_by3ly")]
+transitions = ["Stun", "Knockback", SubResource("AnimationNodeStateMachineTransition_dt5te"), "Knockback", "Downed", SubResource("AnimationNodeStateMachineTransition_6x8u5"), "Downed", "Up", SubResource("AnimationNodeStateMachineTransition_msu2m"), "Downed", "Knockback", SubResource("AnimationNodeStateMachineTransition_2n6nx"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_00enb"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_jpqlp"), "Stun", "Idle", SubResource("AnimationNodeStateMachineTransition_d7n1s"), "Up", "Idle", SubResource("AnimationNodeStateMachineTransition_swtt5"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_by3ly")]
 graph_offset = Vector2(-114, -244)
 
 [sub_resource type="Animation" id="Animation_vsh85"]
@@ -1712,21 +1712,22 @@ _data = {
 &"UpRight": SubResource("Animation_m2t77")
 }
 
-[node name="EnemyDefault" type="CharacterBody2D" unique_id=187010336 node_paths=PackedStringArray("DeathNode") groups=["Enemy", "Entity"]]
+[node name="EnemyDefault" type="CharacterBody2D" unique_id=187010336 node_paths=PackedStringArray("DeathNode", "AIModule") groups=["Enemy", "Entity"]]
 position = Vector2(640, 320)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_go55b")
 DeathNode = NodePath("EnemyDeath")
+AIModule = NodePath("AIModule")
 
 [node name="EnemyDeath" type="Node" parent="." unique_id=971704386]
 script = ExtResource("2_8ryn8")
 
-[node name="GrimpMoveset" type="Node" parent="." unique_id=716930840]
-script = ExtResource("3_5xbcs")
+[node name="FlybyMoveset" type="Node" parent="." unique_id=716930840]
+script = ExtResource("3_go55b")
 hitboxPacked = ExtResource("4_tyysi")
 
-[node name="MovesetUtils" type="Node" parent="GrimpMoveset" unique_id=2037218752]
+[node name="MovesetUtils" type="Node" parent="FlybyMoveset" unique_id=2037218752]
 script = ExtResource("5_ylej0")
 hitboxPacked = ExtResource("4_tyysi")
 
@@ -1744,21 +1745,30 @@ debug_color = Color(0.62, 0.41333336, 0, 0.039215688)
 [node name="AIUtils" type="Node" parent="AIModule" unique_id=373234183]
 script = ExtResource("7_eadth")
 
-[node name="PlayerModule" parent="." unique_id=1088861868 node_paths=PackedStringArray("MovesetModule") instance=ExtResource("8_v7v52")]
-MovesetModule = NodePath("../GrimpMoveset")
+[node name="PlayerModule" parent="." unique_id=1088861868 node_paths=PackedStringArray("animTree", "MovesetModule") instance=ExtResource("8_v7v52")]
+maxHealth = 1000.0
+health = 1000.0
+animTree = NodePath("../Visual/AnimationTree")
+MovesetModule = NodePath("../FlybyMoveset")
 
 [node name="CollisionBox" type="CollisionShape2D" parent="." unique_id=146435598]
-visible = false
 z_index = 1
 position = Vector2(0, -64)
 shape = SubResource("CircleShape2D_00ayx")
 
 [node name="Sprite2D" type="Sprite2D" parent="CollisionBox" unique_id=1863763923]
-visible = false
 modulate = Color(1, 1, 1, 0.4745098)
 z_index = 50
-position = Vector2(-1.9550323e-05, -1.4305115e-06)
-scale = Vector2(0.15999985, 0.15999976)
+position = Vector2(1.2397766e-05, 3.0040741e-05)
+scale = Vector2(0.19199999, 0.1919999)
+texture = ExtResource("9_1y1uf")
+
+[node name="ImaginarySprite2D" type="Sprite2D" parent="CollisionBox" unique_id=1303077260]
+modulate = Color(1, 1, 1, 0.4745098)
+self_modulate = Color(0.94633335, 1, 0.53999996, 1)
+z_index = 50
+position = Vector2(1.2397766e-05, 3.0040741e-05)
+scale = Vector2(0.19199999, 0.1919999)
 texture = ExtResource("9_1y1uf")
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=741059315]
@@ -1788,7 +1798,7 @@ parameters/Atk/blend_position = 0.0
 parameters/AtkBall/blend_position = 0.0
 parameters/AtkSLag/blend_position = 0.0
 parameters/Downed/blend_position = 0.0
-parameters/Idle2/blend_position = 0.0
+parameters/Idle/blend_position = 0.0
 parameters/IdleBall/blend_position = 0.0
 parameters/Knockback/blend_position = 0.0
 parameters/Stun/blend_position = 0.3824573333333373

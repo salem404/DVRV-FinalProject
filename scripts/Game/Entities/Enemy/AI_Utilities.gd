@@ -18,12 +18,20 @@ func lookPlayer(target: CharacterBody2D):
 func moveToPlayer(target: CharacterBody2D, offset: Vector2 = Vector2.ZERO):
 	var targetPos = target.position + offset
 	moveSameHorizontal(targetPos.x)
-	moveSameHeight(targetPos.y)
+	moveSameVertical(targetPos.y)
+	
+func moveToPlayerX(target: CharacterBody2D, offset: Vector2 = Vector2.ZERO):
+	var targetPos = target.position + offset
+	moveSameHorizontal(targetPos.x)
+	
+func moveToPlayerY(target: CharacterBody2D, offset: Vector2 = Vector2.ZERO):
+	var targetPos = target.position + offset
+	moveSameVertical(targetPos.y)
 	
 func moveFromPlayer(target: CharacterBody2D, offset: Vector2 = Vector2.ZERO):
-	var targetPos = 2 * this.position - (target.position + offset)
+	var targetPos = 2 * this.position - target.position + offset
 	moveSameHorizontal(targetPos.x)
-	moveSameHeight(targetPos.y)
+	moveSameVertical(targetPos.y)
 
 func moveSameHorizontal(target: int):
 	if target:
@@ -32,11 +40,12 @@ func moveSameHorizontal(target: int):
 			playerModule.InputModule.movement.x= 1 if enemyDir > 0 else -1
 	pass
 	
-func moveSameHeight(target: int):
+func moveSameVertical(target: int):
 	if target:
 		var enemyDir: float = (target - this.position.y)
 		if abs(enemyDir) > 20:
 			playerModule.InputModule.movement.y = 1 if enemyDir > 0 else -1
+			
 	pass
 
 ################################################################################

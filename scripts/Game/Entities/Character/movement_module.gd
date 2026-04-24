@@ -9,7 +9,7 @@ var isMoving: bool
 var outsideArea: bool = false
 var inCamera: bool = false
 
-func movementProcess(delta):
+func _movementProcess(delta):
 	if not playerModule:
 		playerModule = get_parent()
 		return
@@ -44,24 +44,30 @@ func setMovement(movement: Vector2, speed: Vector2):
 			playerModule.StatusModule.setLookDir(-1)
 		elif movement.x > 0:
 			playerModule.StatusModule.setLookDir(1)
-		moveTo(Vector2(movement.x * speed.x, movement.y * speed.y))
+		moveTo(Vector2(movement.x * speed.x, movement.y * speed.y), speed)
 	elif not playerModule.StatusModule.onAir: 
 		playerModule.StatusModule.isMoving = false
 
-func moveTo(movement: Vector2):
-	moveXTo(movement.x)
-	moveYTo(movement.y)
+func moveTo(movement: Vector2, maxSpeed: Vector2):
+	moveXTo(movement.x, maxSpeed.x)
+	moveYTo(movement.y, maxSpeed.y)
 
-func moveXTo(movementX: float):
-	character.velocity.x = movementX
+func moveXTo(movementX: float, maxSpeedX: float):
+	if playerModule.StatusModule.onAir:
+		character.velocity.x = max(-maxSpeedX,min(maxSpeedX,movementX/10+character.velocity.x))
+	else:
+		character.velocity.x = max(-maxSpeedX,min(maxSpeedX,movementX))
 	
-func moveYTo(movementY: float):
-	character.velocity.y = movementY
+func moveYTo(movementY: float, maxSpeedY: float):
+	if playerModule.StatusModule.onAir:
+		character.velocity.y = max(-maxSpeedY,min(maxSpeedY,movementY/10+character.velocity.y))
+	else:
+		character.velocity.y = movementY
 	
 func applyForce(force: Vector2, height: float):
 	character.velocity.x += force.x
 	character.velocity.y += force.y
-	playerModule.HeightModule.jump(height)
+	playerModule.HeightModule.addHeightSpeed(height)
 	if height != 0:
 		playerModule.StatusModule.isMoving = true
 
@@ -98,6 +104,8 @@ func snapInsidePolygon():
 			
 	if min_distPos: 
 		character.position = min_distPos
+		character.velocity.y = 0
+		#character.velocity = Vector2.ZERO
 
 func snapInsideCamera():
 	var camera = character.Camera
@@ -109,5 +117,7 @@ func snapInsideCamera():
 	else:
 		if character.global_position.x > camPos.x+camSize.x:
 			character.global_position.x = camPos.x+camSize.x
+			character.velocity.x = 0
 		elif character.global_position.x < camPos.x-camSize.x:
 			character.global_position.x = camPos.x-camSize.x
+			character.velocity.x = 0

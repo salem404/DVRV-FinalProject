@@ -2375,12 +2375,13 @@ _data = {
 &"WalkRight": SubResource("Animation_5gh6j")
 }
 
-[node name="EnemyDefault" type="CharacterBody2D" unique_id=187010336 node_paths=PackedStringArray("DeathNode") groups=["Enemy", "Entity"]]
+[node name="EnemyDefault" type="CharacterBody2D" unique_id=187010336 node_paths=PackedStringArray("DeathNode", "AIModule") groups=["Enemy", "Entity"]]
 position = Vector2(640, 320)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_ecl5d")
 DeathNode = NodePath("EnemyDeath")
+AIModule = NodePath("AIModule")
 
 [node name="EnemyDeath" type="Node" parent="." unique_id=938863537]
 script = ExtResource("2_mtgve")
@@ -2411,17 +2412,23 @@ script = ExtResource("6_mtgve")
 MovesetModule = NodePath("../PumppufMoveset")
 
 [node name="CollisionBox" type="CollisionShape2D" parent="." unique_id=146435598]
-visible = false
 z_index = 1
 position = Vector2(0, -64)
 shape = SubResource("CircleShape2D_00ayx")
 
 [node name="Sprite2D" type="Sprite2D" parent="CollisionBox" unique_id=1863763923]
-visible = false
 modulate = Color(1, 1, 1, 0.4745098)
 z_index = 50
-position = Vector2(-1.9550323e-05, -1.4305115e-06)
-scale = Vector2(0.15999985, 0.15999976)
+position = Vector2(1.2397766e-05, 8.583069e-06)
+scale = Vector2(0.19199999, 0.192)
+texture = ExtResource("14_oabrq")
+
+[node name="ImaginarySprite2D" type="Sprite2D" parent="CollisionBox" unique_id=619534655]
+modulate = Color(1, 1, 1, 0.4745098)
+self_modulate = Color(0.94633335, 1, 0.53999996, 1)
+z_index = 50
+position = Vector2(1.2397766e-05, 3.0040741e-05)
+scale = Vector2(0.19199999, 0.1919999)
 texture = ExtResource("14_oabrq")
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=741059315]
