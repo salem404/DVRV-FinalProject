@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://cepmk55uduy27" path="res://scripts/Game/Hitbox/hitbox_module.gd" id="3_7svxk"]
 [ext_resource type="Script" uid="uid://bghoagk1dci3i" path="res://scripts/Game/Hitbox/hitbox_movement_module.gd" id="4_mf5k8"]
 [ext_resource type="Texture2D" uid="uid://bwf0hdksn75fq" path="res://images/Circle.png" id="4_vq0b0"]
+[ext_resource type="Script" uid="uid://c378j886clqog" path="res://scripts/Game/Hitbox/imaginary_hitbox_shower.gd" id="6_db76l"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0vdsg"]
 radius = 8.0
@@ -46,5 +47,16 @@ position = Vector2(5.4240227e-06, 9.23872e-06)
 scale = Vector2(0.032000046, 0.032000046)
 texture = ExtResource("4_vq0b0")
 
+[node name="ImaginaryHitboxShower" type="Node2D" parent="." unique_id=482969845]
+script = ExtResource("6_db76l")
+
+[node name="ImaginaryHitbox" type="Sprite2D" parent="ImaginaryHitboxShower" unique_id=1182894614]
+modulate = Color(0, 0.43588275, 0.8942805, 0.37254903)
+z_index = 20
+position = Vector2(-1.4424324e-05, -3.2186508e-06)
+scale = Vector2(0.03199998, 0.031999998)
+texture = ExtResource("4_vq0b0")
+
 [connection signal="initialized" from="." to="LifetimeModule" method="_on_initialized"]
 [connection signal="initialized" from="." to="HitboxMovementModule" method="_on_initialized"]
+[connection signal="initialized" from="." to="ImaginaryHitboxShower" method="_on_initialized"]

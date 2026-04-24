@@ -39,6 +39,9 @@ func setAim():
 	animTree.set("parameters/%s/blend_position" % current, lookDir)
 	#animTree.set("parameters/Knockback/blend_position",knockbackDir)
 
+func getCurrentAnim():
+	return animTree.get("parameters/playback").get_current_node()
+
 func forceAnim(animName: String):
 	if animTree:
 		var sm = animTree.get("parameters/playback")
