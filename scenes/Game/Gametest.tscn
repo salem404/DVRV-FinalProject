@@ -66,8 +66,7 @@ texture = ExtResource("6_2sju2")
 [node name="Boundry" type="Area2D" parent="Map" unique_id=852656395]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Boundry" unique_id=259037805]
-position = Vector2(-8, 0)
-polygon = PackedVector2Array(4296, 384, 4296, 704, 24, 704, 24, 384)
+polygon = PackedVector2Array(4296, 384, 4296, 704, 48, 704, 48, 384)
 
 [node name="SpawnPos" type="Node2D" parent="." unique_id=710396889]
 
