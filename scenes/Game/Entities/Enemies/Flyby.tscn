@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://clkkjr4bwsqf1" path="res://scripts/Game/Entities/Enemy/AI_Utilities.gd" id="7_eadth"]
 [ext_resource type="PackedScene" uid="uid://calalwud0205g" path="res://scenes/Game/Entities/player_module.tscn" id="8_v7v52"]
 [ext_resource type="Texture2D" uid="uid://bwf0hdksn75fq" path="res://images/Circle.png" id="9_1y1uf"]
+[ext_resource type="Script" uid="uid://ccpko0nfby6p4" path="res://scenes/Game/Entities/Enemies/flying_module.gd" id="9_8ryn8"]
 [ext_resource type="Texture2D" uid="uid://de8xycmp1afo4" path="res://images/Entities/shadow.png" id="10_f71au"]
 [ext_resource type="Texture2D" uid="uid://dapgnwkvf74w5" path="res://images/Entities/Enemies/Flyby Spritesheet.png" id="11_go55b"]
 
@@ -1712,13 +1713,14 @@ _data = {
 &"UpRight": SubResource("Animation_m2t77")
 }
 
-[node name="EnemyDefault" type="CharacterBody2D" unique_id=187010336 node_paths=PackedStringArray("DeathNode", "AIModule") groups=["Enemy", "Entity"]]
+[node name="EnemyDefault" type="CharacterBody2D" unique_id=187010336 node_paths=PackedStringArray("DeathNode", "AIModule", "FlyingModule") groups=["Enemy", "Entity"]]
 position = Vector2(640, 320)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_go55b")
 DeathNode = NodePath("EnemyDeath")
 AIModule = NodePath("AIModule")
+FlyingModule = NodePath("PlayerModule/FlyingModule")
 
 [node name="EnemyDeath" type="Node" parent="." unique_id=971704386]
 script = ExtResource("2_8ryn8")
@@ -1748,6 +1750,10 @@ script = ExtResource("7_eadth")
 [node name="PlayerModule" parent="." unique_id=1088861868 node_paths=PackedStringArray("animTree", "MovesetModule") instance=ExtResource("8_v7v52")]
 animTree = NodePath("../Visual/AnimationTree")
 MovesetModule = NodePath("../FlybyMoveset")
+
+[node name="FlyingModule" type="Node" parent="PlayerModule" unique_id=1040500888 node_paths=PackedStringArray("playerModule")]
+script = ExtResource("9_8ryn8")
+playerModule = NodePath("..")
 
 [node name="CollisionBox" type="CollisionShape2D" parent="." unique_id=146435598]
 z_index = 1

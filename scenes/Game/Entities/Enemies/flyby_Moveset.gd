@@ -19,8 +19,8 @@ extends Node
 @export var MeHitboxSize: int = 7
 @export var MeHitboxLifetime: float = 0.1
 
-@export var MePlayerMovement: Vector3 = Vector3(300,0,0)
-@export var MeStartLagTime: float = 0.2
+@export var MePlayerMovement: Vector3 = Vector3(300,-10,0)
+@export var MeStartLagTime: float = 1.2
 @export var MeDebounceTime: float = 0.2
 @export var MeAnim: Array[String] = ["AtkSLag", "Atk"]
 @export var MeResetTime: float = 1.0
@@ -41,10 +41,11 @@ func airAttack():
 	
 	playerModule.StatusModule.applyDebounce(MeDebounceTime + MeStartLagTime)
 	playerModule.AnimModule.forceAnim(MeAnim[0])
+	playerModule.MovementModule.setMovement(Vector2(0,0))
 	await get_tree().create_timer(MeStartLagTime).timeout
 	if playerModule.StatusModule.isStunned: return
 	playerModule.AnimModule.forceAnim(MeAnim[1])
-	
+	lookDir = playerModule.StatusModule.lookDir
 	playerModule.MovementModule.setForceV3(MePlayerMovement*Vector3(lookDir,1,1))
 	
 	movesetUtils.spawnHitbox(lookDir, MeHitboxOffset, MeHitboxintMovementDir, MeHitboxAccelerationDir, MeHitboxSize, MeHitboxLifetime, MeDamage, MeStuntime, MeKnockback)

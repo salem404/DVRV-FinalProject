@@ -77,7 +77,7 @@ func _process(delta):
 	var canMove: bool = StatusModule.canMove()
 	
 	if canMove:
-		MovementModule.setMovement(InputModule.movement, StatsModule.speed)
+		MovementModule.setInputMovement(InputModule.movement, StatsModule.speed)
 		
 		if InputModule.jumpKey and not StatusModule.onAir:
 			HeightModule.jump(StatsModule.jPower)
