@@ -13,6 +13,8 @@ var behavior: int = 0
 
 @export_category("Mode 1 = Move Towards")
 @export var distKeep: Vector2 = Vector2(300,0)
+@export var offsetMin: Vector2 = Vector2(-200,-100)
+@export var offsetMax: Vector2 = Vector2(200,100)
 var targetOffset: Vector2 = Vector2.ZERO
 
 @export_category("Mode 2 = KickAttack")
@@ -28,7 +30,7 @@ func _ready():
 			continue
 		behavior = 2
 		#behavior = randi_range(1, 2)
-		targetOffset = Vector2(randi_range(-200,200),randi_range(-100,100))
+		targetOffset = Vector2(randi_range(offsetMin.x,offsetMax.x),randi_range(offsetMin.y,offsetMax.y))
 		await get_tree().create_timer(randf_range(waitTimeRange.x,waitTimeRange.y)).timeout
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.

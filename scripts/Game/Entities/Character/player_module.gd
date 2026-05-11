@@ -80,7 +80,7 @@ func _process(delta):
 		MovementModule.setInputMovement(InputModule.movement, StatsModule.speed)
 		
 		if InputModule.jumpKey and not StatusModule.onAir:
-			HeightModule.jump(StatsModule.jPower)
+			MovesetModule.jump()
 		if StatusModule.onAir:
 			if InputModule.lightAttack and MovesetModule.airAttack:
 				MovesetModule.airAttack()

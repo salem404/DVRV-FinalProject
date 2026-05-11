@@ -47,11 +47,17 @@ func moveSameVertical(target: int):
 			playerModule.InputModule.movement.y = 1 if enemyDir > 0 else -1
 			
 	pass
-
+	
 ################################################################################
 #####                              Attacks                                 #####
 ################################################################################
 
+func useJump():
+	if playerModule.InputModule.jumpKey == false:
+		playerModule.InputModule.jumpKey = true
+		await waitTime(0.1)
+		playerModule.InputModule.jumpKey = false
+		
 func useLightAttack():
 	if playerModule.InputModule.lightAttack == false:
 		playerModule.InputModule.lightAttack = true

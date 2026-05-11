@@ -1,11 +1,11 @@
-[gd_scene format=3 uid="uid://cdiuvmhs6n6l1"]
+[gd_scene format=3 uid="uid://iuv35gx70s04"]
 
 [ext_resource type="Script" uid="uid://dbjji30kw3c0f" path="res://scripts/Game/Entities/Character/playerPhysics.gd" id="1_qhrni"]
 [ext_resource type="Script" uid="uid://x6oifdqj03x5" path="res://scripts/Game/Entities/Enemy/enemy_death.gd" id="2_wwuxe"]
-[ext_resource type="Script" uid="uid://b7vqkwge0uusc" path="res://scripts/Game/Entities/Enemy/Grimp/grimp_Moveset.gd" id="3_4foeg"]
+[ext_resource type="Script" uid="uid://mar8jnpxpnmd" path="res://scripts/Game/Entities/Enemy/Spiffer/spiffer_Moveset.gd" id="3_qhrni"]
 [ext_resource type="PackedScene" uid="uid://pyc48swcdrki" path="res://scenes/Game/Attacks/hitbox.tscn" id="4_7p0vy"]
 [ext_resource type="Script" uid="uid://c73wj7hcloodd" path="res://scripts/Game/Entities/moveset_utils.gd" id="5_5we2g"]
-[ext_resource type="Script" uid="uid://873jsag3lu2i" path="res://scripts/Game/Entities/Enemy/Grimp/grimp_AI.gd" id="6_5j3fg"]
+[ext_resource type="Script" uid="uid://cq1w8o35ndc0o" path="res://scripts/Game/Entities/Enemy/Spiffer/spiffer_AI.gd" id="6_wwuxe"]
 [ext_resource type="Script" uid="uid://clkkjr4bwsqf1" path="res://scripts/Game/Entities/Enemy/AI_Utilities.gd" id="7_chu3p"]
 [ext_resource type="PackedScene" uid="uid://calalwud0205g" path="res://scenes/Game/Entities/player_module.tscn" id="8_1xvb6"]
 [ext_resource type="Texture2D" uid="uid://bwf0hdksn75fq" path="res://images/Circle.png" id="9_v37mt"]
@@ -245,7 +245,7 @@ states/Defeat/position = Vector2(239, -104)
 states/DigIn/node = SubResource("AnimationNodeBlendSpace1D_4foeg")
 states/DigIn/position = Vector2(239, -169)
 states/DigOut/node = SubResource("AnimationNodeBlendSpace1D_7p0vy")
-states/DigOut/position = Vector2(384, -169)
+states/DigOut/position = Vector2(441, -169)
 states/Downed/node = SubResource("AnimationNodeBlendSpace1D_xkejy")
 states/Downed/position = Vector2(297, 226)
 states/Idle/node = SubResource("AnimationNodeBlendSpace1D_jpqlp")
@@ -272,11 +272,10 @@ states/Up/position = Vector2(297, 100)
 states/Walk/node = SubResource("AnimationNodeBlendSpace1D_wklcl")
 states/Walk/position = Vector2(641, -24)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_by3ly"), "Stun", "Idle", SubResource("AnimationNodeStateMachineTransition_d7n1s"), "Up", "Idle", SubResource("AnimationNodeStateMachineTransition_swtt5"), "Downed", "Up", SubResource("AnimationNodeStateMachineTransition_msu2m"), "Stun", "Knockback", SubResource("AnimationNodeStateMachineTransition_dt5te"), "Knockback", "Downed", SubResource("AnimationNodeStateMachineTransition_6x8u5"), "Downed", "Knockback", SubResource("AnimationNodeStateMachineTransition_2n6nx"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_00enb"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_jpqlp")]
-graph_offset = Vector2(-93, -236)
+graph_offset = Vector2(72, -220)
 
 [sub_resource type="Animation" id="Animation_mycxw"]
 resource_name = "DefeatLeft"
-length = 0.4
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -285,7 +284,7 @@ tracks/0/path = NodePath("Sprite2D:region_rect")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.25, 0.4),
+"times": PackedFloat32Array(0, 0.15, 0.6, 1),
 "transitions": PackedFloat32Array(0, 0, 0, 0),
 "update": 0,
 "values": [Rect2(1100, 704, 322, 235), Rect2(1457, 807, 187, 132), Rect2(1670, 805, 189, 134), Rect2(1909, 841, 168, 96)]
@@ -297,7 +296,7 @@ tracks/1/path = NodePath("Sprite2D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.25, 0.4),
+"times": PackedFloat32Array(0, 0.15, 0.6, 1),
 "transitions": PackedFloat32Array(0, 0, 0, 0),
 "update": 0,
 "values": [Vector2(-3, -59), Vector2(-0.5, -31.4), Vector2(-2, -32.5), Vector2(-1, -22)]
@@ -353,7 +352,6 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id="Animation_m1j1l"]
 resource_name = "DefeatRight"
-length = 0.4
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -362,7 +360,7 @@ tracks/0/path = NodePath("Sprite2D:region_rect")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.25, 0.4),
+"times": PackedFloat32Array(0, 0.15, 0.6, 1),
 "transitions": PackedFloat32Array(0, 0, 0, 0),
 "update": 0,
 "values": [Rect2(1100, 704, 322, 235), Rect2(1457, 807, 187, 132), Rect2(1670, 805, 189, 134), Rect2(1909, 841, 168, 96)]
@@ -374,7 +372,7 @@ tracks/1/path = NodePath("Sprite2D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.25, 0.4),
+"times": PackedFloat32Array(0, 0.15, 0.6, 1),
 "transitions": PackedFloat32Array(0, 0, 0, 0),
 "update": 0,
 "values": [Vector2(3, -59), Vector2(0.5, -31.4), Vector2(2, -32.5), Vector2(1, -22)]
@@ -439,10 +437,10 @@ tracks/0/path = NodePath("Sprite2D:region_rect")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.15),
-"transitions": PackedFloat32Array(0, 0, 0),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(0, 0, 0, 0),
 "update": 0,
-"values": [Rect2(699, 138, 267, 219), Rect2(1003, 122, 217, 236), Rect2(1258, 260, 168, 96)]
+"values": [Rect2(699, 138, 267, 219), Rect2(1003, 122, 217, 236), Rect2(1258, 260, 168, 96), Rect2(1, 1, 1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -451,7 +449,7 @@ tracks/1/path = NodePath("Sprite2D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.15),
+"times": PackedFloat32Array(0, 0.1, 0.2),
 "transitions": PackedFloat32Array(0, 0, 0),
 "update": 0,
 "values": [Vector2(-8, -53), Vector2(-2, -57), Vector2(0, -20)]
@@ -516,10 +514,10 @@ tracks/0/path = NodePath("Sprite2D:region_rect")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.15),
-"transitions": PackedFloat32Array(0, 0, 0),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(0, 0, 0, 0),
 "update": 0,
-"values": [Rect2(699, 138, 267, 219), Rect2(1003, 122, 217, 236), Rect2(1258, 260, 168, 96)]
+"values": [Rect2(699, 138, 267, 219), Rect2(1003, 122, 217, 236), Rect2(1258, 260, 168, 96), Rect2(1, 1, 1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -528,7 +526,7 @@ tracks/1/path = NodePath("Sprite2D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.15),
+"times": PackedFloat32Array(0, 0.1, 0.2),
 "transitions": PackedFloat32Array(0, 0, 0),
 "update": 0,
 "values": [Vector2(8, -53), Vector2(2, -57), Vector2(0, -20)]
@@ -1928,17 +1926,18 @@ AIModule = NodePath("AIModule")
 
 [node name="EnemyDeath" type="Node" parent="." unique_id=971704386]
 script = ExtResource("2_wwuxe")
+deathTime = 1.5
+deathAnim = &"Defeat"
 
-[node name="GrimpMoveset" type="Node" parent="." unique_id=716930840]
-script = ExtResource("3_4foeg")
-hitboxPacked = ExtResource("4_7p0vy")
+[node name="SpifferMoveset" type="Node" parent="." unique_id=716930840]
+script = ExtResource("3_qhrni")
 
-[node name="MovesetUtils" type="Node" parent="GrimpMoveset" unique_id=2037218752]
+[node name="MovesetUtils" type="Node" parent="SpifferMoveset" unique_id=2037218752]
 script = ExtResource("5_5we2g")
 hitboxPacked = ExtResource("4_7p0vy")
 
 [node name="AIModule" type="Node2D" parent="." unique_id=376197860]
-script = ExtResource("6_5j3fg")
+script = ExtResource("6_wwuxe")
 
 [node name="AiRange" type="Area2D" parent="AIModule" unique_id=495530485]
 position = Vector2(640, 256)
@@ -1952,7 +1951,8 @@ debug_color = Color(0.62, 0.41333336, 0, 0.039215688)
 script = ExtResource("7_chu3p")
 
 [node name="PlayerModule" parent="." unique_id=1088861868 node_paths=PackedStringArray("MovesetModule") instance=ExtResource("8_1xvb6")]
-MovesetModule = NodePath("../GrimpMoveset")
+ignoresKnockback = true
+MovesetModule = NodePath("../SpifferMoveset")
 
 [node name="CollisionBox" type="CollisionShape2D" parent="." unique_id=146435598]
 z_index = 1

@@ -4,8 +4,21 @@ extends Node
 @onready var player: Node = get_parent().get_parent()
 
 ################################################################################
+#####                             Functions                                #####
+################################################################################
+
+func defaultJump():
+	player.PlayerModule.HeightModule.setHeightSpeed(player.PlayerModule.StatsModule.jPower)
+
+################################################################################
 #####                              Utility                                 #####
 ################################################################################
+
+func tpToPosition(target: Vector2):
+	player.position = target
+	
+func lookPlayer(target: CharacterBody2D):
+	var playerModule = player.PlayerModule
 
 func spawnHitbox(lookDir, positionOffset, intMovementDir, AccelerationDir, scale, lifetime, damage, stuntime, knockback, followParent: bool = true, dmgSelf: bool = false):
 	var hitbox = hitboxPacked.instantiate()
