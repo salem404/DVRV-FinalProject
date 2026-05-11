@@ -1,8 +1,10 @@
-[gd_scene format=3 uid="uid://c2l1f3ea3ue51"]
+[gd_scene format=3 uid="uid://mxw8lddn2vpf"]
 
 [ext_resource type="Script" uid="uid://b77jre5h6i45s" path="res://scripts/Menu/menu.gd" id="1_yqeox"]
+[ext_resource type="Texture2D" uid="uid://dnp21sfw1k4c3" path="res://images/menu/menu.png" id="2_mhnvy"]
 [ext_resource type="PackedScene" uid="uid://d3i3qli7l3int" path="res://scenes/settings.tscn" id="2_vjb58"]
-[ext_resource type="PackedScene" uid="uid://brmct871hpirb" path="res://scenes/credit.tscn" id="3_con2f"]
+[ext_resource type="Texture2D" uid="uid://bsu16p4k2di5d" path="res://assets/Prinbles_YetAnotherIcons (beta) (9_7_2023)/svg/White-Icon/Gear.svg" id="3_4ytvr"]
+[ext_resource type="PackedScene" uid="uid://bi2m73hrl38fb" path="res://scenes/credit.tscn" id="3_con2f"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mhnvy"]
 content_margin_left = 12.0
@@ -85,10 +87,14 @@ grow_vertical = 2
 script = ExtResource("1_yqeox")
 
 [node name="BackgroundContainer" type="PanelContainer" parent="." unique_id=1448090182]
-visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundContainer" unique_id=369209529]
+position = Vector2(642, 359)
+scale = Vector2(0.88458884, 0.34960938)
+texture = ExtResource("2_mhnvy")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=245583536]
 layout_mode = 0
@@ -117,7 +123,7 @@ theme_override_font_sizes/font_size = 25
 theme_override_styles/normal = SubResource("StyleBoxFlat_13sgg")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_i6lef")
 theme_override_styles/hover = SubResource("StyleBoxFlat_70i5f")
-text = "ui_credit"
+text = "ui_credits"
 
 [node name="ExitButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1711757321]
 layout_mode = 2
@@ -135,6 +141,7 @@ offset_right = 129.0
 offset_bottom = 110.0
 text = "ui_settings
 "
+icon = ExtResource("3_4ytvr")
 
 [node name="Settings" parent="." unique_id=1520513264 instance=ExtResource("2_vjb58")]
 visible = false

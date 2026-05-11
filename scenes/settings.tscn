@@ -6,7 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://djsjvj0sym2g5" path="res://assets/Prinbles_YetAnotherIcons (beta) (9_7_2023)/svg/White-Icon/Music-On.svg" id="2_gjs24"]
 [ext_resource type="Texture2D" uid="uid://d1d6soynr17p3" path="res://assets/Prinbles_YetAnotherIcons (beta) (9_7_2023)/svg/White-Icon/MediumArrow-Left.svg" id="3_es4n0"]
 [ext_resource type="Script" uid="uid://bijuhj6ov52nr" path="res://scripts/language.gd" id="3_f4mfi"]
-[ext_resource type="Texture2D" uid="uid://dmgjoirpvdn5r" path="res://assets/Prinbles_YetAnotherIcons (beta) (9_7_2023)/svg/White-Icon/MediumArrow-Right.svg" id="4_gis3k"]
+[ext_resource type="Texture2D" uid="uid://chrtfvap6kx8k" path="res://images/menu/icon-mas.png" id="6_am25x"]
+[ext_resource type="Texture2D" uid="uid://c88o2mmw4g77k" path="res://images/menu/icon-menos.png" id="7_4ppmf"]
 [ext_resource type="Texture2D" uid="uid://cww7e2vwy154t" path="res://assets/Prinbles_YetAnotherIcons (beta) (9_7_2023)/svg/White-Icon/Repeat-Right.svg" id="7_am25x"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_manaa"]
@@ -20,6 +21,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5p8wc")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=17922337]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 719.0
+color = Color(0.12955844, 0.12955847, 0.12955844, 1)
 
 [node name="AjustesLabel" type="Label" parent="." unique_id=1992692996]
 visible = false
@@ -86,7 +93,7 @@ flat = true
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
 size_flags_vertical = 4
-icon = ExtResource("3_es4n0")
+icon = ExtResource("6_am25x")
 flat = true
 icon_alignment = 1
 
@@ -104,7 +111,7 @@ ticks_position = 3
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
 size_flags_vertical = 4
-icon = ExtResource("4_gis3k")
+icon = ExtResource("7_4ppmf")
 flat = true
 icon_alignment = 1
 
@@ -129,7 +136,7 @@ flat = true
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
 size_flags_vertical = 4
-icon = ExtResource("3_es4n0")
+icon = ExtResource("6_am25x")
 flat = true
 icon_alignment = 1
 
@@ -147,7 +154,7 @@ ticks_position = 3
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
 size_flags_vertical = 4
-icon = ExtResource("4_gis3k")
+icon = ExtResource("7_4ppmf")
 flat = true
 icon_alignment = 1
 
@@ -173,7 +180,7 @@ flat = true
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
 size_flags_vertical = 4
-icon = ExtResource("3_es4n0")
+icon = ExtResource("6_am25x")
 flat = true
 icon_alignment = 1
 
@@ -191,7 +198,7 @@ ticks_position = 3
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
 size_flags_vertical = 4
-icon = ExtResource("4_gis3k")
+icon = ExtResource("7_4ppmf")
 flat = true
 icon_alignment = 1
 
@@ -265,6 +272,7 @@ offset_bottom = 50.0
 [node name="Button" type="Button" parent="BoxContainer2" unique_id=1066629123]
 layout_mode = 2
 text = "ui_back"
+icon = ExtResource("3_es4n0")
 
 [connection signal="pressed" from="MarginContainer/TabContainer/Audio/ResetButton" to="MarginContainer/TabContainer/Audio" method="_on_reset_button_pressed"]
 [connection signal="pressed" from="BoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
