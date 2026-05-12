@@ -10,10 +10,11 @@ var thisOwner: CharacterBody2D
 	
 func _on_initialized():
 	if not this: this = get_parent()
-	thisOwner = this.get_parent()
+	thisOwner = this.get_parent() if this.get_parent() is CharacterBody2D else null
 	
-	while true:
-		imaginaryHitbox.position.y = -thisOwner.PlayerModule.HeightModule.height/this.scale.y
-		await get_tree().process_frame
-		if !this.followHeight:
-			break
+	if thisOwner:
+		while true:
+			imaginaryHitbox.position.y = -thisOwner.PlayerModule.HeightModule.height/this.scale.y if this.get_parent() is CharacterBody2D else 0
+			await get_tree().process_frame
+			if !this.followHeight:
+				break

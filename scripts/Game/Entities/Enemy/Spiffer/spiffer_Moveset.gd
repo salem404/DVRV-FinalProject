@@ -24,6 +24,24 @@ func _initialized():
 var tpOffset: Vector2 = Vector2.ZERO
 var TpNumber: int = 0
 
+@export_category("Spit Horizonal")
+@export var SHDamage: int = 10
+@export var SHKnockback: Vector3 = Vector3(500,10,0)
+@export var SHStuntime: float = 0.5
+
+@export var SHHitboxOffset: Vector3 = Vector3(80,0,-64)
+@export var SHHitboxintMovementDir: Vector3 = Vector3(0,0,0)
+@export var SHHitboxAccelerationDir: Vector3 = Vector3(0,0,0)
+@export var SHHitboxSize: int = 10
+@export var SHHitboxLifetime: float = 0.1
+
+@export var SHPlayerMovement: Vector3 = Vector3(300,1,0)
+@export var SHStartLagTime: float = 0.2
+@export var SHDebounceTime: float = 0.2
+@export var SHAnim: Array[String] = ["SpitHorizontalSLag", "SpitHorizontal"]
+@export var SHResetTime: float = 1.0
+var SHNumber: int = 0
+
 ################################################################################
 #####                             Movement                                 #####
 ################################################################################
@@ -61,3 +79,38 @@ func jump():
 ################################################################################
 #####                              Attacks                                 #####
 ################################################################################
+
+func lightAttack():
+	if 1 <= SHNumber: return
+	
+	var lookDir = playerModule.StatusModule.lookDir
+	
+	playerModule.StatusModule.applyDebounce(SHDebounceTime + SHStartLagTime)
+	playerModule.AnimModule.forceAnim(SHAnim[0])
+	await get_tree().create_timer(SHStartLagTime).timeout
+	if playerModule.StatusModule.isStunned: return
+	playerModule.AnimModule.forceAnim(SHAnim[1])
+	
+	playerModule.MovementModule.applyForceV3(SHPlayerMovement * Vector3(lookDir, 1, 1))
+	
+	movesetUtils.spawnHitbox(
+		lookDir,
+		SHHitboxOffset,
+		SHHitboxintMovementDir,
+		SHHitboxAccelerationDir,
+		SHHitboxSize,
+		SHHitboxLifetime,
+		SHDamage,
+		SHStuntime,
+		SHKnockback
+	)
+	
+	SHNumber += 1
+	var befAtkN = SHNumber
+	await get_tree().create_timer(SHDebounceTime).timeout
+	if !playerModule.StatusModule.isStunned:
+		playerModule.AnimModule.resetAnim()
+	
+	await get_tree().create_timer(SHResetTime).timeout
+	if befAtkN == SHNumber:
+		SHNumber = 0

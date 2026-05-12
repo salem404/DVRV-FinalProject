@@ -272,7 +272,7 @@ states/Up/position = Vector2(297, 100)
 states/Walk/node = SubResource("AnimationNodeBlendSpace1D_wklcl")
 states/Walk/position = Vector2(641, -24)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_by3ly"), "Stun", "Idle", SubResource("AnimationNodeStateMachineTransition_d7n1s"), "Up", "Idle", SubResource("AnimationNodeStateMachineTransition_swtt5"), "Downed", "Up", SubResource("AnimationNodeStateMachineTransition_msu2m"), "Stun", "Knockback", SubResource("AnimationNodeStateMachineTransition_dt5te"), "Knockback", "Downed", SubResource("AnimationNodeStateMachineTransition_6x8u5"), "Downed", "Knockback", SubResource("AnimationNodeStateMachineTransition_2n6nx"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_00enb"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_jpqlp")]
-graph_offset = Vector2(72, -220)
+graph_offset = Vector2(62, -428)
 
 [sub_resource type="Animation" id="Animation_mycxw"]
 resource_name = "DefeatLeft"

@@ -13,7 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://de8xycmp1afo4" path="res://images/Entities/shadow.png" id="10_f71au"]
 [ext_resource type="Texture2D" uid="uid://dapgnwkvf74w5" path="res://images/Entities/Enemies/Flyby Spritesheet.png" id="11_go55b"]
 
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_nbf47"]
 radius = 2000.0
 

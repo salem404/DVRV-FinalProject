@@ -1,7 +1,7 @@
 extends Node
 
 @export var this: Area2D = get_parent()
-@onready var thisOwner: CharacterBody2D = this.get_parent()
+@onready var thisOwner: CharacterBody2D
 
 @export_category("Values")
 @export var damage: int
@@ -18,6 +18,8 @@ var hitted: Array[CharacterBody2D] = []
 var newHeight: float = 0
 
 func _ready():
+	thisOwner = this.get_parent() if this.get_parent() is CharacterBody2D else null
+	
 	this.body_entered.connect(_on_body_entered)
 	this.body_exited.connect(_on_body_exit)
 

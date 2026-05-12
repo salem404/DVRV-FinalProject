@@ -45,4 +45,7 @@ func _AIProcess(delta):
 				pass
 			1:
 				AIUtils.useJump()
+				behavior = 2
+			2:
+				AIUtils.useLightAttack()
 	pass

@@ -20,7 +20,8 @@ signal hit(this: Node2D)
 @export_category("LIfeTime Values")
 @export var lifeTime: float = -1
 
-var showHitbox: bool = false
+@export_category("Debug")
+@export var showHitbox: bool = false
 
 func _ready():
 	$HitboxMovementModule.intMovementDir = intMovementDir
