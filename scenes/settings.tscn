@@ -1,14 +1,102 @@
 [gd_scene format=3 uid="uid://d3i3qli7l3int"]
 
 [ext_resource type="Script" uid="uid://ce1tei6n7ulfo" path="res://scripts/settings.gd" id="1_5p8wc"]
+[ext_resource type="Theme" uid="uid://dxpviy64b7b2l" path="res://assets/Theme/settings_theme.tres" id="1_gjs24"]
 [ext_resource type="Script" uid="uid://clglermckhp1j" path="res://scripts/audio.gd" id="2_6wm04"]
-[ext_resource type="Texture2D" uid="uid://dnh5endgaq1hi" path="res://assets/Prinbles_YetAnotherIcons (beta) (9_7_2023)/svg/White-Icon/TalkBubble.svg" id="2_gis3k"]
-[ext_resource type="Texture2D" uid="uid://djsjvj0sym2g5" path="res://assets/Prinbles_YetAnotherIcons (beta) (9_7_2023)/svg/White-Icon/Music-On.svg" id="2_gjs24"]
 [ext_resource type="Texture2D" uid="uid://d1d6soynr17p3" path="res://assets/Prinbles_YetAnotherIcons (beta) (9_7_2023)/svg/White-Icon/MediumArrow-Left.svg" id="3_es4n0"]
 [ext_resource type="Script" uid="uid://bijuhj6ov52nr" path="res://scripts/language.gd" id="3_f4mfi"]
 [ext_resource type="Texture2D" uid="uid://chrtfvap6kx8k" path="res://images/menu/icon-mas.png" id="6_am25x"]
 [ext_resource type="Texture2D" uid="uid://c88o2mmw4g77k" path="res://images/menu/icon-menos.png" id="7_4ppmf"]
 [ext_resource type="Texture2D" uid="uid://cww7e2vwy154t" path="res://assets/Prinbles_YetAnotherIcons (beta) (9_7_2023)/svg/White-Icon/Repeat-Right.svg" id="7_am25x"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_am25x"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.7058824, 0.5686275, 0.1882353, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ppmf"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.6039216, 0.48235294, 0.15686275, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uhhto"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.78431374, 0.63529414, 0.22745098, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gjs24"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.23921569, 0.3019608, 0.15294118, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.54509807, 0.5019608, 0.2, 0.5019608)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1g033"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.9098039, 0.8784314, 0.8, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.54509807, 0.5019608, 0.2, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_01roj"]
+bg_color = Color(0.2901961, 0.36078432, 0.1882353, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_wqwn7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wqwn7"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.7058824, 0.5686275, 0.1882353, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
 
 [sub_resource type="LabelSettings" id="LabelSettings_manaa"]
 font_size = 20
@@ -20,13 +108,322 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_gjs24")
 script = ExtResource("1_5p8wc")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=17922337]
-layout_mode = 0
-offset_right = 1280.0
-offset_bottom = 719.0
-color = Color(0.12955844, 0.12955847, 0.12955844, 1)
+[node name="Dimmer" type="ColorRect" parent="." unique_id=17922337]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1637362421]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MainPanel" type="PanelContainer" parent="CenterContainer" unique_id=930075391]
+custom_minimum_size = Vector2(800, 500)
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="CenterContainer/MainPanel" unique_id=2058833435]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBox" type="VBoxContainer" parent="CenterContainer/MainPanel/Margin" unique_id=1537513726]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="HeaderBar" type="HBoxContainer" parent="CenterContainer/MainPanel/Margin/VBox" unique_id=1732020418]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="BackButton" type="Button" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar" unique_id=791247328]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_am25x")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_4ppmf")
+theme_override_styles/hover = SubResource("StyleBoxFlat_uhhto")
+text = "<"
+
+[node name="TabContainer" type="TabContainer" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar" unique_id=277226810]
+layout_mode = 2
+size_flags_horizontal = 3
+tab_alignment = 1
+current_tab = 2
+clip_tabs = false
+
+[node name="SONIDO" type="MarginContainer" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar/TabContainer" unique_id=610420254]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 20
+metadata/_tab_index = 0
+
+[node name="AudioBuses" type="VBoxContainer" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar/TabContainer/SONIDO" unique_id=707425030]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="MasterBus" type="HBoxContainer" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar/TabContainer/SONIDO/AudioBuses" unique_id=1398309362]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="AudioLabel" type="Label" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar/TabContainer/SONIDO/AudioBuses/MasterBus" unique_id=69820503]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "todo
+
+"
+uppercase = true
+
+[node name="MinimuButton" type="Button" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar/TabContainer/SONIDO/AudioBuses/MasterBus" unique_id=1956787840]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_vertical = 0
+text = "-"
+
+[node name="Slider" type="HSlider" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar/TabContainer/SONIDO/AudioBuses/MasterBus" unique_id=1038179307]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+value = 80.0
+rounded = true
+scrollable = false
+
+[node name="PlusButton" type="Button" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar/TabContainer/SONIDO/AudioBuses/MasterBus" unique_id=350733190]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "+"
+
+[node name="ValueLabel" type="Label" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar/TabContainer/SONIDO/AudioBuses/MasterBus" unique_id=930223802]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "80
+"
+horizontal_alignment = 2
+
+[node name="MusicBus" type="HBoxContainer" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar/TabContainer/SONIDO/AudioBuses" unique_id=1442391596]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="AudioLabel" type="Label" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar/TabContainer/SONIDO/AudioBuses/MusicBus" unique_id=847116866]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "música
+
+"
+uppercase = true
+
+[node name="MinimuButton" type="Button" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar/TabContainer/SONIDO/AudioBuses/MusicBus" unique_id=1090511619]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "-"
+
+[node name="Slider" type="HSlider" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar/TabContainer/SONIDO/AudioBuses/MusicBus" unique_id=1365472762]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+value = 60.0
+rounded = true
+scrollable = false
+
+[node name="PlusButton" type="Button" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar/TabContainer/SONIDO/AudioBuses/MusicBus" unique_id=790914155]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_vertical = 0
+text = "+"
+
+[node name="ValueLabel" type="Label" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar/TabContainer/SONIDO/AudioBuses/MusicBus" unique_id=570236313]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "60
+"
+horizontal_alignment = 2
+
+[node name="SFXBus" type="HBoxContainer" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar/TabContainer/SONIDO/AudioBuses" unique_id=465105127]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="AudioLabel" type="Label" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar/TabContainer/SONIDO/AudioBuses/SFXBus" unique_id=1456964525]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "sfx
+
+"
+uppercase = true
+
+[node name="MinimuButton" type="Button" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar/TabContainer/SONIDO/AudioBuses/SFXBus" unique_id=1533342658]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_vertical = 0
+text = "-"
+
+[node name="Slider" type="HSlider" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar/TabContainer/SONIDO/AudioBuses/SFXBus" unique_id=1584701566]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+value = 70.0
+rounded = true
+scrollable = false
+
+[node name="PlusButton" type="Button" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar/TabContainer/SONIDO/AudioBuses/SFXBus" unique_id=865081993]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_vertical = 0
+text = "+"
+
+[node name="ValueLabel" type="Label" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar/TabContainer/SONIDO/AudioBuses/SFXBus" unique_id=52475302]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "70
+"
+horizontal_alignment = 2
+
+[node name="AmbientBus" type="HBoxContainer" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar/TabContainer/SONIDO/AudioBuses" unique_id=1326074789]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="AudioLabel" type="Label" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar/TabContainer/SONIDO/AudioBuses/AmbientBus" unique_id=176762948]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "ambiente
+
+"
+uppercase = true
+
+[node name="MinimuButton" type="Button" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar/TabContainer/SONIDO/AudioBuses/AmbientBus" unique_id=1499014596]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+text = "-"
+
+[node name="Slider" type="HSlider" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar/TabContainer/SONIDO/AudioBuses/AmbientBus" unique_id=218683270]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+value = 50.0
+rounded = true
+scrollable = false
+
+[node name="PlusButton" type="Button" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar/TabContainer/SONIDO/AudioBuses/AmbientBus" unique_id=1406202909]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+text = "+"
+
+[node name="ValueLabel" type="Label" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar/TabContainer/SONIDO/AudioBuses/AmbientBus" unique_id=1526190781]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "50
+"
+horizontal_alignment = 2
+
+[node name="IDIOMA" type="MarginContainer" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar/TabContainer" unique_id=836550651]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 15
+metadata/_tab_index = 1
+
+[node name="LanguageList" type="VBoxContainer" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar/TabContainer/IDIOMA" unique_id=478460787]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="HintLabel" type="Label" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar/TabContainer/IDIOMA/LanguageList" unique_id=652885765]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Elige tu idioma"
+
+[node name="LangES" type="Button" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar/TabContainer/IDIOMA/LanguageList" unique_id=1756575587]
+custom_minimum_size = Vector2(0, 55)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8901961, 0.79607844, 0.3764706, 1)
+theme_override_colors/font_pressed_color = Color(0.2, 0.16470589, 0.08627451, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_gjs24")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1g033")
+theme_override_styles/hover = SubResource("StyleBoxFlat_01roj")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_wqwn7")
+text = "ESPAÑOL                                           ES"
+
+[node name="LangEN" type="Button" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar/TabContainer/IDIOMA/LanguageList" unique_id=1352989062]
+custom_minimum_size = Vector2(0, 55)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8901961, 0.79607844, 0.3764706, 1)
+theme_override_colors/font_pressed_color = Color(0.2, 0.16470589, 0.08627451, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_gjs24")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1g033")
+theme_override_styles/hover = SubResource("StyleBoxFlat_01roj")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_wqwn7")
+text = "INGLÉS                                               EN"
+
+[node name="CONTROLES" type="MarginContainer" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar/TabContainer" unique_id=1564836586]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 15
+metadata/_tab_index = 2
+
+[node name="ColumnsContainer" type="HBoxContainer" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar/TabContainer/CONTROLES" unique_id=846262208]
+layout_mode = 2
+theme_override_constants/separation = 60
+alignment = 1
+
+[node name="MovementColumn" type="VBoxContainer" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar/TabContainer/CONTROLES/ColumnsContainer" unique_id=217506961]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar/TabContainer/CONTROLES/ColumnsContainer/MovementColumn" unique_id=947881744]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8901961, 0.79607844, 0.3764706, 1)
+theme_override_font_sizes/font_size = 24
+text = "MOVIMIENTO"
+uppercase = true
+
+[node name="Keyrow_Up" type="HBoxContainer" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar/TabContainer/CONTROLES/ColumnsContainer/MovementColumn" unique_id=18240696]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="DirIcon" type="Label" parent="CenterContainer/MainPanel/Margin/VBox/HeaderBar/TabContainer/CONTROLES/ColumnsContainer/MovementColumn/Keyrow_Up" unique_id=596574935]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_wqwn7")
+text = "↑"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="AjustesLabel" type="Label" parent="." unique_id=1992692996]
 visible = false
@@ -41,22 +438,22 @@ horizontal_alignment = 1
 vertical_alignment = 2
 
 [node name="MarginContainer" type="AspectRatioContainer" parent="." unique_id=193194671]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -1.0
-offset_right = -5.0
-offset_bottom = -20.0
+offset_top = 137.0
+offset_right = -3.0
+offset_bottom = -81.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TabContainer" type="TabContainer" parent="MarginContainer" unique_id=88315357]
 layout_mode = 2
+theme_override_font_sizes/font_size = 25
 tab_alignment = 1
 current_tab = 0
-tab_0/icon = ExtResource("2_gjs24")
-tab_1/icon = ExtResource("2_gis3k")
 
 [node name="Audio" type="AspectRatioContainer" parent="MarginContainer/TabContainer" unique_id=209815922]
 custom_minimum_size = Vector2(500, 0)
@@ -263,15 +660,15 @@ text = "X"
 icon_alignment = 1
 
 [node name="BoxContainer2" type="BoxContainer" parent="." unique_id=1881499785]
+visible = false
 layout_mode = 0
-offset_left = 280.0
-offset_top = 10.0
-offset_right = 346.0
-offset_bottom = 50.0
+offset_left = 288.0
+offset_top = -1.0
+offset_right = 352.0
+offset_bottom = 63.0
 
 [node name="Button" type="Button" parent="BoxContainer2" unique_id=1066629123]
 layout_mode = 2
-text = "ui_back"
 icon = ExtResource("3_es4n0")
 
 [connection signal="pressed" from="MarginContainer/TabContainer/Audio/ResetButton" to="MarginContainer/TabContainer/Audio" method="_on_reset_button_pressed"]
