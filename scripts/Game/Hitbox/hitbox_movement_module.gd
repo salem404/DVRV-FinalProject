@@ -19,7 +19,7 @@ func _on_initialized():
 	height = intHeight
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta: float) -> void:
 	if setMovement:
 		velocity += AccelerationDir*Vector3(lookDir,1,1)
 		proyectile.position += Vector2(velocity.x,0+velocity.z)
