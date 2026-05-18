@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cj30h0h2xucks"
+path="res://.godot/imported/SFX bloqueo.mp3-a1a8ae877fe0389fc0fd4f7f333639af.mp3str"
+
+[deps]
+
+source_file="res://assets/Música/SFX/SFX bloqueo.mp3"
+dest_files=["res://.godot/imported/SFX bloqueo.mp3-a1a8ae877fe0389fc0fd4f7f333639af.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

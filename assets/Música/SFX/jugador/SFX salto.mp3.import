@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bxt4jbf12xbjp"
+path="res://.godot/imported/SFX salto.mp3-1633414ff57db495ac616406e25118a9.mp3str"
+
+[deps]
+
+source_file="res://assets/Música/SFX/jugador/SFX salto.mp3"
+dest_files=["res://.godot/imported/SFX salto.mp3-1633414ff57db495ac616406e25118a9.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
