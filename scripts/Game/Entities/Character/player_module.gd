@@ -82,12 +82,12 @@ func _process(delta):
 		if InputModule.jumpKey and not StatusModule.onAir:
 			HeightModule.jump(StatsModule.jPower)
 		if StatusModule.onAir:
-			if InputModule.lightAttack and MovesetModule.airAttack:
+			if InputModule.lightAttack and MovesetModule.has_method("airAttack"):
 				MovesetModule.airAttack()
 		else:
-			if InputModule.lightAttack and MovesetModule.lightAttack:
+			if InputModule.lightAttack and MovesetModule.has_method("lightAttack"):
 				MovesetModule.lightAttack()
-			if InputModule.heavyAttack and MovesetModule.heavyAttack:
+			if InputModule.heavyAttack and MovesetModule.has_method("heavyAttack"):
 				MovesetModule.heavyAttack()
 	else:
 		StatusModule.isMoving = false

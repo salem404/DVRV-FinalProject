@@ -5,6 +5,8 @@ extends Node
 
 @export var animTree: AnimationTree
 
+var lastAnim: String = ""
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if not status:
@@ -12,6 +14,7 @@ func _process(delta):
 		return
 	animTree = playerModule.charVisual.get_node("AnimationTree")
 	setAim()
+	checkAnimSfx()
 
 ################################################################################
 #####                              Utility                                 #####
@@ -50,3 +53,15 @@ func forceAnim(animName: String):
 	
 func resetAnim():
 	forceAnim("Idle")
+
+func checkAnimSfx():
+	var currentAnim = getCurrentAnim()
+	if currentAnim != lastAnim:
+		#print("Anim: ", currentAnim)
+		match currentAnim:
+			"AtkLight1": AudioManager.play_sfx("ataqueBaston")
+			"AtkLight2": AudioManager.play_sfx("ataqueBaston")
+			"AtkLight3": AudioManager.play_sfx("ataqueBaston")
+			"AtkSLagHeavy": AudioManager.play_sfx("cabezazo")
+			"Jump": AudioManager.play_sfx("jump")
+		lastAnim = currentAnim

@@ -19,6 +19,7 @@ extends Node2D
 func _ready():
 	spawn_players()
 	start_game()
+	#GlobalAudioStream.play_game()
 
 func spawn_players():
 	var i: int = 0

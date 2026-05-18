@@ -1,5 +1,7 @@
 extends Node
 
+@export var jumpSfxThreshold: float = 3
+
 @onready var playerModule: Node = get_parent()
 var character: CharacterBody2D
 
@@ -24,8 +26,11 @@ func _heightProcess(delta):
 ################################################################################
 
 func jump(jPower: float):
+	#var wasOnGround: bool = height <= 0
 	if height <= 0:
 		height += 1
+	#if jPower >= jumpSfxThreshold and height <= 1:
+		#AudioManager.play_sfx("jump")
 	heightSpeed = jPower
 	setOnAir()
 	
