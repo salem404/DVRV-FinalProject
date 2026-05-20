@@ -36,7 +36,7 @@ ui_lightAttack,Golpe ligero,Light attack
 ui_strongAttack,Golpe fuerte,Strong attack
 ui_jump,Salto,Jump
 ui_special,Especial,Special
-ui_masterVolumen,Volumen Maestro,Master Volume
+ui_masterVolumen,Volumen Maestro,Master Volume      
 ui_music,Música,Music
 ui_sfx,SFX,SFX
 ui_credits,Créditos,Credits
