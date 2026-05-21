@@ -29,7 +29,7 @@ func _set_children_visible(state: bool):
 func _on_retry_button_pressed() -> void:
 	is_active = false
 	get_tree().paused = false
-	exit_pressed.emit()
+	retry_pressed.emit()
 
 
 func _on_exit_button_pressed() -> void:

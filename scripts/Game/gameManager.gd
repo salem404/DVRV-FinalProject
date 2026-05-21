@@ -84,12 +84,12 @@ func _on_player_died():
 func _on_game_over_retry():
 	game_over_shown = false
 	get_tree().paused = false
-	get_tree().reload_current_scene()
+	get_tree().call_deferred("reload_current_scene")
 
 func _on_game_over_exit():
 	game_over_shown = false
 	get_tree().paused = false
-	get_tree().change_scene_to_packed(MenuScreen)
+	get_tree().call_deferred("change_scene_to_packed", MenuScreen)
 
 ################################################################################
 #####                              Utility                                 #####
