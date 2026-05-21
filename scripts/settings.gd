@@ -35,6 +35,7 @@ func show_settings() -> void:
 
 
 func _on_close_button_pressed() -> void:
+	AudioManager.play_sfx("btnSalir")
 	visible = false
 	settings_closed.emit()
 	
@@ -56,14 +57,17 @@ func _on_button_pressed() -> void:
 
 
 func _on_option_button_pressed() -> void:
+	AudioManager.play_sfx("btn")
 	pass # Replace with function body.
 
 
 func _on_gear_btn_pressed() -> void:
+	AudioManager.play_sfx("btn")
 	pass # Replace with function body.
 
 
 func _on_back_button_pressed() -> void:
+	AudioManager.play_sfx("btnSalir")
 	visible = false
 	settings_closed.emit()
 
