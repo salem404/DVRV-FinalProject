@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Spores and Dreams</title>
+<script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+  <link rel="stylesheet" href="asset/css/style.css">
+  <link rel="stylesheet" href="asset/css/audio.css">
+  <link rel="icon" type="image/png" href="asset/imagen/LogoSETAvector.svg">
+  
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/eruda@3/eruda.min.js"></script>
+<script>eruda.init();</script>
+<!-- ════════════════════════════════
+     HUD
+════════════════════════════════ -->
+<div id="hud">
+  <!-- Score + Combo centrado -->
+  <div id="score-row">
+    <div id="score-label">Score</div>
+    <div id="score-display">0</div>
+    <div id="combo-display">x1</div>
+  </div>
+
+  <!-- Multiplier debajo del score -->
+  <div id="multiplier-display">×1 PTS</div>
+
+  <!-- Barras de vida lado a lado -->
+  <div id="bars-row">
+    <div class="bar-group bar-player">
+      <div class="bar-header">
+        <div class="bar-label" id="player-hp-label">Tu vida</div>
+        <div class="bar-count" id="player-hp-count">5/5</div>
+      </div>
+      <div class="bar-bg">
+        <div class="bar-fill" id="player-hp-bar"></div>
+      </div>
+    </div>
+
+    <div class="bar-separator"></div>
+
+    <div class="bar-group bar-boss">
+      <div class="bar-header">
+        <div class="bar-label" id="hp-label">Boss</div>
+        <div class="bar-count" id="boss-hp-count">20/20</div>
+      </div>
+      <div class="bar-bg">
+        <div class="bar-fill" id="hp-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bar-group bar-stamina">
+    <div class="bar-header">
+      <div class="bar-label">Energía</div>
+      <div class="bar-count" id="stamina-count">4/4</div>
+    </div>
+    <div class="bar-bg">
+      <div class="bar-fill" id="stamina-bar"></div>
+    </div>
+  </div>
+
+  <div id="hud-divider"></div>
+</div>
+
+<!-- Scan prompt -->
+<div id="scan-prompt">
+  <span class="scan-dot"></span>
+  Apunta a una carta o al póster
+</div>
+
+<!-- Start overlay -->
+<div id="overlay">
+  <div class="overlay-inner">
+    <div class="overlay-glow"></div>
+    <div class="overlay-line-top"></div>
+
+    <div class="overlay-tag">Realidad aumentada</div>
+
+    <div class="overlay-title-group">
+      <div class="overlay-title">Spores</div>
+      <div class="overlay-title">and</div>
+      <div class="overlay-title">Dreams</div>
+    </div>
+
+    <div class="overlay-boss-label">BOSS</div>
+
+    <div class="overlay-sub">Escanea una carta o el póster<br>Derrota al enemigo</div>
+
+    <button class="btn-start" onclick="startGame()">EMPEZAR</button>
+
+    <div class="overlay-line-bottom"></div>
+  </div>
+</div>
+
+<!-- Result overlay -->
+<div id="result-overlay">
+  <div class="result-card">
+
+    <!-- Título -->
+    <div class="result-title win" id="result-title">¡VICTORIA!</div>
+
+    <!-- Puntuación -->
+    <div class="score-block">
+      <div class="score-label-sm">Puntuación</div>
+      <div class="score-value" id="result-score">0</div>
+      <div class="new-best-badge" id="new-best-badge">✦ NUEVO RÉCORD ✦</div>
+    </div>
+
+    <!-- Recompensas -->
+    <div style="width:100%;display:flex;flex-direction:column;gap:8px;align-items:center;">
+      <div class="rewards-title">Recompensas obtenidas</div>
+      <div class="rewards-grid" id="rewards-grid"></div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Ranking -->
+    <div style="width:100%;">
+      <div class="lb-header">
+        <div class="lb-title">🏆 Ranking</div>
+        <button class="lb-clear" onclick="clearLeaderboard()">Borrar</button>
+      </div>
+      <table class="lb-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Jugador</th>
+            <th>Puntos</th>
+          </tr>
+        </thead>
+        <tbody id="cuerpotabla"></tbody>
+      </table>
+    </div>
+
+    <!-- Botones -->
+    <div class="btn-row">
+      <button class="btn-play btn-secondary" onclick="shareScore()">📤 Compartir</button>
+      <button class="btn-play btn-primary"   onclick="restartGame()">⚔️ Rejugar</button>
+      <a href="links/index.html" class="btn-play btn-secondary" style="text-align: center; text-decoration: none; display: block; width: 100%;">🔗 Síguenos</a>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+     A-FRAME + MindAR SCENE
+     8 targets — todos invocan al mismo boss (Vaia)
+     Compilar targets.mind con las 8 imágenes en este orden:
+       0 = Grimp (carta 1/7)
+       1 = Pumpumf (carta 2/7)
+       2 = Flyby (carta 3/7)
+       3 = Spiffter (carta 4/7)
+       4 = Spiffty (carta 5/7)
+       5 = Vaia (carta 6/7)
+       6 = Ovie (carta 7/7)
+       7 = Logo Spores & Dreams
+════════════════════════════════ -->
+<a-scene
+  mindar-image="imageTargetSrc: asset/targets/targets.mind; autoStart: true; maxTrack: 1; uiLoading: no; uiError: no; uiScanning: no;"
+  color-space="sRGB"
+  renderer="colorManagement: true; antialias: true; alpha: true;"
+  vr-mode-ui="enabled: false"
+  device-orientation-permission-ui="enabled: false"
+  embedded
+  id="ar-scene">
+
+  <a-assets>
+    <img id="boss-idle1" src="asset/imagen/boss-animación/Vaia AR Idle1.png">
+    <img id="boss-idle2" src="asset/imagen/boss-animación/Vaia AR Idle2.png">
+    <img id="boss-idle3" src="asset/imagen/boss-animación/Vaia AR Idle3.png">
+    <img id="boss-attack1" src="asset/imagen/boss-animación/attack/Vaia AR Attack1.png">
+    <img id="boss-attack2" src="asset/imagen/boss-animación/attack/Vaia AR Attack2.png">
+    <img id="boss-attack3" src="asset/imagen/boss-animación/attack/Vaia AR Attack3.png">
+    <img id="boss-defeat1" src="asset/imagen/boss-animación/defeat/Vaia AR Defeat1.png">
+    <img id="boss-defeat2" src="asset/imagen/boss-animación/defeat/Vaia AR Defeat2.png">
+    <img id="boss-defeat3" src="asset/imagen/boss-animación/defeat/Vaia AR Defeat3.png">
+    <img id="boss-block" src="asset/imagen/boss-animación/Vaia AR Block.png">
+    <img id="boss-hurt" src="asset/imagen/boss-animación/Vaia AR Hurt.png">
+    <img id="bg-tree" src="asset/imagen/Background-Tree.png">
+  </a-assets>
+
+  <!-- Cámara MindAR -->
+  <a-camera
+    position="0 0 0"
+    look-controls="enabled: false"
+    cursor="fuse: false; rayOrigin: mouse;"
+    raycaster="near: 10; far: 10000; objects: .clickable">
+  </a-camera>
+
+  <!-- Target 0: Grimp -->
+  <a-entity class="boss-marker" mindar-image-target="targetIndex: 0">
+    <a-plane class="arena-bg" position="0 0.15 -0.05" width="1.6" height="0.675"
+      material="src: #bg-tree; transparent: true; alphaTest: 0.05; side: double"></a-plane>
+    <a-plane class="boss-sprite" position="0 0.05 0.01" width="0.6" height="0.7"
+      material="src: #boss-idle1; transparent: true; alphaTest: 0.1"></a-plane>
+  </a-entity>
+
+  <!-- Target 1: Pumpumf -->
+  <a-entity class="boss-marker" mindar-image-target="targetIndex: 1">
+    <a-plane class="arena-bg" position="0 0.15 -0.05" width="1.6" height="0.675"
+      material="src: #bg-tree; transparent: true; alphaTest: 0.05; side: double"></a-plane>
+    <a-plane class="boss-sprite" position="0 0.05 0.01" width="0.6" height="0.7"
+      material="src: #boss-idle1; transparent: true; alphaTest: 0.1"></a-plane>
+  </a-entity>
+
+  <!-- Target 2: Flyby -->
+  <a-entity class="boss-marker" mindar-image-target="targetIndex: 2">
+    <a-plane class="arena-bg" position="0 0.15 -0.05" width="1.6" height="0.675"
+      material="src: #bg-tree; transparent: true; alphaTest: 0.05; side: double"></a-plane>
+    <a-plane class="boss-sprite" position="0 0.05 0.01" width="0.6" height="0.7"
+      material="src: #boss-idle1; transparent: true; alphaTest: 0.1"></a-plane>
+  </a-entity>
+
+  <!-- Target 3: Spiffter -->
+  <a-entity class="boss-marker" mindar-image-target="targetIndex: 3">
+    <a-plane class="arena-bg" position="0 0.15 -0.05" width="1.6" height="0.675"
+      material="src: #bg-tree; transparent: true; alphaTest: 0.05; side: double"></a-plane>
+    <a-plane class="boss-sprite" position="0 0.05 0.01" width="0.6" height="0.7"
+      material="src: #boss-idle1; transparent: true; alphaTest: 0.1"></a-plane>
+  </a-entity>
+
+  <!-- Target 4: Spiffty -->
+  <a-entity class="boss-marker" mindar-image-target="targetIndex: 4">
+    <a-plane class="arena-bg" position="0 0.15 -0.05" width="1.6" height="0.675"
+      material="src: #bg-tree; transparent: true; alphaTest: 0.05; side: double"></a-plane>
+    <a-plane class="boss-sprite" position="0 0.05 0.01" width="0.6" height="0.7"
+      material="src: #boss-idle1; transparent: true; alphaTest: 0.1"></a-plane>
+  </a-entity>
+
+  <!-- Target 5: Vaia -->
+  <a-entity class="boss-marker" mindar-image-target="targetIndex: 5">
+    <a-plane class="arena-bg" position="0 0.15 -0.05" width="1.6" height="0.675"
+      material="src: #bg-tree; transparent: true; alphaTest: 0.05; side: double"></a-plane>
+    <a-plane class="boss-sprite" position="0 0.05 0.01" width="0.6" height="0.7"
+      material="src: #boss-idle1; transparent: true; alphaTest: 0.1"></a-plane>
+  </a-entity>
+
+  <!-- Target 6: Ovie -->
+  <a-entity class="boss-marker" mindar-image-target="targetIndex: 6">
+    <a-plane class="arena-bg" position="0 0.15 -0.05" width="1.6" height="0.675"
+      material="src: #bg-tree; transparent: true; alphaTest: 0.05; side: double"></a-plane>
+    <a-plane class="boss-sprite" position="0 0.05 0.01" width="0.6" height="0.7"
+      material="src: #boss-idle1; transparent: true; alphaTest: 0.1"></a-plane>
+  </a-entity>
+
+  <!-- Target 7: Logo Spores & Dreams -->
+  <a-entity class="boss-marker" mindar-image-target="targetIndex: 7">
+    <a-plane class="arena-bg" position="0 0.15 -0.05" width="1.6" height="0.675"
+      material="src: #bg-tree; transparent: true; alphaTest: 0.05; side: double"></a-plane>
+    <a-plane class="boss-sprite" position="0 0.05 0.01" width="0.6" height="0.7"
+      material="src: #boss-idle1; transparent: true; alphaTest: 0.1"></a-plane>
+  </a-entity>
+
+</a-scene>
+
+<!-- ══════════════════════════════════════════════════════
+     Panel desplegalbe con mute maste + sliders separados
+═══════════════════════════════════════════════════════ -->
+<div id="audio-panel" class="audio-panel">
+  <button id="audio-gear-btn" class="audio-gear-btn" aria-label="Audio settings">⚙</button>
+
+  <div id="audio-panel-body" class="audio-panel-body">
+    <div class="apb-header">
+      <span>Audio</span>
+      <button id="apb-close" class="apb-close"></button>
+    </div>
+
+    <button id="apb-mute" class="apb-mute">
+      <span class="apb-mute-icon">🔊</span>
+      <span class="apb-mute-text">Silenciar todo</span>
+    </button>
+
+    <div class="apb-row">
+      <div class="apb-row-head">
+        <span class="apb-label">🎵 Música</span>
+        <span class="apb-value" id="apb-music-val">60</span>
+      </div>
+      <input type="range" id="apb-music" min="0" max="100" value="60">
+    </div>
+
+    <div class="apb-row">
+      <div class="apb-row-head">
+        <span class="apb-label">🔔 Efectos</span>
+        <span class="apb-value" id="apb-sfx-val">80</span>
+      </div>
+      <input type="range" id="apb-sfx" min="0" max="100" value="80">
+    </div>
+  </div>
+</div>
+
+<script type="module" src="asset/javascript/script.js"></script>
+<!-- JS: incluir como <script type="module"> al final del body -->
+<script type="module">
+  import { audio } from './asset/javascript/audio-manager.js';
+ 
+  const gear   = document.getElementById('audio-gear-btn');
+  const body   = document.getElementById('audio-panel-body');
+  const close  = document.getElementById('apb-close');
+  const muteBt = document.getElementById('apb-mute');
+  const muteIc = muteBt.querySelector('.apb-mute-icon');
+  const muteTx = muteBt.querySelector('.apb-mute-text');
+  const music  = document.getElementById('apb-music');
+  const sfx    = document.getElementById('apb-sfx');
+  const musicV = document.getElementById('apb-music-val');
+  const sfxV   = document.getElementById('apb-sfx-val');
+ 
+  // Sincronizar UI con estado guardado
+  const s = audio.getState();
+  music.value = Math.round(s.musicVolume * 100);
+  sfx.value   = Math.round(s.sfxVolume * 100);
+  musicV.textContent = music.value;
+  sfxV.textContent   = sfx.value;
+  refreshMuteUI();
+ 
+  function refreshMuteUI() {
+    const muted = audio.getState().muted;
+    muteIc.textContent = muted ? '🔇' : '🔊';
+    muteTx.textContent = muted ? 'Sonido silenciado' : 'Silenciar todo';
+    muteBt.classList.toggle('active', muted);
+    gear.classList.toggle('muted', muted);
+  }
+ 
+  gear.addEventListener('click', () => body.classList.toggle('open'));
+  close.addEventListener('click', () => body.classList.remove('open'));
+  muteBt.addEventListener('click', () => {
+    audio.toggleMute();
+    refreshMuteUI();
+  });
+  music.addEventListener('input', (e) => {
+    audio.setMusicVolume(e.target.value / 100);
+    musicV.textContent = e.target.value;
+  });
+  sfx.addEventListener('input', (e) => {
+    audio.setSfxVolume(e.target.value / 100);
+    sfxV.textContent = e.target.value;
+  });
+ 
+  // Cerrar panel al tocar fuera
+  document.addEventListener('click', (e) => {
+    if (!document.getElementById('audio-panel').contains(e.target)) {
+      body.classList.remove('open');
+    }
+  });
+</script>
+</body>
+</html>
